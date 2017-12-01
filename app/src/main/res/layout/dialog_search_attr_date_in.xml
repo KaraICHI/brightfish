@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:theme="@style/DialogGreen">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialogTitle"
+        android:background="@color/colorGreen"
+        android:text="日期-时间"
+        android:textColor="#fff"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/amount_only"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:background="@drawable/amount_activity_green"
+                android:text="指定"
+                android:textColor="@color/colorGreen"
+                android:layout_marginRight="5dp"
+                />
+            <Button
+                android:id="@+id/amount_scope"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:background="@drawable/amount_normal"
+                android:text="范围"
+                android:textColor="@color/colorGreen"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/amount_equals"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="等于"
+                android:textColor="@color/colorDarkGery"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/search_date_only"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/search_time_only"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+       <LinearLayout
+           android:id="@+id/amount_min"
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:visibility="gone"
+           >
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="起始"
+               android:textColor="@color/colorDarkGery"
+               />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <EditText
+                   android:id="@+id/search_date_min"
+                   android:layout_width="0dp"
+                   android:layout_weight="4"
+                   android:layout_height="wrap_content" />
+               <EditText
+                   android:id="@+id/search_time_min"
+                   android:layout_width="0dp"
+                   android:layout_weight="2"
+                   android:layout_height="wrap_content" />
+           </LinearLayout>
+       </LinearLayout>
+        <LinearLayout
+            android:id="@+id/amount_max"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="截止"
+                android:textColor="@color/colorDarkGery"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/search_date_max"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/search_time_max"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialogItenHeight">
+            <Button
+                android:id="@+id/search_goods_attr_cancel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/colorGreen"
+                style="?android:attr/borderlessButtonStyle"
+                />
+            <Button
+                android:id="@+id/search_date_attr_commit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/colorGreen"
+                style="?android:attr/borderlessButtonStyle"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

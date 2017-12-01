@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.baosight.brightfish.SupplierAblumActivity">
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottomBar"
+            android:textSize="@dimen/bottomContent"
+            android:textColor="#fff"
+            android:layout_gravity="bottom"
+            android:background="@color/colorDarkGery"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="新货品"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

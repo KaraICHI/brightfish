@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="content">13sp</dimen>
+    <dimen name="bottomContent">14sp</dimen>
+    <dimen name="bottomBar">36dp</dimen>
+    <dimen name="photoHeight">200dp</dimen>
+    <dimen name="iconContent">23dp</dimen>
+    <dimen name="dialogItenHeight">50dp</dimen>
+    <dimen name="dialogContent">17sp</dimen>
+    <dimen name="dialogTitle">36dp</dimen>
+    <dimen name="cutline">0.5dp</dimen>
+    <dimen name="lineMargin">10dp</dimen>
+    <dimen name="addPhotoIcon">56dp</dimen>
+    <dimen name="addPhoto">130dp</dimen>
+    <dimen name="searchItem">70dp</dimen>
+    <dimen name="searchIcon">25dp</dimen>
+    <dimen name="searchFontSize">16sp</dimen>
+    <dimen name="searchBar">50dp</dimen>
+</resources>

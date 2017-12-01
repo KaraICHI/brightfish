@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.baosight.brightfish.SupplierAblumActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottomBar"
+            android:layout_gravity="bottom"
+            android:background="@color/colorDarkGery"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="新供应商"
+            android:textColor="#fff"
+            android:textSize="@dimen/bottomContent" />
+    </LinearLayout>
+
+
+</LinearLayout>

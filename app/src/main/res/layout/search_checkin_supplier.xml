@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:theme="@style/DialogGreen"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialogItenHeight"
+        android:background="@color/colorTGery"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="供应商"
+          android:textColor="@color/colorGreen"
+          android:layout_gravity="center_vertical"
+          />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="="
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/search_checkin_supplier_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            />
+
+
+
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/search_close_btn"
+        android:layout_width="@dimen/iconContent"
+        android:layout_height="@dimen/iconContent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_cancel_reverse_24dp"
+        android:backgroundTint="@color/colorDarkGery"
+        />
+
+</RelativeLayout>

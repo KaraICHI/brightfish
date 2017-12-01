@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:theme="@style/EditTextBlueStyle"
+    >
+    <include layout="@layout/toolbar"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+    <include layout="@layout/check_goods_layout_item"/>
+    <include layout="@layout/check_note_layout_item"/>
+    <include layout="@layout/check_buyer_layout_item"/>
+    <Button
+        android:id="@+id/checkin_commit"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/colorBlue"
+        android:textColor="#fff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="确定"
+        />
+
+</LinearLayout>

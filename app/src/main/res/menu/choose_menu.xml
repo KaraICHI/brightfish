@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/skip_btn"
+        android:title="跳转"
+        android:icon="@drawable/ic_action_list_jump"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/sort_btn"
+        android:title="排序"
+        android:icon="@drawable/ic_sort_white_24dp"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@id/blueTooth"
+        android:title="蓝牙扫描器"
+        app:showAsAction="never"
+        />
+
+
+</menu>

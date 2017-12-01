@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baosight.brightfish">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="我的仓库"></activity>
+        <activity
+            android:name=".CheckinActivity"
+            android:label="新入库" />
+        <activity
+            android:name=".CheckoutActivity"
+            android:label="新出库" />
+        <activity
+            android:name=".SupplierActivity"
+            android:label="供应商" />
+        <activity
+            android:name=".BuyerActivity"
+            android:label="买家" />
+        <activity
+            android:name=".AccountActivity"
+            android:label="我的账号" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="设置" />
+        <activity
+            android:name=".GoodsActivity"
+            android:label="货品" />
+        <activity
+            android:name=".AnalyzeActivity"
+            android:label="数据分析" />
+        <activity
+            android:name=".ChecklistActivity"
+            android:label="现有库存数量" />
+        <activity
+            android:name=".ChooseGoodsActivity"
+            android:label="选取货物" />
+        <activity
+            android:name=".ChooseSupplierActivity"
+            android:label="选择供应商" />
+        <activity
+            android:name=".ChooseBuyerActivity"
+            android:label="选择买家" />
+        <activity
+            android:name=".CheckinAblumActivity"
+            android:label="入库相册" />
+        <activity
+            android:name=".SupplierAblumActivity"
+            android:label="供应商相册" />
+        <activity
+            android:name=".BuyerAblumActivity"
+            android:label="买家相册" />
+        <activity
+            android:name=".GoodsAblumActivity"
+            android:label="货品相册" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.baosight.cameraalbumtest.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".SearchActivity"
+            android:label="查找" />
+        <activity
+            android:name=".ChooseCheckinActivity"
+            android:label="选择入库记录" />
+        <activity
+            android:name=".ChooseCheckoutActivity"
+            android:label="选择出库记录" />
+        <activity
+            android:name=".ChooseChecklistActivity"
+            android:label="选择盘货记录" />
+        <activity
+            android:name=".SearchCheckinActivity"
+            android:label="查找入库" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SearchCheckoutActivity" android:label="查找出库"/>
+    </application>
+
+</manifest>
