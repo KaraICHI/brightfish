@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.baosight.brightfish.ChooseGoodsActivity">
     <include layout="@layout/toolbar"/>
-    <ListView
-        android:id="@+id/goods_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/choose_rec"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
     <View
         android:layout_width="match_parent"

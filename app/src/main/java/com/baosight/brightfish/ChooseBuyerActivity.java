@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +16,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Buyer;
+import com.baosight.brightfish.model.ChooseItem;
+import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.ui.ChooseAdapter;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChooseBuyerActivity extends AppCompatActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     Toolbar toolbar;
+    List<ChooseItem> chooseItemList=new ArrayList<>();
 
     public static void startChooseBuyerActivity(Context context) {
         Intent intent = new Intent(context, ChooseBuyerActivity.class);
@@ -45,6 +57,18 @@ public class ChooseBuyerActivity extends AppCompatActivity {
                 finish();
             }
         });
+        initChooseItemList();
+        ChooseAdapter adapter=new ChooseAdapter(chooseItemList);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        RecyclerView recyclerView=(RecyclerView) findViewById(R.id.choose_rec);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
+    private void initChooseItemList() {
+        List<Buyer> suppliers= DataSupport.findAll(Buyer.class);
+        for (Buyer s:suppliers) {
+            chooseItemList.add(new ChooseItem(s.getName(),s.getSku()));
+        }
     }
 
     @Override
