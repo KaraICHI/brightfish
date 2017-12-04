@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/chooseItem">
+            <TextView
+                android:id="@+id/choose_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/chooseName"
+                android:layout_marginBottom="5dp"
+                />
+            <TextView
+                android:id="@+id/choose_sku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/chooseSku"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/choose_checked_icon"
+            android:layout_width="@dimen/chooseIcon"
+            android:layout_height="@dimen/chooseIcon"
+            android:background="@drawable/ic_check_white_24dp"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+         <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cutline"
+            android:background="@color/colorLightGery"/>
+</LinearLayout>

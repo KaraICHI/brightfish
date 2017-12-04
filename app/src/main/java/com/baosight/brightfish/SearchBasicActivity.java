@@ -42,10 +42,9 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
     /**
      * 初始化控件
      */
-    /*protected void initAdapter(int itemLayout){
-        adapter = new ConditionAdapter(conditionItemList);
+    protected void initAdapter(int itemLayout){
         adapter.setItemLayout(itemLayout);
-    }*/
+    }
     protected void initControls() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

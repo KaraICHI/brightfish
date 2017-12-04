@@ -6,13 +6,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="我的仓库"></activity>
+            android:label="我的仓库" />
         <activity
             android:name=".CheckinActivity"
             android:label="新入库" />
@@ -94,7 +95,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchCheckoutActivity" android:label="查找出库"/>
+        <activity
+            android:name=".SearchCheckoutActivity"
+            android:label="查找出库" />
+        <activity android:name=".SearchGoodsActivity" android:label="查找货物"></activity>
     </application>
 
 </manifest>

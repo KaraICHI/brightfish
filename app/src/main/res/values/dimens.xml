@@ -19,4 +19,8 @@
     <dimen name="searchIcon">25dp</dimen>
     <dimen name="searchFontSize">16sp</dimen>
     <dimen name="searchBar">50dp</dimen>
+    <dimen name="chooseItem">56dp</dimen>
+    <dimen name="chooseIcon">32dp</dimen>
+    <dimen name="chooseName">22dp</dimen>
+    <dimen name="chooseSku">16dp</dimen>
 </resources>

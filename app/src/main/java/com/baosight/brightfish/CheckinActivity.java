@@ -1,5 +1,6 @@
 package com.baosight.brightfish;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,6 +42,12 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
 
     public static void startCheckinActivity(Context context) {
         Intent intent = new Intent(context, CheckinActivity.class);
+        context.startActivity(intent);
+    }
+    public static void startCheckinActivity(Context context,String name,String sku) {
+        Intent intent = new Intent(context, CheckinActivity.class);
+        intent.putExtra("name",name);
+        intent.putExtra("sku",sku);
         context.startActivity(intent);
     }
 
@@ -90,18 +97,7 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         supplierRefesh.setOnClickListener(this);
         for (EditText editText : editTexts) {
             editText.setOnClickListener(this);
-          /*  editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if(hasFocus){
-                        isFocus=true;
-                        invalidateOptionsMenu();
-                    }else {
-                        isFocus=false;
-                        invalidateOptionsMenu();
-                    }
-                }
-            });*/
+
 
         }
     }
@@ -213,6 +209,7 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

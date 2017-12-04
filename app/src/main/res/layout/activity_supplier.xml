@@ -221,7 +221,7 @@
 
 
     <Button
-        android:id="@+id/checkin_commit"
+        android:id="@+id/supplier_commit"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_margin="10dp"

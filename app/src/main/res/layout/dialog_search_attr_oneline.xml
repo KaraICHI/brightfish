@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:theme="@style/DialogOrange">
+    <TextView
+        android:id="@+id/search_goods_attr_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialogTitle"
+        android:background="@color/colorOrange"
+        android:text="SKU"
+        android:textColor="#fff"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="等于"
+            android:textColor="@color/colorDarkGery"
+            />
+        <EditText
+            android:id="@+id/search_goods_attr_equals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialogItenHeight">
+            <Button
+                android:id="@+id/search_goods_attr_cancel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/colorOrange"
+                style="?android:attr/borderlessButtonStyle"
+                />
+            <Button
+                android:id="@+id/search_goods_attr_commit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/colorOrange"
+                style="?android:attr/borderlessButtonStyle"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

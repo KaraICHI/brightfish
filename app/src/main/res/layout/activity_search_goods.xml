@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:theme="@style/DialogOrange"
+    tools:context="com.baosight.brightfish.SearchCheckoutActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/goods_select_top"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <LinearLayout
+                            android:layout_margin="10dp"
+                            android:padding="10dp"
+                            android:theme="@style/DialogOrange"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorTGery"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SKU"
+                                android:textColor="@color/colorOrange"
+                                />
+                            <EditText
+                                android:id="@+id/select_goods_sku"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/search_goods_close_btn"
+                            android:layout_width="@dimen/iconContent"
+                            android:layout_height="@dimen/iconContent"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_cancel_reverse_24dp"
+                            android:backgroundTint="@color/colorLightGery"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-20dp">
+
+                        <LinearLayout
+                            android:layout_margin="10dp"
+                            android:padding="10dp"
+                            android:theme="@style/DialogOrange"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorTGery"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="名称"
+                                android:textColor="@color/colorOrange"
+                                />
+                            <EditText
+                                android:id="@+id/select_goods_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/search_goods_name_close_btn"
+                            android:layout_width="@dimen/iconContent"
+                            android:layout_height="@dimen/iconContent"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_cancel_reverse_24dp"
+                            android:backgroundTint="@color/colorLightGery"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/search_conditions_rec"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/searchBar"
+                    android:background="@color/colorLightGery"
+                    android:padding="10dp"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="更多条件"
+                        android:textSize="@dimen/searchFontSize"
+                        />
+                    <ImageView
+                        android:id="@+id/add_conditions_btn"
+                        android:layout_width="@dimen/iconContent"
+                        android:layout_height="@dimen/iconContent"
+                        android:background="@drawable/ic_add_black_24dp"
+                        android:backgroundTint="@color/colorOrange"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cutline"
+                    android:background="@color/colorMGery"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/searchBar"
+                    android:background="@color/colorLightGery"
+                    android:padding="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="按"
+                        android:textSize="@dimen/searchFontSize"
+                        />
+                    <TextView
+                        android:id="@+id/sort_method_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="时间-日期"
+                        android:textSize="@dimen/searchFontSize"
+                        android:textStyle="italic"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="从新到旧排列"
+                        android:textSize="@dimen/searchFontSize"
+                        />
+                    <ImageView
+                        android:id="@+id/search_sort_btn"
+                        android:layout_width="@dimen/iconContent"
+                        android:layout_height="@dimen/iconContent"
+                        android:background="@drawable/ic_sort_white_24dp"
+                        android:backgroundTint="@color/colorOrange"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cutline"
+                    android:background="@color/colorMGery"
+                    android:layout_marginBottom="50dp"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottomBar"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorOrange"
+        android:text="查找"
+        android:textColor="#fff"
+        android:layout_margin="10dp"
+        />
+
+</RelativeLayout>
