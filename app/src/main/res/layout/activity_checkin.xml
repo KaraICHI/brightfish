@@ -7,12 +7,20 @@
     android:theme="@style/EditTextGreenStyle"
  >
     <include layout="@layout/toolbar"/>
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"/>
-    <include layout="@layout/check_goods_layout_item"/>
+
+    <fragment
+        android:id="@+id/goods_frag"
+        android:name="com.baosight.brightfish.Fragment.GoodsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <include layout="@layout/check_note_layout_item"/>
-    <include layout="@layout/check_supplier_layout_item"/>
+    <fragment
+        android:id="@+id/supplier_frag"
+        android:name="com.baosight.brightfish.Fragment.SupplierFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <Button
         android:id="@+id/checkin_commit"
         android:layout_width="match_parent"

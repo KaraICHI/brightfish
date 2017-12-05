@@ -32,7 +32,7 @@ public class ChooseBuyerActivity extends AppCompatActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     Toolbar toolbar;
-    List<ChooseItem> chooseItemList=new ArrayList<>();
+    List<Object> chooseItemList=new ArrayList<>();
 
     public static void startChooseBuyerActivity(Context context) {
         Intent intent = new Intent(context, ChooseBuyerActivity.class);
@@ -58,7 +58,7 @@ public class ChooseBuyerActivity extends AppCompatActivity {
             }
         });
         initChooseItemList();
-        ChooseAdapter adapter=new ChooseAdapter(chooseItemList);
+        ChooseAdapter adapter=new ChooseAdapter(chooseItemList,ChooseBuyerActivity.this);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.choose_rec);
         recyclerView.setLayoutManager(layoutManager);
@@ -67,7 +67,7 @@ public class ChooseBuyerActivity extends AppCompatActivity {
     private void initChooseItemList() {
         List<Buyer> suppliers= DataSupport.findAll(Buyer.class);
         for (Buyer s:suppliers) {
-            chooseItemList.add(new ChooseItem(s.getName(),s.getSku()));
+            chooseItemList.add(s);
         }
     }
 

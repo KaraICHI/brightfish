@@ -10,9 +10,9 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"/>
-    <include layout="@layout/check_goods_layout_item"/>
+    <include layout="@layout/check_goods_frag_green"/>
     <include layout="@layout/check_note_layout_item"/>
-    <include layout="@layout/check_buyer_layout_item"/>
+    <include layout="@layout/check_buyer_frag"/>
     <Button
         android:id="@+id/checkin_commit"
         android:layout_width="match_parent"

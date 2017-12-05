@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/EditTextGreenStyle"
+    android:layout_marginTop="-11dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,18 +15,17 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/check_buyer"
+            android:id="@+id/check_good"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="250dp"
             android:layout_weight="1"
-            android:maxLines="1"
-            android:text="买家"
-            android:textColor="@color/colorBlue" />
+            android:text="货品"
+            android:textColor="@color/colorGreen" />
+
 
         <ImageButton
-            android:id="@+id/check_buyer_menu"
+            android:id="@+id/check_good_menu"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center_vertical"
@@ -32,18 +33,18 @@
             android:background="@drawable/ic_list_white_24dp" />
 
         <ImageButton
-            android:id="@+id/check_buyer_refesh"
+            android:id="@+id/check_good_refesh"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_refresh_white_24dp" />
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
@@ -55,13 +56,11 @@
             android:textSize="13sp" />
 
         <EditText
-            android:id="@+id/buyer_sku_checkin"
+            android:id="@+id/goods_sku_checkin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="50"
-            android:maxLines="1"
-            android:textCursorDrawable="@drawable/cursor_color"
-            android:theme="@style/EditTextBlueStyle" />
+            android:maxLines="1" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,11 +69,13 @@
             android:textSize="13sp" />
 
         <EditText
-            android:id="@+id/buyer_name_checkin"
+            android:id="@+id/goods_name_checkin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="50"
             android:maxLines="1" />
 
     </LinearLayout>
+
+
 </LinearLayout>

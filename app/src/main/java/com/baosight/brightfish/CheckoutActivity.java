@@ -1,5 +1,6 @@
 package com.baosight.brightfish;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Buyer;
+import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.model.Supplier;
+
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -28,10 +33,12 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
     private String content = "";
     private boolean isFocus;
-    TextView goods, note, buyer, currentTime;
+    TextView goodsText, note, buyerText, currentTime;
     Button commit;
     EditText goodsSku, goodsName, price, amount, description, supplierSku, supplierName;
     ImageButton goodsMenu, goodsRefesh, goodsPhoto, buyerMenu, buyerRefesh;
+    Goods goods;
+    Buyer buyer;
 
     public static void startCheckoutActivity(Context context) {
         Intent intent = new Intent(context, CheckoutActivity.class);
@@ -55,11 +62,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 finish();
             }
         });
-        goods = (TextView) findViewById(R.id.check_good);
+        goodsText = (TextView) findViewById(R.id.check_good);
         note = (TextView) findViewById(R.id.note_checkin);
-        buyer = (TextView) findViewById(R.id.check_buyer);
+        buyerText = (TextView) findViewById(R.id.check_buyer);
         currentTime = (TextView) findViewById(R.id.current_time);
-        goods.setTextColor(getResources().getColor(R.color.colorBlue));
+        goodsText.setTextColor(getResources().getColor(R.color.colorBlue));
         note.setTextColor(getResources().getColor(R.color.colorBlue));
         currentTime.setTextColor(getResources().getColor(R.color.colorBlue));
         currentTime.setTextColor(getResources().getColor(R.color.colorBlue));
@@ -108,14 +115,16 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         }
         switch (v.getId()) {
             case R.id.check_good_menu:
-                ChooseGoodsActivity.startChooseGoodsActivity(CheckoutActivity.this);
+                Intent intent = new Intent(this, ChooseGoodsActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.check_good_refesh:
                 goodsSku.setText("");
                 goodsName.setText("");
                 break;
             case R.id.check_buyer_menu:
-                ChooseBuyerActivity.startChooseBuyerActivity(CheckoutActivity.this);
+                Intent intent2 = new Intent(this, ChooseBuyerActivity.class);
+                startActivityForResult(intent2, 1);
                 break;
             case R.id.check_buyer_refesh:
                 supplierSku.setText("");
@@ -207,6 +216,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -249,6 +259,19 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         }
         return mYear + "年" + mMonth + "月" + mDay + "日" + " " + "星期" + mWay + " " + mHour + ":" + mMinute + ":" + mSecond;
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    goods = (Goods) data.getSerializableExtra("goods");
+                }
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    buyer = (Buyer) data.getSerializableExtra("buyer");
+                }
+        }
+    }
 
 }

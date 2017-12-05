@@ -23,6 +23,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.model.Supplier;
+
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -39,17 +46,14 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
     EditText goodsSku, goodsName, price, amount, description, supplierSku, supplierName;
     ImageButton goodsMenu, goodsRefesh, goodsPhoto, supplierMenu, supplierRefesh;
     List<EditText> editTexts;
+    static Goods goods;
+    static Supplier supplier;
 
     public static void startCheckinActivity(Context context) {
         Intent intent = new Intent(context, CheckinActivity.class);
         context.startActivity(intent);
     }
-    public static void startCheckinActivity(Context context,String name,String sku) {
-        Intent intent = new Intent(context, CheckinActivity.class);
-        intent.putExtra("name",name);
-        intent.putExtra("sku",sku);
-        context.startActivity(intent);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,28 +101,27 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         supplierRefesh.setOnClickListener(this);
         for (EditText editText : editTexts) {
             editText.setOnClickListener(this);
-
-
         }
     }
 
     @Override
     public void onClick(View v) {
         if (v.getClass() == android.support.v7.widget.AppCompatEditText.class) {
-            content += goodsSku.getText();
             isFocus = true;
             invalidateOptionsMenu();
         }
         switch (v.getId()) {
             case R.id.check_good_menu:
-                ChooseGoodsActivity.startChooseGoodsActivity(CheckinActivity.this);
+                Intent intent = new Intent(this, ChooseGoodsActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.check_good_refesh:
                 goodsSku.setText("");
                 goodsName.setText("");
                 break;
             case R.id.check_supplier_menu:
-                ChooseSupplierActivity.startChooseSupplierActivity(CheckinActivity.this);
+                Intent intent2 = new Intent(this, ChooseSupplierActivity.class);
+                startActivityForResult(intent2, 2);
                 break;
             case R.id.check_suplier_refesh:
                 supplierSku.setText("");
@@ -142,16 +145,27 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
                 dialog.dismiss();
             }
         });
-        if (TextUtils.isEmpty(content)) {
-            dialog.setMessage("内容不能为空");
-        } else if (TextUtils.isEmpty(goodsName.getText())) {
-            dialog.setMessage("货物不能为空");
+        if (goods==null&&TextUtils.isEmpty(goodsSku.getText())) {
+            dialog.setMessage("货品不能为空");
+            dialog.show();
+        } else if( !selectGoods(goodsSku.getText().toString())){
+           dialog.setMessage("该货品不存在");
+           dialog.show();
         } else if (TextUtils.isEmpty(price.getText())) {
             dialog.setMessage("价格不能为空");
+            dialog.show();
         } else if (TextUtils.isEmpty(amount.getText())) {
             dialog.setMessage("数量不能为空");
+            dialog.show();
+        }else if(!selectSupplier(supplierSku.getText().toString())){
+            dialog.setMessage("该供应商不存在");
+            dialog.show();
         }
-        dialog.show();
+        else {
+            saveCheckin();
+            Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -253,4 +267,55 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         return mYear + "年" + mMonth + "月" + mDay + "日" + " " + "星期" + mWay + " " + mHour + ":" + mMinute + ":" + mSecond;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    goods = (Goods) data.getBundleExtra("bundle").getSerializable("goods");
+                    Log.d(TAG, "onActivityResult: ==goods==="+goods);
+                }
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    supplier = (Supplier) data.getBundleExtra("bundle").getSerializable("supplier");
+                }
+        }
+        if(goods!=null){
+            goodsSku.setText(goods.getSku());
+            goodsName.setText(goods.getName());
+        }
+        if(supplier!=null){
+            supplierSku.setText(supplier.getSku());
+            supplierName.setText(supplier.getName());
+        }
+
+    }
+    private void saveCheckin(){
+        Checkin checkin=new Checkin();
+        checkin.setGoods(goods);
+        checkin.setPrice(Long.parseLong(price.getText().toString()));
+        checkin.setAmount(Integer.parseInt(amount.getText().toString()));
+        checkin.setDescr(description.getText().toString());
+        checkin.setSupplier(supplier);
+    }
+    private Boolean selectGoods(String sku){
+        List<Goods> goodsList=DataSupport.where("sku = ?",sku).find(Goods.class);
+        if(goodsList.size()>=1){
+            goods=goodsList.get(0);
+            return true;
+        }else{
+
+            return false;
+        }
+    }
+    private Boolean selectSupplier(String sku){
+        List<Supplier> supplierList=DataSupport.where("sku = ?",sku).find(Supplier.class);
+        if(supplierList.size()>=1){
+            supplier=supplierList.get(0);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

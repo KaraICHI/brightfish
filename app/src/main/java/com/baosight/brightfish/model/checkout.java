@@ -2,6 +2,8 @@ package com.baosight.brightfish.model;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2017/12/4.
  */
@@ -14,6 +16,24 @@ public class checkout extends DataSupport {
     private String photo;
     private Goods goods;
     private Buyer buyer;
+    private Date checkinDate;
+    private Long checkinTime;
+
+    public Date getCheckinDate() {
+        return checkinDate;
+    }
+
+    public void setCheckinDate(Date checkinDate) {
+        this.checkinDate = checkinDate;
+    }
+
+    public Long getCheckinTime() {
+        return checkinTime;
+    }
+
+    public void setCheckinTime(Long checkinTime) {
+        this.checkinTime = checkinTime;
+    }
 
     public int getId() {
         return id;

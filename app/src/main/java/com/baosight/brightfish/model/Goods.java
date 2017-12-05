@@ -2,11 +2,13 @@ package com.baosight.brightfish.model;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by Administrator on 2017/12/4.
- */
+import java.io.Serializable;
 
-public class Goods extends DataSupport {
+
+
+public class Goods extends DataSupport implements Serializable{
+
+    private static final long serialVersionUID=1L;
     private int id;
     private String sku;
     private String name;

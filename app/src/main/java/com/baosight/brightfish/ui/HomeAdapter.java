@@ -10,17 +10,17 @@ import android.widget.TextView;
 
 import com.baosight.brightfish.AccountActivity;
 import com.baosight.brightfish.AnalyzeActivity;
-import com.baosight.brightfish.BuyerActivity;
+import com.baosight.brightfish.NewBuyerActivity;
 import com.baosight.brightfish.CheckinActivity;
 import com.baosight.brightfish.ChecklistActivity;
 import com.baosight.brightfish.CheckoutActivity;
-import com.baosight.brightfish.GoodsActivity;
+import com.baosight.brightfish.NewGoodsActivity;
 import com.baosight.brightfish.model.HomeItem;
 import com.baosight.brightfish.MainActivity;
 import com.baosight.brightfish.R;
 import com.baosight.brightfish.SearchActivity;
 import com.baosight.brightfish.SettingActivity;
-import com.baosight.brightfish.SupplierActivity;
+import com.baosight.brightfish.NewSupplierActivity;
 
 import java.util.List;
 
@@ -89,13 +89,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 AnalyzeActivity.startAnalyzeActivity(context);
                 break;
             case MainActivity.BUYER_ITEM:
-                BuyerActivity.startBuyerActivity(context);
+                NewBuyerActivity.startBuyerActivity(context);
                 break;
             case MainActivity.DIANHUO_ITEM:
                 ChecklistActivity.startChecklistActivity(context);
                 break;
             case MainActivity.GOOD_ITEM:
-                GoodsActivity.startGoodsActivity(context);
+                NewGoodsActivity.startGoodsActivity(context);
                 break;
             case MainActivity.SEARCH_ITEM:
                 SearchActivity.startSearchActivity(context);
@@ -104,7 +104,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 SettingActivity.startSettingActivity(context);
                 break;
             case MainActivity.SUPPILER_ITEM:
-                SupplierActivity.startSupplierActivity(context);
+                NewSupplierActivity.startSupplierActivity(context);
                 break;
             default:
                 break;

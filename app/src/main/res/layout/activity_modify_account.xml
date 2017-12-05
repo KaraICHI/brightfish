@@ -28,7 +28,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/photoHeight"
-                    android:background="@color/colorGery"
+                    android:background="@color/colorLightGery"
                     >
 
                     <ImageView
@@ -37,45 +37,29 @@
                         android:layout_centerInParent="true"
                         android:layout_height="170dp"
                         android:background="@drawable/person_256dp"
-                        android:backgroundTint="@color/colorMGery"
+                        android:backgroundTint="@color/colorGery"
                         />
                     <ImageView
                         android:id="@+id/photo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         />
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="#B4434343"
-                        android:padding="10dp"
-                        android:gravity="center_vertical"
-                        >
-                        <TextView
-                            android:id="@+id/acount_sku"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="我的序列号"
-                            android:textColor="#fff"
-                            />
-                        <TextView
-                            android:id="@+id/account_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="我的账号名"
-                            android:textColor="#fff"
-                            />
-
-                    </LinearLayout>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="12dp"
+                        android:text="头像"
+                        android:textColor="@color/colorGery"
+                        />
                     <ImageView
                         android:id="@+id/select_ablum_btn"
                         android:layout_width="@dimen/iconContent"
                         android:layout_height="@dimen/iconContent"
                         android:background="@drawable/ic_image_blue_24dp"
-                        android:backgroundTint="#fff"
+                        android:backgroundTint="@color/colorGery"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_alignParentRight="true"
@@ -93,7 +77,27 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SKU"
+                        android:textColor="@color/colorGery"
+                        />
+                    <EditText
+                        android:id="@+id/sku_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="名称"
+                        android:textColor="@color/colorGery"
+                        />
+                    <EditText
+                        android:id="@+id/name_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,7 +105,7 @@
                         android:text="地址"
                         />
                     <EditText
-                        android:id="@+id/supplier_address"
+                        android:id="@+id/address_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -127,12 +131,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
-                            android:id="@+id/supplier_telephone"
+                            android:id="@+id/telephone_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content" />
                         <EditText
-                            android:id="@+id/supplier_cellphone"
+                            android:id="@+id/cellphone_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content" />
@@ -145,7 +149,7 @@
                         android:textColor="@color/colorGery"
                         />
                     <EditText
-                        android:id="@+id/supplier_email"
+                        android:id="@+id/email_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -171,12 +175,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
-                            android:id="@+id/supplier_wecaht"
+                            android:id="@+id/wechat_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content" />
                         <EditText
-                            android:id="@+id/supplier_qq"
+                            android:id="@+id/qq_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content" />
@@ -216,7 +220,16 @@
     </LinearLayout>
 
 
-
+    <Button
+        android:id="@+id/commit_edit"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorGery"
+        android:textColor="#fff"
+        android:text="确定"
+        android:layout_alignParentBottom="true"
+        />
 
 
 </RelativeLayout>

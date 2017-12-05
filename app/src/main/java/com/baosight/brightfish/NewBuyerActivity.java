@@ -1,57 +1,45 @@
 package com.baosight.brightfish;
 
 import android.app.Dialog;
-import android.bluetooth.le.AdvertiseData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.model.Buyer;
 
-import java.io.File;
-import java.io.IOException;
-
-public class SupplierActivity extends BasicActivity implements View.OnClickListener {
+public class NewBuyerActivity extends BasicActivity implements View.OnClickListener {
     Toolbar toolbar;
     ImageView photo;
     ImageView selectAblum;
     EditText sku,name,address,cellphone,telephone,email,wechat,qq,descr,website;
     Button saveBtn;
-    public static void startSupplierActivity(Context context) {
-        Intent intent = new Intent(context, SupplierActivity.class);
+    public static void startBuyerActivity(Context context) {
+        Intent intent = new Intent(context, NewBuyerActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supplier);
+        setContentView(R.layout.activity_buyer);
+        initToolbar();
         initControls();
-    }
 
-    private void initControls() {
+    }
+    private void initToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +47,12 @@ public class SupplierActivity extends BasicActivity implements View.OnClickListe
                 finish();
             }
         });
+    }
+
+    /*
+     *控件初始化
+     */
+    private void initControls() {
         photo = (ImageView) findViewById(R.id.photo);
         photo.setOnClickListener(this);
         selectAblum = (ImageView) findViewById(R.id.select_ablum_btn);
@@ -73,7 +67,7 @@ public class SupplierActivity extends BasicActivity implements View.OnClickListe
         qq=(EditText) findViewById(R.id.supplier_qq);
         wechat=(EditText) findViewById(R.id.supplier_wecaht);
         website=(EditText) findViewById(R.id.supplier_web);
-        saveBtn=(Button) findViewById(R.id.supplier_commit);
+        saveBtn=(Button) findViewById(R.id.checkin_commit);
         saveBtn.setOnClickListener(this);
     }
 
@@ -90,27 +84,27 @@ public class SupplierActivity extends BasicActivity implements View.OnClickListe
                 final Dialog dialog = new Dialog(this, R.style.NoTitleDialog);
                 dialog.setContentView(R.layout.layout_dialog);
                 dialog.setCanceledOnTouchOutside(true);
-                LinearLayout takePhoto = (LinearLayout) dialog.findViewById(R.id.take_photo);
-                LinearLayout openAblum = (LinearLayout) dialog.findViewById(R.id.open_ablum);
+                LinearLayout takePhoto = (LinearLayout) dialog.getWindow().findViewById(R.id.take_photo);
+                LinearLayout openAblum = (LinearLayout) dialog.getWindow().findViewById(R.id.open_ablum);
                 LinearLayout setNull = (LinearLayout) dialog.findViewById(R.id.set_photo_null);
                 initCameraControls(takePhoto, openAblum, photo, dialog, setNull);
                 dialog.show();
+
                 break;
             case R.id.select_ablum_btn:
-                SupplierAblumActivity.startSupplierAblumActivity(this);
+                BuyerAblumActivity.startBuyerAblumActivity(NewBuyerActivity.this);
                 break;
-            case R.id.supplier_commit:
-                saveSupplier();
+            case R.id.checkin_commit:
+                saveBuyer();
                 Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
                 clearEditText();
-
         }
     }
-    private void saveSupplier(){
+    private void saveBuyer(){
         if (TextUtils.isEmpty(sku.getText())||TextUtils.isEmpty(name.getText())) {
             setAlertDialog();
         }
-        Supplier supplier=new Supplier();
+        Buyer supplier=new Buyer();
         supplier.setName(name.getText().toString());
         supplier.setSku(sku.getText().toString());
         supplier.setCellphoto(cellphone.getText().toString());
@@ -125,7 +119,7 @@ public class SupplierActivity extends BasicActivity implements View.OnClickListe
 
     }
     private void setAlertDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(SupplierActivity.this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(NewBuyerActivity.this);
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -148,6 +142,7 @@ public class SupplierActivity extends BasicActivity implements View.OnClickListe
         qq.setText("");
         website.setText("");
     }
+
 
 
 }
