@@ -16,9 +16,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.baosight.brightfish.model.ChooseItem;
 import com.baosight.brightfish.model.Supplier;
-import com.baosight.brightfish.ui.ChooseAdapter;
+import com.baosight.brightfish.ui.ChooseGoodsAdapter;
+import com.baosight.brightfish.ui.ChooseSupplierAdapter;
 
 import org.litepal.crud.DataSupport;
 
@@ -31,7 +31,7 @@ public class ChooseSupplierActivity extends AppCompatActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     Toolbar toolbar;
-    List<Object> chooseItemList=new ArrayList<>();
+    List<Supplier> chooseItemList=new ArrayList<>();
 
     public static void startChooseSupplierActivity(Context context) {
         Intent intent = new Intent(context, ChooseSupplierActivity.class);
@@ -57,12 +57,11 @@ public class ChooseSupplierActivity extends AppCompatActivity {
             }
         });
         initChooseItemList();
-        ChooseAdapter adapter=new ChooseAdapter(chooseItemList,ChooseSupplierActivity.this);
+        ChooseSupplierAdapter adapter=new ChooseSupplierAdapter(chooseItemList,ChooseSupplierActivity.this);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.choose_rec);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
     }
 
     private void initChooseItemList() {

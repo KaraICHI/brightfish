@@ -34,7 +34,7 @@ public class NewGoodsActivity extends BasicActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goods);
+        setContentView(R.layout.activity_goods_new);
         initControls();
     }
 

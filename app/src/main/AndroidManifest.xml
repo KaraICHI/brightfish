@@ -101,7 +101,8 @@
         <activity
             android:name=".SearchGoodsActivity"
             android:label="查找货物" />
-        <activity android:name=".ModifyAccountActivity"></activity>
+        <activity android:name=".ModifyAccountActivity" android:label="修改我的账号"></activity>
+
     </application>
 
 </manifest>

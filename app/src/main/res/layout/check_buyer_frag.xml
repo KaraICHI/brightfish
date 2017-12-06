@@ -30,14 +30,18 @@
             android:layout_height="23dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:background="@drawable/ic_list_white_24dp" />
+            android:background="@drawable/ic_list_white_24dp"
+            android:textColor="@color/colorBlue"
+            />
 
         <ImageButton
             android:id="@+id/check_buyer_refesh"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_refresh_white_24dp" />
+            android:background="@drawable/ic_refresh_white_24dp"
+            android:textColor="@color/colorBlue"
+            />
 
     </LinearLayout>
 

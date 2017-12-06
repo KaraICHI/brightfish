@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/EditTextBlueStyle"
+    android:layout_marginTop="-11dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28sp"
+        android:background="@color/colorLightGery"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/check_good"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="货品"
+            android:textColor="@color/colorBlue" />
+
+
+        <ImageButton
+            android:id="@+id/check_good_menu"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_list_white_24dp"
+            android:backgroundTint="@color/colorBlue"
+            />
+
+        <ImageButton
+            android:id="@+id/check_good_refesh"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_refresh_white_24dp"
+            android:backgroundTint="@color/colorBlue"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SKU"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/goods_sku_checkin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="50"
+            android:maxLines="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="名称"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/goods_name_checkin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="50"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

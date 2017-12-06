@@ -1,6 +1,7 @@
 package com.baosight.brightfish.ui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +30,13 @@ import java.util.List;
  */
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
+    Context mContext;
+
     private List<HomeItem> mHomeItem;
 
-    public HomeAdapter(List<HomeItem> homeItems){
+    public HomeAdapter(List<HomeItem> homeItems,Context context){
         mHomeItem=homeItems;
+        mContext=context;
     }
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
@@ -54,6 +58,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         HomeItem homeItem=mHomeItem.get(position);
         holder.itemName.setText(homeItem.getItem_name());
         holder.itemIcon.setImageResource(homeItem.getIcon());
+        holder.itemIcon.setColorFilter(mContext.getResources().getColor(homeItem.getColor()));
+
     }
 
     @Override
