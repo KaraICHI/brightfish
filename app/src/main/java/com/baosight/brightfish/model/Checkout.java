@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Administrator on 2017/12/4.
  */
 
-public class checkout extends DataSupport {
+public class Checkout extends DataSupport {
     private int id;
     private double price;
     private int amount;

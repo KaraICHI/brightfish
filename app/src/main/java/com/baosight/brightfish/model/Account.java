@@ -9,10 +9,10 @@ import java.io.Serializable;
  * Created by Administrator on 2017/12/4.
  */
 
-public class Buyer extends DataSupport implements Serializable{
+public class Account extends DataSupport implements Serializable{
     private static final long serialVersionUID=1L;
     private int id;
-    @Column (unique = true,nullable = false)
+    @Column(unique = true,nullable = false)
     private String sku;
     @Column(nullable = false)
     private String name;

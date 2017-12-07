@@ -53,7 +53,7 @@
                         android:gravity="center_vertical"
                         >
                         <TextView
-                            android:id="@+id/acount_sku"
+                            android:id="@+id/account_sku"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="我的序列号"
@@ -100,7 +100,7 @@
                         android:text="地址"
                         />
                     <EditText
-                        android:id="@+id/supplier_address"
+                        android:id="@+id/address_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                        android:enabled="false"
@@ -127,13 +127,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
-                            android:id="@+id/supplier_telephone"
+                            android:id="@+id/telephone_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:enabled="false"/>
                         <EditText
-                            android:id="@+id/supplier_cellphone"
+                            android:id="@+id/cellphone_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                         android:textColor="@color/colorGery"
                         />
                     <EditText
-                        android:id="@+id/supplier_email"
+                        android:id="@+id/email_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
@@ -174,13 +174,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
-                            android:id="@+id/supplier_wecaht"
+                            android:id="@+id/wechat_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:enabled="false"/>
                         <EditText
-                            android:id="@+id/supplier_qq"
+                            android:id="@+id/qq_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
                         android:textColor="@color/colorGery"
                         />
                     <EditText
-                        android:id="@+id/supplier_describe"
+                        android:id="@+id/describe_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
@@ -206,7 +206,7 @@
                         android:textColor="@color/colorGery"
                         />
                     <EditText
-                        android:id="@+id/supplier_web"
+                        android:id="@+id/web_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="40dp"

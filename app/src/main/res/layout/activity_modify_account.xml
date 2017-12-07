@@ -193,7 +193,7 @@
                         android:textColor="@color/colorGery"
                         />
                     <EditText
-                        android:id="@+id/supplier_describe"
+                        android:id="@+id/describe_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -204,7 +204,7 @@
                         android:textColor="@color/colorGery"
                         />
                     <EditText
-                        android:id="@+id/supplier_web"
+                        android:id="@+id/web_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="40dp"

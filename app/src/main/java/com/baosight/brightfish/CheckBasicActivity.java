@@ -3,6 +3,7 @@ package com.baosight.brightfish;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.model.Supplier;
 import com.baosight.brightfish.ui.ChooseGoodsAdapter;
 import com.baosight.brightfish.ui.ChooseGoodsdDialogAdapter;
 
@@ -167,26 +169,7 @@ public class CheckBasicActivity extends BasicActivity implements View.OnClickLis
         return mYear + "年" + mMonth + "月" + mDay + "日" + " " + "星期" + mWay + " " + mHour + ":" + mMinute + ":" + mSecond;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.check_mark:
-                isEditTextBlank();
-                break;
-            case R.id.blueTooth:
-                Toast.makeText(CheckBasicActivity.this, "开启蓝牙扫码", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.default_param:
-                Toast.makeText(CheckBasicActivity.this, "货品默认参数", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.kuaiSao:
-                Toast.makeText(CheckBasicActivity.this, "开启快扫模式", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     //创建菜单
     @Override
@@ -262,6 +245,15 @@ public class CheckBasicActivity extends BasicActivity implements View.OnClickLis
         }
         return super.onPrepareOptionsMenu(menu);
     }
+    public void clearEditText(){
+        goodsName.setText("");
+        goodsSku.setText("");
+        price.setText("");
+        amount.setText("");
+        description.setText("");
+    }
+
+
 
 
 }

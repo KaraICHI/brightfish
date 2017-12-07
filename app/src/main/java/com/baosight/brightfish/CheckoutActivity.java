@@ -1,44 +1,35 @@
 package com.baosight.brightfish;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.baosight.brightfish.model.Buyer;
+import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
-import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.ui.ChooseBuyerDialogAdapter;
 
-import java.util.Calendar;
-import java.util.TimeZone;
+import org.litepal.crud.DataSupport;
 
-public class CheckoutActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final int msgKey1 = 1;
-    Toolbar toolbar;
-    private String content = "";
-    private boolean isFocus;
-    TextView goodsText, note, buyerText, currentTime;
-    Button commit;
-    EditText goodsSku, goodsName, price, amount, description, supplierSku, supplierName;
-    ImageButton goodsMenu, goodsRefesh, goodsPhoto, buyerMenu, buyerRefesh;
-    Goods goods;
-    Buyer buyer;
+import java.util.List;
+
+public class CheckoutActivity  extends CheckBasicActivity implements View.OnClickListener{
+    @SuppressLint("StaticFieldLeak")
+    static EditText buyerSku;
+    @SuppressLint("StaticFieldLeak")
+    static EditText buyerName;
+    ImageButton buyerMenu, buyerRefesh;
+    public static Goods goods;
+    public static Buyer buyer;
 
     public static void startCheckoutActivity(Context context) {
         Intent intent = new Intent(context, CheckoutActivity.class);
@@ -49,62 +40,24 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        initToolbar(R.color.colorBlue);
         initControls();
-    }
+        initBuyerPart();
 
-    private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        goodsText = (TextView) findViewById(R.id.check_good);
-        note = (TextView) findViewById(R.id.note_checkin);
-        buyerText = (TextView) findViewById(R.id.check_buyer);
-        currentTime = (TextView) findViewById(R.id.current_time);
-        goodsText.setTextColor(getResources().getColor(R.color.colorBlue));
-        note.setTextColor(getResources().getColor(R.color.colorBlue));
-        currentTime.setTextColor(getResources().getColor(R.color.colorBlue));
-        currentTime.setTextColor(getResources().getColor(R.color.colorBlue));
-        currentTime = (TextView) findViewById(R.id.current_time);
-        new TimeThread().start();
-        commit = (Button) findViewById(R.id.checkin_commit);
-        assert commit != null;
-        commit.setOnClickListener(this);
-        goodsSku = (EditText) findViewById(R.id.goods_sku_checkin);
-        goodsName = (EditText) findViewById(R.id.goods_name_checkin);
-        price = (EditText) findViewById(R.id.price_checkin);
-        amount = (EditText) findViewById(R.id.amount_checkin);
-        description = (EditText) findViewById(R.id.descripe_checkin);
-        supplierName = (EditText) findViewById(R.id.buyer_name_checkin);
-        supplierSku = (EditText) findViewById(R.id.supplier_sku_checkin);
-        goodsMenu = (ImageButton) findViewById(R.id.check_good_menu);
-        goodsRefesh = (ImageButton) findViewById(R.id.check_good_refesh);
+    }
+    protected void initBuyerPart(){
+        buyerName = (EditText) findViewById(R.id.buyer_name_checkin);
+        buyerSku = (EditText) findViewById(R.id.buyer_sku_checkin);
         buyerMenu = (ImageButton) findViewById(R.id.check_buyer_menu);
-        buyerRefesh = (ImageButton) findViewById(R.id.check_buyer_refesh);
-        goodsPhoto = (ImageButton) findViewById(R.id.photo_goods);
-        goodsPhoto.setOnClickListener(this);
-        goodsName.setOnClickListener(this);
-        goodsSku.setOnClickListener(this);
-        price.setOnClickListener(this);
-        amount.setOnClickListener(this);
-        description.setOnClickListener(this);
-        goodsMenu.setOnClickListener(this);
-        goodsRefesh.setOnClickListener(this);
+        buyerRefesh = (ImageButton) findViewById(R.id.check_good_refesh);
         buyerMenu.setOnClickListener(this);
         buyerRefesh.setOnClickListener(this);
-        goodsMenu.setBackgroundResource(R.drawable.ic_list_blue_24dp);
-        buyerMenu.setBackgroundResource(R.drawable.ic_list_blue_24dp);
-        goodsRefesh.setBackgroundResource(R.drawable.ic_refresh_blue_24dp);
-        buyerRefesh.setBackgroundResource(R.drawable.ic_refresh_blue_24dp);
-        goodsPhoto.setBackgroundResource(R.drawable.ic_image_blue_24dp);
-
-
+        editTexts.add(buyerSku);
+        editTexts.add(buyerName);
+        setCheckLisener();
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -124,57 +77,41 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.check_buyer_menu:
                 Intent intent2 = new Intent(this, ChooseBuyerActivity.class);
-                startActivityForResult(intent2, 1);
+                startActivityForResult(intent2, 2);
                 break;
             case R.id.check_buyer_refesh:
-                supplierSku.setText("");
-                supplierName.setText("");
+                buyerSku.setText("");
+                buyerName.setText("");
                 break;
             case R.id.photo_goods:
                 CheckinAblumActivity.startCheckinAblumActivity(CheckoutActivity.this);
                 break;
             case R.id.checkin_commit:
-                setAlertDialog();
+                if((!isEditTextBlank()&&isBuyerExist())){
+                    saveCheckout();
+                    clearEditText();
+                    buyerSku.setText("");
+                    buyerName.setText("");
+                    Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
+                }
                 break;
-
-        }
-    }
-
-    private void setAlertDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(CheckoutActivity.this);
-        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            case R.id.add_new_buyer:
+                NewBuyerActivity.startBuyerActivity(CheckoutActivity.this);
+                break;
+            case R.id.add_new_goods:
+                NewGoodsActivity.startGoodsActivity(CheckoutActivity.this);
+                break;
+            case R.id.add_cancel:
                 dialog.dismiss();
-            }
-        });
-        if (TextUtils.isEmpty(content)) {
-            dialog.setMessage("内容不能为空");
-        } else if (TextUtils.isEmpty(goodsName.getText())) {
-            dialog.setMessage("货物不能为空");
-        } else if (TextUtils.isEmpty(price.getText())) {
-            dialog.setMessage("价格不能为空");
-        } else if (TextUtils.isEmpty(amount.getText())) {
-            dialog.setMessage("数量不能为空");
-        }
-        dialog.show();
-    }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (!isFocus) {
-            menu.findItem(R.id.check_mark).setVisible(false);
-        } else {
-            menu.findItem(R.id.check_mark).setVisible(true);
         }
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.check_mark:
-                setAlertDialog();
+                saveCheckout();
                 break;
             case R.id.blueTooth:
                 Toast.makeText(CheckoutActivity.this, "开启蓝牙扫码", Toast.LENGTH_SHORT).show();
@@ -191,73 +128,69 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-    //创建菜单
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.checkin_bar_menu, menu);
+
+    private void saveCheckout() {
+        if((!isEditTextBlank()&&isBuyerExist())){
+            Checkout checkout=new Checkout();
+            checkout.setGoods(goods);
+            checkout.setAmount(Integer.parseInt(amount.getText().toString()));
+            checkout.setPrice(Long.parseLong(price.getText().toString()));
+            checkout.setDescr(description.getText().toString());
+            checkout.setBuyer(buyer);
+            checkout.save();
+            clearEditText();
+            buyerSku.setText("");
+            buyerName.setText("");
+            Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private boolean isBuyerExist() {
+        if (!selectBuyer(buyerSku.getText().toString())) {
+            showNoThatBuyerDialog();
+            return false;
+        }
         return true;
+
     }
 
-
-    //显示时间线程
-    public class TimeThread extends Thread {
-        @Override
-        public void run() {
-            do {
-                try {
-                    Thread.sleep(1000);
-                    Message msg = new Message();
-                    msg.what = msgKey1;
-                    mHandler.sendMessage(msg);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } while (true);
+    private boolean selectBuyer(String s) {
+        List<Buyer> buyerList= DataSupport.where("sku=?",s).find(Buyer.class);
+        if(buyerList.size()>=1){
+            buyer=buyerList.get(0);
+            return true;
         }
+        return false;
+
     }
 
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case msgKey1:
-                    currentTime.setText(getTime());
-                    break;
-                default:
-                    break;
-            }
+    private void showNoThatBuyerDialog() {
+        dialog = new Dialog(CheckoutActivity.this);
+        dialog.setTitle("没有该买家！");
+        dialog.setContentView(R.layout.dialog_no_buyer);
+        RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.dialog_rec);
+        Button addNew=(Button) dialog.findViewById(R.id.add_new_buyer);
+        Button addCancel=(Button) dialog.findViewById(R.id.add_cancel);
+        addCancel.setOnClickListener(this);
+        addNew.setOnClickListener(this);
+        ChooseBuyerDialogAdapter adapter = new ChooseBuyerDialogAdapter(DataSupport.findAll(Buyer.class),dialog);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(CheckoutActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        dialog.show();
+    }
+    public static void refesh(){
+        if (goods != null) {
+            goodsSku.setText(goods.getSku());
+            goodsName.setText(goods.getName());
         }
-    };
+        if (buyer != null) {
+            buyerSku.setText(buyer.getSku());
+            buyerName.setText(buyer.getName());
+        }
 
-    //获得当前年月日时分秒星期
-    public String getTime() {
-        final Calendar c = Calendar.getInstance();
-        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
-        String mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
-        String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
-        String mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
-        String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
-        String mSecond = String.valueOf(c.get(Calendar.SECOND));//秒
-        if ("1".equals(mWay)) {
-            mWay = "天";
-        } else if ("2".equals(mWay)) {
-            mWay = "一";
-        } else if ("3".equals(mWay)) {
-            mWay = "二";
-        } else if ("4".equals(mWay)) {
-            mWay = "三";
-        } else if ("5".equals(mWay)) {
-            mWay = "四";
-        } else if ("6".equals(mWay)) {
-            mWay = "五";
-        } else if ("7".equals(mWay)) {
-            mWay = "六";
-        }
-        return mYear + "年" + mMonth + "月" + mDay + "日" + " " + "星期" + mWay + " " + mHour + ":" + mMinute + ":" + mSecond;
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -265,13 +198,15 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    goods = (Goods) data.getSerializableExtra("goods");
+                    goods = (Goods) data.getBundleExtra("bundle").getSerializable("goods");
                 }
             case 2:
                 if (resultCode == RESULT_OK) {
-                    buyer = (Buyer) data.getSerializableExtra("buyer");
+                    buyer = (Buyer) data.getBundleExtra("bundle").getSerializable("buyer");
                 }
         }
+        refesh();
+
     }
 
 }

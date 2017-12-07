@@ -31,7 +31,7 @@
             android:id="@+id/choose_checked_icon"
             android:layout_width="@dimen/chooseIcon"
             android:layout_height="@dimen/chooseIcon"
-            android:background="@drawable/ic_check_white_24dp"
+            android:background="@drawable/item_choosed"
             android:layout_gravity="center_vertical"
             />
 

@@ -1,5 +1,6 @@
 package com.baosight.brightfish.model;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
@@ -11,7 +12,11 @@ import java.io.Serializable;
 public class Supplier extends DataSupport implements Serializable{
     private static final long serialVersionUID=1L;
     private int id;
-    private String sku, name, address, telephone, cellphoto, email, wechat, qq, descr, website, photo;
+    @Column(unique = true,nullable = false)
+    private String sku;
+    @Column(nullable = false)
+    private String name;
+    private String address, telephone, cellphoto, email, wechat, qq, descr, website, photo;
 
     public int getId() {
         return id;

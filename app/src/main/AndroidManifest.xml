@@ -22,10 +22,10 @@
             android:label="新出库" />
         <activity
             android:name=".NewSupplierActivity"
-            android:label="供应商" />
+            android:label="新供应商" />
         <activity
             android:name=".NewBuyerActivity"
-            android:label="买家" />
+            android:label="新买家" />
         <activity
             android:name=".AccountActivity"
             android:label="我的账号" />
@@ -34,7 +34,7 @@
             android:label="设置" />
         <activity
             android:name=".NewGoodsActivity"
-            android:label="货品" />
+            android:label="新货品" />
         <activity
             android:name=".AnalyzeActivity"
             android:label="数据分析" />
@@ -101,8 +101,10 @@
         <activity
             android:name=".SearchGoodsActivity"
             android:label="查找货物" />
-        <activity android:name=".ModifyAccountActivity" android:label="修改我的账号"></activity>
-
+        <activity
+            android:name=".ModifyAccountActivity"
+            android:label="修改我的账号" />
+        <activity android:name=".GoodsActivity"></activity>
     </application>
 
 </manifest>

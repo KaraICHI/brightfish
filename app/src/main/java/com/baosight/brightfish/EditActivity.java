@@ -54,7 +54,10 @@ public class EditActivity extends BasicActivity implements View.OnClickListener{
         wechat=(EditText) findViewById(R.id.wechat_edit);
         website=(EditText) findViewById(R.id.web_edit);
         saveBtn=(Button) findViewById(R.id.commit_edit);
-        saveBtn.setOnClickListener(this);
+        if(saveBtn!=null){
+            saveBtn.setOnClickListener(this);
+        }
+
     }
 
     @Override

@@ -1,25 +1,26 @@
 package com.baosight.brightfish;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.baosight.brightfish.model.Checkin;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.model.Supplier;
-import com.baosight.brightfish.ui.ChooseGoodsdDialogAdapter;
 import com.baosight.brightfish.ui.ChooseSupplierDialogAdapter;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Date;
 import java.util.List;
 
 public class CheckinActivity extends CheckBasicActivity implements View.OnClickListener {
@@ -87,24 +88,24 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
                 CheckinAblumActivity.startCheckinAblumActivity(CheckinActivity.this);
                 break;
             case R.id.checkin_commit:
-                if((!isEditTextBlank()&&isSupplierExist())){
                     saveCheckin();
-                    Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
-                 }
+
                 break;
             case R.id.add_new_goods:
                 NewGoodsActivity.startGoodsActivity(CheckinActivity.this);
                 break;
             case R.id.add_cancel:
                 dialog.dismiss();
-
+            case R.id.add_new_supplier:
+                NewSupplierActivity.startSupplierActivity(CheckinActivity.this);
+                break;
         }
     }
 
 
     private boolean isSupplierExist(){
         if (!selectSupplier(supplierSku.getText().toString())) {
-           showNoThatSupplierDialog();
+            showNoThatSupplierDialog();
             return false;
         }
         return true;
@@ -127,14 +128,44 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
         refesh();
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.check_mark:
+                saveCheckin();
+                break;
+            case R.id.blueTooth:
+                Toast.makeText(CheckinActivity.this, "开启蓝牙扫码", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.default_param:
+                Toast.makeText(CheckinActivity.this, "货品默认参数", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.kuaiSao:
+                Toast.makeText(CheckinActivity.this, "开启快扫模式", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void saveCheckin() {
-        Checkin checkin = new Checkin();
-        checkin.setGoods(goods);
-        checkin.setPrice(Long.parseLong(price.getText().toString()));
-        checkin.setAmount(Integer.parseInt(amount.getText().toString()));
-        checkin.setDescr(description.getText().toString());
-        checkin.setSupplier(supplier);
+        if((!isEditTextBlank()&&isSupplierExist())){
+            Checkin checkin = new Checkin();
+            checkin.setGoods(goods);
+            checkin.setPrice(Long.parseLong(price.getText().toString()));
+            checkin.setAmount(Integer.parseInt(amount.getText().toString()));
+            checkin.setDescr(description.getText().toString());
+            checkin.setSupplier(supplier);
+            checkin.setCheckinDate(new Date(System.currentTimeMillis()));
+
+            checkin.save();
+            clearEditText();
+            supplierSku.setText("");
+            supplierName.setText("");
+            Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
