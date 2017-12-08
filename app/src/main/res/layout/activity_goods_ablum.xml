@@ -4,24 +4,64 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baosight.brightfish.SupplierAblumActivity">
+    tools:context="com.baosight.brightfish.CheckinAblumActivity">
     <include layout="@layout/toolbar"/>
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/add_Ablum_rec"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottomBar"
-            android:textSize="@dimen/bottomContent"
-            android:textColor="#fff"
-            android:layout_gravity="bottom"
-            android:background="@color/colorDarkGery"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="新货品"
+            android:layout_height="match_parent"
             />
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/add_photo"
+            android:layout_width="@dimen/addPhoto"
+            android:layout_height="@dimen/addPhoto"
+            android:background="@color/colorLightGery"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <ImageView
+                android:id="@+id/add_photo_icon"
+                android:layout_width="@dimen/addPhotoIcon"
+                android:layout_height="@dimen/addPhotoIcon"
+                android:background="@drawable/ic_add_a_photo_black"
+                android:backgroundTint="@color/colorDarkGery"
+                android:layout_centerInParent="true"
+                />
+            <TextView
+                android:id="@+id/add_photo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加照片"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/add_photo_icon"
+                />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottomBar"
+        android:textSize="@dimen/bottomContent"
+        android:textColor="#fff"
+        android:layout_gravity="bottom"
+        android:background="@color/colorDarkGery"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="新入库"
+        />
+
+
+
 
 
 </LinearLayout>

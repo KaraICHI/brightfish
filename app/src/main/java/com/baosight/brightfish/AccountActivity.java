@@ -2,6 +2,8 @@ package com.baosight.brightfish;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,18 +50,22 @@ public class AccountActivity extends EditActivity {
         return super.onOptionsItemSelected(item);
     }
     private void initEditText(){
-        Account account= DataSupport.find(Account.class,1);
-        accountSku.setText(account.getSku());
-        accountName.setText(account.getName());
-        address.setText(account.getAddress());
-        telephone.setText(account.getTelephone());
-        cellphone.setText(account.getCellphoto());
-        email.setText(account.getEmail());
-        wechat.setText(account.getWechat());
-        qq.setText(account.getQq());
-        descr.setText(account.getDescr());
-        website.setText(account.getWebsite());
 
+        Account account= DataSupport.find(Account.class,1);
+        if(account!=null) {
+            accountSku.setText(account.getSku());
+            accountName.setText(account.getName());
+            address.setText(account.getAddress());
+            telephone.setText(account.getTelephone());
+            cellphone.setText(account.getCellphoto());
+            email.setText(account.getEmail());
+            wechat.setText(account.getWechat());
+            qq.setText(account.getQq());
+            descr.setText(account.getDescr());
+            website.setText(account.getWebsite());
+            Bitmap bitmap = BitmapFactory.decodeFile(account.getPhoto());
+            photo.setImageBitmap(bitmap);
+        }
 
     }
 }

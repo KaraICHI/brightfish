@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChooseBuyerActivity extends AppCompatActivity {
+public class ChooseBuyerActivity extends BasicActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     Toolbar toolbar;
@@ -39,19 +39,10 @@ public class ChooseBuyerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_buyer);
         initControls();
-
+        initToolbar(R.color.colorBlue);
     }
 
     private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         initChooseItemList();
         ChooseBuyerAdapter adapter=new  ChooseBuyerAdapter(chooseItemList,ChooseBuyerActivity.this);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);

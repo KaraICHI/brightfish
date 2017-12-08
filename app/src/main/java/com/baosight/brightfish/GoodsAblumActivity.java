@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
-public class GoodsAblumActivity extends AppCompatActivity {
+public class GoodsAblumActivity extends CameraBasicActivity {
 
     Toolbar toolbar;
 
@@ -22,18 +22,11 @@ public class GoodsAblumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer_ablum);
         initControls();
+        initToolbar(R.color.colorOrange);
     }
 
     private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorOrange));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
     }
 

@@ -13,11 +13,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
-    Toolbar toolbar;
+public class SearchActivity extends BasicActivity implements View.OnClickListener {
     ImageButton chooseCheckin, chooseCheckout, chooseGoods, chooseSupplier, chooseBuyer, chooseCheckList,
             searchCheckin, searchCheckout, searchGoods, searchSupplier, searchBuyer, searchCheckList;
-    private static final String TAG = "SearchActivity";
 
 
     public static void startSearchActivity(Context context) {
@@ -29,15 +27,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPur));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+       initToolbar(R.color.colorPur);
         initControls();
 
     }

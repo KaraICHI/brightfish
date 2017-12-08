@@ -9,8 +9,12 @@ import android.widget.Toast;
 
 import com.baosight.brightfish.model.Account;
 
+import org.litepal.crud.DataSupport;
+
 
 public class ModifyAccountActivity extends EditActivity {
+    Account account;
+
     public static void startModifyAccountActivity(Context context) {
         Intent intent = new Intent(context, ModifyAccountActivity.class);
         context.startActivity(intent);
@@ -34,39 +38,52 @@ public class ModifyAccountActivity extends EditActivity {
                 showCameraDialog();
                 break;
             case R.id.select_ablum_btn:
-                pictureImageView=photo;
+                pictureImageView = photo;
                 choiceFromAlbum();
                 break;
             case R.id.commit_edit:
-                saveAccount();
-                clearEditText();
+                commit();
+                break;
+            default:
+                break;
 
         }
     }
-    private void saveAccount(){
-        if (TextUtils.isEmpty(sku.getText())||TextUtils.isEmpty(name.getText())) {
+
+    private void initAccount() {
+        account = new Account();
+        account.setName(name.getText().toString());
+        account.setSku(sku.getText().toString());
+        account.setCellphoto(cellphone.getText().toString());
+        account.setTelephone(telephone.getText().toString());
+        account.setDescr(descr.getText().toString());
+        account.setAddress(address.getText().toString());
+        account.setEmail(email.getText().toString());
+        account.setQq(qq.getText().toString());
+        account.setWechat(wechat.getText().toString());
+        account.setWebsite(website.getText().toString());
+        if(photoOutputUri!=null){
+            account.setPhoto(photoOutputUri.getPath());
+        }
+
+    }
+
+
+    private void commit() {
+        if (TextUtils.isEmpty(sku.getText()) || TextUtils.isEmpty(name.getText())) {
             setAlertDialog();
-        }else {
-            Account supplier=new Account();
-            supplier.setName(name.getText().toString());
-            supplier.setSku(sku.getText().toString());
-            supplier.setCellphoto(cellphone.getText().toString());
-            supplier.setTelephone(telephone.getText().toString());
-            supplier.setDescr(descr.getText().toString());
-            supplier.setAddress(address.getText().toString());
-            supplier.setEmail(email.getText().toString());
-            supplier.setQq(qq.getText().toString());
-            supplier.setWechat(wechat.getText().toString());
-            supplier.setWebsite(website.getText().toString());
-            supplier.save();
-            Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
+        } else if (DataSupport.find(Account.class, 1) != null) {
+            initAccount();
+            account.update(1);
+            Toast.makeText(ModifyAccountActivity.this, "更新成功", Toast.LENGTH_SHORT).show();
+        } else {
+            initAccount();
+            account.save();
+            Toast.makeText(ModifyAccountActivity.this, "创建成功", Toast.LENGTH_SHORT).show();
         }
 
-
+        clearEditText();
     }
-
-
-
 
 
 }

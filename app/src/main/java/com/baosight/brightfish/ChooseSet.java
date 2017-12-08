@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by Administrator on 2017/12/4.
  */
 
-public class ChooseSet extends BasicActivity {
+public class ChooseSet extends CameraBasicActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     @Override

@@ -23,4 +23,7 @@
     <dimen name="chooseIcon">32dp</dimen>
     <dimen name="chooseName">16dp</dimen>
     <dimen name="chooseSku">14dp</dimen>
+    <dimen name="tab">30dp</dimen>
+    <dimen name="checklistBtnHeight">40dp</dimen>
+    <dimen name="checklistBtnwidth">70dp</dimen>
 </resources>

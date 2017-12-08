@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.baosight.brightfish.ui.ChooseSupplierDialogAdapter;
 
 import org.litepal.crud.DataSupport;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
     static EditText supplierSku;
     static EditText supplierName;
     ImageButton supplierMenu, supplierRefesh;
+    String checkinPhotoPath;
     public static Goods goods;
     public static Supplier supplier;
 
@@ -157,8 +160,9 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
             checkin.setAmount(Integer.parseInt(amount.getText().toString()));
             checkin.setDescr(description.getText().toString());
             checkin.setSupplier(supplier);
-            checkin.setCheckinDate(new Date(System.currentTimeMillis()));
-
+//            SimpleDateFormat format=new SimpleDateFormat("yyyy mm月 dd HH:mm");
+ //           checkin.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
+            checkin.setPhoto(checkinPhotoPath);
             checkin.save();
             clearEditText();
             supplierSku.setText("");

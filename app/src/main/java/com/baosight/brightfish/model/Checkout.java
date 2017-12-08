@@ -1,5 +1,6 @@
 package com.baosight.brightfish.model;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 import java.util.Date;
@@ -10,30 +11,27 @@ import java.util.Date;
 
 public class Checkout extends DataSupport {
     private int id;
+    @Column(nullable = false)
     private double price;
+    @Column(nullable = false)
     private int amount;
     private String descr;
     private String photo;
+    @Column (nullable = false,unique = true)
     private Goods goods;
+    @Column(nullable = false)
     private Buyer buyer;
-    private Date checkinDate;
-    private Long checkinTime;
+    @Column(nullable = false)
+    private String checkinDate;
 
-    public Date getCheckinDate() {
+    public String getCheckinDate() {
         return checkinDate;
     }
 
-    public void setCheckinDate(Date checkinDate) {
+    public void setCheckinDate(String checkinDate) {
         this.checkinDate = checkinDate;
     }
 
-    public Long getCheckinTime() {
-        return checkinTime;
-    }
-
-    public void setCheckinTime(Long checkinTime) {
-        this.checkinTime = checkinTime;
-    }
 
     public int getId() {
         return id;

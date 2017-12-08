@@ -13,12 +13,22 @@ import com.baosight.brightfish.R;
  * Created by Administrator on 2017/12/4.
  */
 
-public class GoodsFragment extends Fragment {
+public class GoodsFragment extends BaseFragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.check_goods_frag_green,container);
+       View view = inflater.inflate(R.layout.frag_tab_goods,container);
         return view;
+    }
+
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    protected View initView() {
+        return null;
     }
 }

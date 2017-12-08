@@ -46,15 +46,7 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
         adapter.setItemLayout(itemLayout);
     }
     protected void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         addConditions = (ImageView) findViewById(R.id.add_conditions_btn);
         searchSort = (ImageView) findViewById(R.id.search_sort_btn);
         addConditions.setOnClickListener(this);
@@ -360,7 +352,7 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 //因为monthOfYear会比实际月份少一月所以这边要加1
-                date.setText(year + " " + (monthOfYear + 1) + "月" + dayOfMonth + "日");
+                date.setText(year + " " + (monthOfYear + 1) + "月" + dayOfMonth );
             }
         }, year, month, day);
         datePickerDialog.show();

@@ -12,34 +12,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
-/**
- * Created by Administrator on 2017/12/5.
- */
 
-public class EditActivity extends BasicActivity implements View.OnClickListener{
+
+public class EditActivity extends CameraBasicActivity implements View.OnClickListener{
     Toolbar toolbar;
     ImageView photo;
     ImageView selectAblum;
     EditText sku,name,address,cellphone,telephone,email,wechat,qq,descr,website;
     Button saveBtn;
 
-    protected void initToolbar(int color){
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(color));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
+
      /*
      *控件初始化
      */
 
     protected void initControls() {
         photo = (ImageView) findViewById(R.id.photo);
+        assert photo != null;
         photo.setOnClickListener(this);
         selectAblum = (ImageView) findViewById(R.id.select_ablum_btn);
         selectAblum.setOnClickListener(this);

@@ -21,7 +21,7 @@ public class SearchCheckoutActivity extends SearchBasicActivity implements View.
         setContentView(R.layout.activity_search_checkout);
        /* initAdapter(R.layout.item_add_condition_out);*/
         initControls();
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+        initToolbar(R.color.colorBlue);
     }
 
     @Override

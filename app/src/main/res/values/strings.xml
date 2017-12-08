@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">brightfish</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string-array name="tab_short_Title">
+        <item>基本参数</item>
+        <item>最近活动</item>
+        <item>商家分析</item>
+        <item>数据统计</item>
+    </string-array>
 </resources>
 

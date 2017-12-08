@@ -53,6 +53,7 @@ public class SearchCheckinActivity extends SearchBasicActivity implements View.O
         setContentView(R.layout.activity_search_checkin);
       /*  initAdapter(R.layout.item_add_condition_in);*/
         initControls();
+        initToolbar(R.color.colorGreen);
 
     }
 

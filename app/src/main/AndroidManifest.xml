@@ -104,7 +104,7 @@
         <activity
             android:name=".ModifyAccountActivity"
             android:label="修改我的账号" />
-        <activity android:name=".GoodsActivity"></activity>
+        <activity android:name=".GoodsActivity" android:label="货品"></activity>
     </application>
 
 </manifest>

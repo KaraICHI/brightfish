@@ -42,7 +42,7 @@ public class SearchGoodsActivity extends SearchBasicActivity {
         setContentView(R.layout.activity_search_goods);
         initAdapter(R.layout.item_add_condition_goods);
         initControls();
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorOrange));
+        initToolbar(R.color.colorOrange);
     }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <litepal>
     <dbname value="BrightFishStore" />
-    <version value="3"/>
+    <version value="5"/>
     <list>
         <mapping class="com.baosight.brightfish.model.Supplier"/>
         <mapping class="com.baosight.brightfish.model.Buyer"/>
@@ -9,5 +9,6 @@
         <mapping class="com.baosight.brightfish.model.Checkout"/>
         <mapping class="com.baosight.brightfish.model.Goods"/>
         <mapping class="com.baosight.brightfish.model.Account"/>
+        <mapping class="com.baosight.brightfish.model.Checklist"/>
     </list>
 </litepal>

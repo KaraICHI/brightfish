@@ -20,12 +20,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckinAblumActivity extends BasicActivity {
-    List<AlbumItem> albumItemList;
-    Toolbar toolbar;
-    RelativeLayout addPhoto;
-    RecyclerView recyclerView;
-    AlbumAdapter adapter;
+public class CheckinAblumActivity extends AlbumBasicActivity {
+
+
 
     public static void startCheckinAblumActivity(Context context) {
         Intent intent = new Intent(context, CheckinAblumActivity.class);
@@ -36,25 +33,35 @@ public class CheckinAblumActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkin_ablum);
+        initToolbar(R.color.colorGreen);
         initControls();
+
+
+    }
+
+
+    private void initAblum() {
+        albumItemList = new ArrayList<>();
+        AlbumItem album = new AlbumItem();
+        albumItemList.add(album);
+
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.checkin_ablum, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    protected void initControls() {
         initAblum();
         recyclerView = (RecyclerView) findViewById(R.id.add_Ablum_rec);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         adapter = new AlbumAdapter(albumItemList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
-    }
-
-    private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         addPhoto = (RelativeLayout) findViewById(R.id.add_photo);
         initCameraControls(addPhoto, null, null);
         addPhoto.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +73,7 @@ public class CheckinAblumActivity extends BasicActivity {
         });
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -92,13 +100,6 @@ public class CheckinAblumActivity extends BasicActivity {
         }
     }
 
-    private void initAblum() {
-        albumItemList = new ArrayList<>();
-        AlbumItem album = new AlbumItem();
-        albumItemList.add(album);
-
-    }
-
     private void addAblum(Bitmap bitmap) {
         AlbumItem albumItem = new AlbumItem(bitmap);
         albumItemList.add(albumItem);
@@ -106,11 +107,6 @@ public class CheckinAblumActivity extends BasicActivity {
         adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.checkin_ablum, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }
 
 

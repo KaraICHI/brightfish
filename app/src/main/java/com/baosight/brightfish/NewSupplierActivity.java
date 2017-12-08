@@ -1,14 +1,10 @@
 package com.baosight.brightfish;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.Supplier;
@@ -58,7 +54,9 @@ public class NewSupplierActivity extends EditActivity implements View.OnClickLis
             supplier.setQq(qq.getText().toString());
             supplier.setWechat(wechat.getText().toString());
             supplier.setWebsite(website.getText().toString());
-            supplier.setPhoto(photoOutputUri.getPath());
+            if(photoOutputUri!=null) {
+                supplier.setPhoto(photoOutputUri.getPath());
+            }
             supplier.save();
             Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
         }

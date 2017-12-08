@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
-public class SupplierAblumActivity extends AppCompatActivity {
+public class SupplierAblumActivity extends CameraBasicActivity {
     Toolbar toolbar;
 
     public static void startSupplierAblumActivity(Context context) {

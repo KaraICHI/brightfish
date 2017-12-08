@@ -14,8 +14,8 @@ import com.baosight.brightfish.ui.HomeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
+public class MainActivity extends BasicActivity {
+
     public static final int CHECKIN_ITEM = 1;
     public static final int SUPPILER_ITEM = 2;
     public static final int CHECKOUT_ITEM = 3;
@@ -33,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initToolbar(R.color.colorHome);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         homeItems = new ArrayList<>();
-        init();
+        initControls();
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         HomeAdapter adapter = new HomeAdapter(homeItems,this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.home_rec);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void init() {
+    private void initControls() {
         HomeItem homeItem = new HomeItem(1, R.drawable.ic_checkin_36dp, "入库");
         homeItem.setColor(R.color.colorGreen);
         homeItems.add(homeItem);

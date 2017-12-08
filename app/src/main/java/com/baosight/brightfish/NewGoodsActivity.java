@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.baosight.brightfish.model.Goods;
 
 
-public class NewGoodsActivity extends BasicActivity implements View.OnClickListener {
+public class NewGoodsActivity extends CameraBasicActivity implements View.OnClickListener {
     Toolbar toolbar;
     ImageView photo;
     ImageView selectAblum;
@@ -36,18 +36,10 @@ public class NewGoodsActivity extends BasicActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_new);
         initControls();
+        initToolbar(R.color.colorOrange);
     }
 
     private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorOrange));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         photo = (ImageView) findViewById(R.id.photo);
         assert photo != null;
         photo.setOnClickListener(this);
@@ -113,6 +105,9 @@ public class NewGoodsActivity extends BasicActivity implements View.OnClickListe
         supplier.setColor(color.getText().toString());
         supplier.setSize(size.getText().toString());
         supplier.setSpec(spec.getText().toString());
+        if(photoOutputUri!=null){
+            supplier.setPhoto(photoOutputUri.getPath());
+        }
         supplier.save();
 
     }

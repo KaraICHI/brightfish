@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -57,6 +56,9 @@ public class NewBuyerActivity extends EditActivity implements View.OnClickListen
             supplier.setQq(qq.getText().toString());
             supplier.setWechat(wechat.getText().toString());
             supplier.setWebsite(website.getText().toString());
+            if(photoOutputUri!=null){
+                supplier.setPhoto(photoOutputUri.getPath());
+            }
             supplier.save();
             Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
         }

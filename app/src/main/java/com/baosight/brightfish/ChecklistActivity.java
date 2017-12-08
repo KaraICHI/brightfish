@@ -3,9 +3,9 @@ package com.baosight.brightfish;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,15 +14,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Checklist;
+import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.ui.ChecklistAdapter;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ChecklistActivity extends AppCompatActivity {
+public class ChecklistActivity extends BasicActivity {
 
 
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    Toolbar toolbar;
+
 
     public static void startChecklistActivity(Context context) {
         Intent intent = new Intent(context, ChecklistActivity.class);
@@ -34,20 +42,38 @@ public class ChecklistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checklist);
         initControls();
+        initToolbar(R.color.colorOrange);
 
     }
 
     private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorOrange));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        RecyclerView recyclerView=(RecyclerView) findViewById(R.id.checklist_rec);
+        ChecklistAdapter adapter=new ChecklistAdapter(getChecklists());
+        LinearLayoutManager layoutManager=new LinearLayoutManager(ChecklistActivity.this);
+        assert recyclerView != null;
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+
     }
+
+    private List<Checklist> getChecklists(){
+        List<Checklist> checklists=new ArrayList<>();
+        List<Goods> goodsList= DataSupport.findAll(Goods.class);
+        if(goodsList.size()>0){
+            for(Goods goods:goodsList){
+
+                int checkinAmount=34;
+                int checkoutAmount=12;
+                Checklist checklist=new Checklist();
+                checklist.setAmount(checkinAmount-checkoutAmount);
+                checklist.setGoods(goods);
+                checklists.add(checklist);
+            }
+        }
+        return checklists;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

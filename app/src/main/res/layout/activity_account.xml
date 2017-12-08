@@ -12,7 +12,7 @@
         <include layout="@layout/toolbar"/>
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"/>
+            android:layout_height="9dp"/>
         <ScrollView
             android:layout_marginTop="-10dp"
             android:layout_width="match_parent"
@@ -51,6 +51,7 @@
                         android:background="#B4434343"
                         android:padding="10dp"
                         android:gravity="center_vertical"
+                        android:layout_marginBottom="1dp"
                         >
                         <TextView
                             android:id="@+id/account_sku"
