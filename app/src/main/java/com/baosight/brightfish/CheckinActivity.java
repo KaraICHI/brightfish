@@ -155,13 +155,13 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
     private void saveCheckin() {
         if((!isEditTextBlank()&&isSupplierExist())){
             Checkin checkin = new Checkin();
-            checkin.setGoods(goods);
+            checkin.setGoodsId(goods.getId());
             checkin.setPrice(Long.parseLong(price.getText().toString()));
             checkin.setAmount(Integer.parseInt(amount.getText().toString()));
             checkin.setDescr(description.getText().toString());
             checkin.setSupplier(supplier);
-//            SimpleDateFormat format=new SimpleDateFormat("yyyy mm月 dd HH:mm");
- //           checkin.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
+           SimpleDateFormat format=new SimpleDateFormat("yyyy MM月 dd HH:mm");
+         checkin.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
             checkin.setPhoto(checkinPhotoPath);
             checkin.save();
             clearEditText();

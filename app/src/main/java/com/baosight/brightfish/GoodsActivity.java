@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsActivity extends BasicActivity implements View.OnClickListener{
-    private static final String TAG = "GoodsActivity";
     private TabLayout mTabLayout;
     ImageView photo;
     ImageView selectAblum;
@@ -78,7 +77,6 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         mTitleList.add("商家分析");
         mTitleList.add("数据分析");
 
-
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
@@ -91,13 +89,10 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
         mTabLayout.setTabsFromPagerAdapter(mAdapter);//给Tabs设置适配器
 
-
     }
     private void initControls(){
         photo = (ImageView) view1.findViewById(R.id.photo);
-        Log.d(TAG, "initControls: =========="+photo);
         selectAblum = (ImageView) view1.findViewById(R.id.select_ablum_btn);
-        Log.d(TAG, "initControls: ==========="+selectAblum);
         assert selectAblum != null;
         selectAblum.setOnClickListener(this);
         sku = (TextView) view1.findViewById(R.id.goods_sku);
@@ -162,14 +157,10 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         size.setText(goods.getSize());
         color.setText(goods.getColor());
         descr.setText(goods.getDescr());
-        Log.d(TAG, "showGoods: =================goods photo"+goods.getPhoto());
         Bitmap bitmap = BitmapFactory.decodeFile(goods.getPhoto());
         photo.setImageBitmap(bitmap);
 
     }
-
-
-
 
 }
 

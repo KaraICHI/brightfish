@@ -1,8 +1,7 @@
 package com.baosight.brightfish.ui;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,17 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.baosight.brightfish.model.AlbumItem;
 import com.baosight.brightfish.R;
+import com.baosight.brightfish.model.AlbumItem;
 
 import java.util.List;
 
-/**
- * Created by saitama on 2017/11/24.
- */
+
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
-    private static final String TAG = "AlbumAdapter";
     private List<AlbumItem> mAlbumItemList;
+    static RadioButton selected;
 
     public AlbumAdapter(List<AlbumItem> albumItemList){
         mAlbumItemList = albumItemList;
@@ -30,28 +27,25 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: ==================");
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_ablum, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
 
     }
 
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
             AlbumItem albumItem = mAlbumItemList.get(position);
             holder.ablumPhoto.setImageBitmap(albumItem.getAblumPhoto());
-            holder.ablumPhotoChoose.setOnTouchListener(new View.OnTouchListener() {
+            holder.ablumPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if(((RadioButton)v).isChecked() ){
-                        ((RadioButton) v).setChecked(false);
-                        return true;
-                    }else {
-                        return false;
+                public void onClick(View v) {
+                    holder.ablumPhotoChoose.setChecked(true);
+                    if(selected!=null){
+                        selected.setChecked(false);
                     }
-
-
+                    selected=holder.ablumPhotoChoose;
                 }
             });
     }

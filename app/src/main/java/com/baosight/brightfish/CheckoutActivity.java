@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import com.baosight.brightfish.model.Buyer;
 import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
@@ -20,9 +21,12 @@ import com.baosight.brightfish.ui.ChooseBuyerDialogAdapter;
 
 import org.litepal.crud.DataSupport;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CheckoutActivity  extends CheckBasicActivity implements View.OnClickListener{
+
     @SuppressLint("StaticFieldLeak")
     static EditText buyerSku;
     @SuppressLint("StaticFieldLeak")
@@ -132,11 +136,13 @@ public class CheckoutActivity  extends CheckBasicActivity implements View.OnClic
     private void saveCheckout() {
         if((!isEditTextBlank()&&isBuyerExist())){
             Checkout checkout=new Checkout();
-            checkout.setGoods(goods);
+            checkout.setGoodsId(goods.getId());
             checkout.setAmount(Integer.parseInt(amount.getText().toString()));
             checkout.setPrice(Long.parseLong(price.getText().toString()));
             checkout.setDescr(description.getText().toString());
             checkout.setBuyer(buyer);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat format=new SimpleDateFormat("yyyy MM月 dd HH:mm");
+            checkout.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
             checkout.save();
             clearEditText();
             buyerSku.setText("");

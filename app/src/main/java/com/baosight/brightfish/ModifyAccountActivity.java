@@ -2,8 +2,10 @@ package com.baosight.brightfish;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -63,7 +65,8 @@ public class ModifyAccountActivity extends EditActivity {
         account.setWechat(wechat.getText().toString());
         account.setWebsite(website.getText().toString());
         if(photoOutputUri!=null){
-            account.setPhoto(photoOutputUri.getPath());
+            account.setPhoto(Uri.parse(getPhotoOutputUri()).getPath());
+
         }
 
     }

@@ -3,9 +3,11 @@ package com.baosight.brightfish;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Checkin;
 import com.baosight.brightfish.model.Checklist;
+import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.ui.ChecklistAdapter;
 
@@ -26,11 +30,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ChecklistActivity extends BasicActivity {
-
+    ChecklistAdapter adapter;
+    RecyclerView recyclerView;
 
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-
+    private static final String TAG = "ChecklistActivity";
 
     public static void startChecklistActivity(Context context) {
         Intent intent = new Intent(context, ChecklistActivity.class);
@@ -47,8 +52,8 @@ public class ChecklistActivity extends BasicActivity {
     }
 
     private void initControls() {
-        RecyclerView recyclerView=(RecyclerView) findViewById(R.id.checklist_rec);
-        ChecklistAdapter adapter=new ChecklistAdapter(getChecklists());
+        recyclerView=(RecyclerView) findViewById(R.id.checklist_rec);
+        adapter=new ChecklistAdapter(getChecklists());
         LinearLayoutManager layoutManager=new LinearLayoutManager(ChecklistActivity.this);
         assert recyclerView != null;
         recyclerView.setLayoutManager(layoutManager);
@@ -57,18 +62,22 @@ public class ChecklistActivity extends BasicActivity {
 
     }
 
+    /**
+     * 获取货品现存数量
+     */
     private List<Checklist> getChecklists(){
         List<Checklist> checklists=new ArrayList<>();
         List<Goods> goodsList= DataSupport.findAll(Goods.class);
         if(goodsList.size()>0){
             for(Goods goods:goodsList){
-
-                int checkinAmount=34;
-                int checkoutAmount=12;
+                int checkinAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkin.class,"amount",int.class);
+                int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
+                Log.d(TAG, "getChecklists: ======"+checkinAmount+"========"+checkoutAmount);
                 Checklist checklist=new Checklist();
                 checklist.setAmount(checkinAmount-checkoutAmount);
                 checklist.setGoods(goods);
                 checklists.add(checklist);
+
             }
         }
         return checklists;
@@ -90,8 +99,6 @@ public class ChecklistActivity extends BasicActivity {
             case R.id.sort_btn:
                 openSortMenu();
                 break;
-
-
         }
         return super.onOptionsItemSelected(item);
     }

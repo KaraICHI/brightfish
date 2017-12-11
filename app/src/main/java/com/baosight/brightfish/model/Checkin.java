@@ -18,8 +18,8 @@ public class Checkin extends DataSupport {
     private int amount;
     private String descr;
     private String photo;
-    @Column (nullable = false,unique = true)
-    private Goods goods;
+    @Column (nullable = false)
+    private int goodsId;
     @Column(nullable = false)
     private Supplier supplier;
     @Column(nullable = false)
@@ -54,9 +54,7 @@ public class Checkin extends DataSupport {
         return price;
     }
 
-    public Goods getGoods() {
-        return goods;
-    }
+
 
     public int getAmount() {
         return amount;
@@ -78,9 +76,7 @@ public class Checkin extends DataSupport {
         this.amount = amount;
     }
 
-    public void setGoods(Goods goods) {
-        this.goods = goods;
-    }
+
 
     public void setPrice(double price) {
         this.price = price;
@@ -88,5 +84,13 @@ public class Checkin extends DataSupport {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    public int getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
     }
 }

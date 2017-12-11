@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,13 +31,14 @@ import java.util.Map;
  */
 public class CameraBasicActivity extends BasicActivity {
 
-
+    private static final String TAG = "CameraBasicActivity";
 
     protected View startCameraButton = null;
     protected View choiceFromAlbumButton = null;
     protected ImageView pictureImageView = null;
     protected View setPhotoNull = null;
     protected Dialog dialog = null;
+    protected static int count=0;
 
 
 
@@ -64,6 +66,8 @@ public class CameraBasicActivity extends BasicActivity {
 
 
     }
+
+
 
     protected void initCameraControls(View startCameraButton, View choiceFromAlbumButton, ImageView pictureImageView, Dialog dialog, View setPhotoNull) {
         this.startCameraButton = startCameraButton;
@@ -150,6 +154,7 @@ public class CameraBasicActivity extends BasicActivity {
      * 裁剪图片
      */
     protected void cropPhoto(Uri inputUri) {
+        count+=1;
         // 调用系统裁剪图片的 Action
         Intent cropPhotoIntent = new Intent("com.android.camera.action.CROP");
         // 设置数据Uri 和类型
@@ -158,8 +163,14 @@ public class CameraBasicActivity extends BasicActivity {
         cropPhotoIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         // 设置图片的最终输出目录
         cropPhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                photoOutputUri = Uri.parse("file:////sdcard/image_output.jpg"));
+                photoOutputUri = Uri.parse("file:////sdcard/image_output"+count+".jpg"));
         startActivityForResult(cropPhotoIntent, CROP_PHOTO_REQUEST_CODE);
+    }
+
+    protected String getPhotoOutputUri(){
+        Log.d(TAG, "getPhotoOutputUri: ==========="+count);
+        return "file:////sdcard/image_output"+count+".jpg";
+        
     }
 
 

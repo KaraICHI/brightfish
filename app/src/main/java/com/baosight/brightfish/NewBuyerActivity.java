@@ -2,15 +2,17 @@ package com.baosight.brightfish;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.Buyer;
 
 public class NewBuyerActivity extends EditActivity implements View.OnClickListener {
-
+    private Uri photoOutputUri = null;
     public static void startBuyerActivity(Context context) {
         Intent intent = new Intent(context, NewBuyerActivity.class);
         context.startActivity(intent);
@@ -57,7 +59,7 @@ public class NewBuyerActivity extends EditActivity implements View.OnClickListen
             supplier.setWechat(wechat.getText().toString());
             supplier.setWebsite(website.getText().toString());
             if(photoOutputUri!=null){
-                supplier.setPhoto(photoOutputUri.getPath());
+                supplier.setPhoto(Uri.parse(getPhotoOutputUri()).getPath());
             }
             supplier.save();
             Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
