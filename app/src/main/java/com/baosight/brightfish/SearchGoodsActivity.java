@@ -40,8 +40,7 @@ public class SearchGoodsActivity extends SearchBasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_goods);
-        initAdapter(R.layout.item_add_condition_goods);
-        initControls();
+        initControls(R.layout.item_add_condition_goods);
         initToolbar(R.color.colorOrange);
     }
 

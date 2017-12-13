@@ -19,8 +19,7 @@ public class SearchCheckoutActivity extends SearchBasicActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_checkout);
-       /* initAdapter(R.layout.item_add_condition_out);*/
-        initControls();
+        initControls(R.layout.item_add_condition_out);
         initToolbar(R.color.colorBlue);
     }
 

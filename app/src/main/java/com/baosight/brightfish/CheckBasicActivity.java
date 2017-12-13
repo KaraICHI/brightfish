@@ -29,9 +29,6 @@ import java.util.TimeZone;
 
 import static com.baosight.brightfish.CheckinActivity.goods;
 
-/**
- * Created by Administrator on 2017/12/6.
- */
 
 public class CheckBasicActivity extends BasicActivity implements View.OnClickListener{
     protected static final int msgKey1 = 1;
@@ -141,26 +138,11 @@ public class CheckBasicActivity extends BasicActivity implements View.OnClickLis
         String mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
         String mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
         String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
-        String mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
         String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
         String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
         String mSecond = String.valueOf(c.get(Calendar.SECOND));//秒
-        if ("1".equals(mWay)) {
-            mWay = "天";
-        } else if ("2".equals(mWay)) {
-            mWay = "一";
-        } else if ("3".equals(mWay)) {
-            mWay = "二";
-        } else if ("4".equals(mWay)) {
-            mWay = "三";
-        } else if ("5".equals(mWay)) {
-            mWay = "四";
-        } else if ("6".equals(mWay)) {
-            mWay = "五";
-        } else if ("7".equals(mWay)) {
-            mWay = "六";
-        }
-        return mYear + "年" + mMonth + "月" + mDay + "日" + " " + "星期" + mWay + " " + mHour + ":" + mMinute + ":" + mSecond;
+
+        return mYear + " " + mMonth + "月" + mDay + " "  + mHour + ":" + mMinute + ":" + mSecond;
     }
 
 

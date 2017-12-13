@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -160,6 +158,19 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         Bitmap bitmap = BitmapFactory.decodeFile(goods.getPhoto());
         photo.setImageBitmap(bitmap);
 
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit_bar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.edit_mark:
+               ModifyGoodsActivity.startModifyActivity(GoodsActivity.this,goods);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

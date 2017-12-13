@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +12,6 @@ import android.widget.TextView;
 import com.baosight.brightfish.model.Account;
 
 import org.litepal.crud.DataSupport;
-
-import java.util.List;
-
-import static com.baosight.brightfish.ModifyAccountActivity.startModifyAccountActivity;
 
 public class AccountActivity extends EditActivity {
     TextView accountSku,accountName;
@@ -57,7 +51,7 @@ public class AccountActivity extends EditActivity {
             accountName.setText(account.getName());
             address.setText(account.getAddress());
             telephone.setText(account.getTelephone());
-            cellphone.setText(account.getCellphoto());
+            cellphone.setText(account.getCellphone());
             email.setText(account.getEmail());
             wechat.setText(account.getWechat());
             qq.setText(account.getQq());

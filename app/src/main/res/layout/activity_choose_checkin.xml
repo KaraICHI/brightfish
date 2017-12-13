@@ -7,7 +7,7 @@
     >
     <include layout="@layout/toolbar"/>
     <ListView
-        android:id="@+id/buyer_list"
+        android:id="@+id/check_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

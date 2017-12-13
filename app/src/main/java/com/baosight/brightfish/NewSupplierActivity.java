@@ -46,7 +46,7 @@ public class NewSupplierActivity extends EditActivity implements View.OnClickLis
             Supplier supplier=new Supplier();
             supplier.setName(name.getText().toString());
             supplier.setSku(sku.getText().toString());
-            supplier.setCellphoto(cellphone.getText().toString());
+            supplier.setCellphone(cellphone.getText().toString());
             supplier.setTelephone(telephone.getText().toString());
             supplier.setDescr(descr.getText().toString());
             supplier.setAddress(address.getText().toString());

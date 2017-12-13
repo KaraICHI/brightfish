@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialogTitle"
+        android:background="@color/colorOrange"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="选择原因"
+            />
+
+    </LinearLayout>
+    <RadioGroup
+        android:id="@+id/reasons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        >
+        <RadioButton
+            android:id="@+id/reason_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/radio_button"
+            android:button="@null"
+            android:drawableTint="@color/colorOrange"
+            android:text="@string/output"
+
+
+            />
+        <RadioButton
+            android:id="@+id/reason_consumption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/radio_button"
+            android:button="@null"
+            android:drawableTint="@color/colorOrange"
+            android:text="@string/consumption"
+
+            />
+        <RadioButton
+            android:id="@+id/reason_wear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/radio_button"
+            android:button="@null"
+            android:drawableTint="@color/colorOrange"
+            android:text="@string/wear"
+
+            />
+        <RadioButton
+            android:id="@+id/reason_lost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/radio_button"
+            android:button="@null"
+            android:drawableTint="@color/colorOrange"
+            android:text="@string/lost"
+            />
+        <RadioButton
+            android:id="@+id/reason_reversion_mistake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/radio_button"
+            android:button="@null"
+            android:drawableTint="@color/colorOrange"
+            android:text="@string/reversion"
+            android:checked="true"
+            />
+
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        >
+        <Button
+            android:id="@+id/cancle_reason"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="38dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="取消"
+            android:textColor="@color/colorOrange"
+            />
+        <Button
+            android:id="@+id/commit_reason"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="38dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="确定"
+            android:textColor="@color/colorOrange"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

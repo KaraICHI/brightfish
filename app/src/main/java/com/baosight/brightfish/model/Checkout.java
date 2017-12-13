@@ -3,13 +3,15 @@ package com.baosight.brightfish.model;
 import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2017/12/4.
  */
 
-public class Checkout extends DataSupport {
+public class Checkout extends DataSupport implements Serializable{
+    private static final long serialVersionUID=1L;
     private int id;
     @Column(nullable = false)
     private double price;

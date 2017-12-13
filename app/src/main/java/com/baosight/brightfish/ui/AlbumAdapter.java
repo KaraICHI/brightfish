@@ -23,8 +23,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         mAlbumItemList = albumItemList;
 
     }
-
-
+    
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_ablum, viewGroup, false);
@@ -53,7 +52,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return mAlbumItemList.size();
-
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,10 +60,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
                 ablumPhoto = (ImageView) itemView.findViewById(R.id.ablum_item_photo);
-                ablumPhotoChoose=(RadioButton) itemView.findViewById(R.id.ablum_item_photo_choose);
+                        ablumPhotoChoose=(RadioButton) itemView.findViewById(R.id.ablum_item_photo_choose);
+                        }
+                        }
 
-        }
-    }
-
-
-}
+                        }

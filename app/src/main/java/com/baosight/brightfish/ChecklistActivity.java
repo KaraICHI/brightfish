@@ -72,7 +72,6 @@ public class ChecklistActivity extends BasicActivity {
             for(Goods goods:goodsList){
                 int checkinAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkin.class,"amount",int.class);
                 int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
-                Log.d(TAG, "getChecklists: ======"+checkinAmount+"========"+checkoutAmount);
                 Checklist checklist=new Checklist();
                 checklist.setAmount(checkinAmount-checkoutAmount);
                 checklist.setGoods(goods);

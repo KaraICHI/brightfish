@@ -31,6 +31,7 @@ public class EditActivity extends CameraBasicActivity implements View.OnClickLis
         assert photo != null;
         photo.setOnClickListener(this);
         selectAblum = (ImageView) findViewById(R.id.select_ablum_btn);
+        assert selectAblum != null;
         selectAblum.setOnClickListener(this);
         sku=(EditText) findViewById(R.id.sku_edit);
         name=(EditText) findViewById(R.id.name_edit);

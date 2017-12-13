@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <litepal>
     <dbname value="BrightFishStore" />
-    <version value="7"/>
+    <version value="10"/>
     <list>
         <mapping class="com.baosight.brightfish.model.Supplier"/>
         <mapping class="com.baosight.brightfish.model.Buyer"/>

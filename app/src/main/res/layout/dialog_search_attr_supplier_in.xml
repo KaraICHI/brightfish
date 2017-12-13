@@ -33,6 +33,7 @@
                 android:layout_gravity="center_vertical"
                 />
             <ImageView
+                android:id="@+id/check_supplier_menu"
                 android:layout_width="@dimen/iconContent"
                 android:layout_height="@dimen/iconContent"
                 android:layout_gravity="center_vertical"

@@ -7,5 +7,10 @@
         <item>商家分析</item>
         <item>数据统计</item>
     </string-array>
+    <string name="output">产出</string>
+    <string name="consumption">消耗</string>
+    <string name="lost">丢失</string>
+    <string name="wear">磨损</string>
+    <string name="reversion">修订错误</string>
 </resources>
 

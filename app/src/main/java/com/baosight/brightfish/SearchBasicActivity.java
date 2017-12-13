@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.ConditionItem;
+import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.ui.ChooseSupplierAdapter;
 import com.baosight.brightfish.ui.ConditionAdapter;
 
 import java.util.ArrayList;
@@ -30,22 +34,24 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
     List<ConditionItem> conditionItemList = new ArrayList<>();
     RecyclerView recyclerView;
     ConditionAdapter adapter;
-    ImageView addConditions, searchSort, goodsCancel;
+    ImageView addConditions, searchSort, goodsCancel,goodsMenu;
     String selectName, selectSku;
-    EditText searchGoodsName, searchGoodsSku, searchSupName, searchSupSku, searchAmountOnly, searchAmountMin, searchAmountMax, searchPriceOnly, searchPriceMin, searchPriceMax, searchDescribeWord, searchDateOnly,
+    static EditText goodsName,goodsSku;
+    static EditText searchGoodsName, searchGoodsSku, searchSupName, searchSupSku, searchAmountOnly, searchAmountMin, searchAmountMax, searchPriceOnly, searchPriceMin, searchPriceMax, searchDescribeWord, searchDateOnly,
             searchTimeOnly, searchDateMin, searchDateMax, searchTimeMin, searchTimeMax;
     Button amountOnly, amountScope;
     View amountEquals, amountMin, amountMax;
     Dialog dialog;
     int year, month, day, hour, minute;
+    static Goods goods;
+    static Supplier supplier;
+    Intent intent;
 
     /**
      * 初始化控件
      */
-    protected void initAdapter(int itemLayout){
-        adapter.setItemLayout(itemLayout);
-    }
-    protected void initControls() {
+
+    protected void initControls(int itemLayout) {
 
         addConditions = (ImageView) findViewById(R.id.add_conditions_btn);
         searchSort = (ImageView) findViewById(R.id.search_sort_btn);
@@ -53,6 +59,7 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
         searchSort.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         adapter = new ConditionAdapter(conditionItemList);
+        adapter.setItemLayout(itemLayout);
         recyclerView = (RecyclerView) findViewById(R.id.search_conditions_rec);
         assert recyclerView != null;
         recyclerView.setLayoutManager(layoutManager);
@@ -60,6 +67,10 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
         goodsCancel = (ImageView) findViewById(R.id.search_goods_close_btn);
         assert goodsCancel != null;
         goodsCancel.setOnClickListener(this);
+        goodsMenu=(ImageView) findViewById(R.id.check_good_menu);
+        goodsMenu.setOnClickListener(this);
+        goodsName = (EditText) findViewById(R.id.select_goods_name);
+        goodsSku = (EditText) findViewById(R.id.select_goods_sku);
 
 
     }
@@ -212,6 +223,13 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
                 }
                 dialog.dismiss();
                 break;
+            case R.id.check_good_menu:
+                intent = new Intent(this, ChooseGoodsActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+            case R.id.check_supplier_menu:
+                intent = new Intent(this, ChooseSupplierActivity.class);
+                startActivityForResult(intent, 2);
 
             default:
                 break;
@@ -291,8 +309,10 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
     protected void initSupplierDialog() {
         Button selectSupplierCommit = (Button) dialog.findViewById(R.id.search_supplier_attr_commit);
         Button selectSupplierCancel = (Button) dialog.findViewById(R.id.search_supplier_attr_cancel);
+        ImageView supplierMenu=(ImageView) dialog.findViewById(R.id.check_supplier_menu);
         searchSupName = (EditText) dialog.findViewById(R.id.search_supplier_name);
         searchSupSku = (EditText) dialog.findViewById(R.id.search_supplier_sku);
+        supplierMenu.setOnClickListener(this);
         selectSupplierCancel.setOnClickListener(this);
         selectSupplierCommit.setOnClickListener(this);
     }
@@ -370,5 +390,34 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    goods = (Goods) data.getBundleExtra("bundle").getSerializable("goods");
+                }
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    supplier = (Supplier) data.getBundleExtra("bundle").getSerializable("supplier");
+                }
+
+        }
+        refesh();
+
+    }
+    public static void refesh(){
+        if (goods != null&&goodsSku!=null) {
+            goodsSku.setText(goods.getSku());
+            goodsName.setText(goods.getName());
+        }if(supplier!=null&&searchSupSku!=null){
+            searchSupName.setText(supplier.getName());
+            searchSupSku.setText(supplier.getSku());
+        }
+
+
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.baosight.brightfish.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
+import com.baosight.brightfish.SupplierActivity;
 import com.baosight.brightfish.model.Buyer;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.model.Supplier;
@@ -23,6 +25,7 @@ public class ChooseSupplierAdapter extends RecyclerView.Adapter<ChooseSupplierAd
 
     private List<Supplier> mChooseItemList;
     private Activity mActivity;
+    private Context mContext;
 
     public ChooseSupplierAdapter(List<Supplier> chooseItemList, Activity activity) {
         mChooseItemList = chooseItemList;
@@ -32,6 +35,7 @@ public class ChooseSupplierAdapter extends RecyclerView.Adapter<ChooseSupplierAd
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+        mContext=parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_choose, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -42,11 +46,16 @@ public class ChooseSupplierAdapter extends RecyclerView.Adapter<ChooseSupplierAd
         final Supplier supplier = mChooseItemList.get(position);
         holder.chooseName.setText(supplier.getName());
         holder.chooseSku.setText(supplier.getSku());
-
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SupplierActivity.startSupplierActivity(mContext,supplier);
+            }
+        });
         holder.chooseChecked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.chooseChecked.setBackgroundTintList(ColorStateList.valueOf(R.color.colorDarkGery));
+                holder.chooseChecked.setBackgroundTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.colorDarkGery)));
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("supplier", supplier);
@@ -67,12 +76,13 @@ public class ChooseSupplierAdapter extends RecyclerView.Adapter<ChooseSupplierAd
         TextView chooseName;
         TextView chooseSku;
         ImageView chooseChecked;
-
+        View view;
         public ViewHolder(View itemView) {
             super(itemView);
             chooseName = (TextView) itemView.findViewById(R.id.choose_name);
             chooseSku = (TextView) itemView.findViewById(R.id.choose_sku);
             chooseChecked = (ImageView) itemView.findViewById(R.id.choose_checked_icon);
+            view=itemView;
 
         }
     }

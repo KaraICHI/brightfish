@@ -5,23 +5,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.model.Checklist;
+import com.baosight.brightfish.ui.CheckAdapter;
+
+import org.litepal.crud.DataSupport;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ChooseCheckinActivity extends AppCompatActivity {
+public class ChooseCheckinActivity extends BasicActivity{
 
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    Toolbar toolbar;
+    List<Checkin> checkinList;
+    ListView listView;
+    CheckAdapter adapter;
 
     public static void startChooseCheckinActivity(Context context) {
         Intent intent = new Intent(context, ChooseCheckinActivity.class);
@@ -38,16 +51,21 @@ public class ChooseCheckinActivity extends AppCompatActivity {
     }
 
     private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+       initToolbar(R.color.colorGreen);
+       listView=(ListView)findViewById(R.id.check_list);
+       checkinList= DataSupport.findAll(Checkin.class);
+       adapter=new CheckAdapter(this,R.layout.item_checkin_note,checkinList);
+       listView.setAdapter(adapter);
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+           }
+       });
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

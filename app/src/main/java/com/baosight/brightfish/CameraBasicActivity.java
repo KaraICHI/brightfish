@@ -154,7 +154,7 @@ public class CameraBasicActivity extends BasicActivity {
      * 裁剪图片
      */
     protected void cropPhoto(Uri inputUri) {
-        count+=1;
+        count=(int)(1+Math.random()*1000);
         // 调用系统裁剪图片的 Action
         Intent cropPhotoIntent = new Intent("com.android.camera.action.CROP");
         // 设置数据Uri 和类型

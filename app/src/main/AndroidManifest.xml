@@ -104,7 +104,25 @@
         <activity
             android:name=".ModifyAccountActivity"
             android:label="修改我的账号" />
-        <activity android:name=".GoodsActivity" android:label="货品"></activity>
+        <activity
+            android:name=".GoodsActivity"
+            android:label="货品" />
+        <activity
+            android:name=".ModifyGoodsActivity"
+            android:label="修改货物" />
+        <activity
+            android:name=".SupplierActivity"
+            android:label="供应商" />
+        <activity
+            android:name=".ModifySupplierActivity"
+            android:label="修改供应商" />
+        <activity
+            android:name=".BuyerActivity"
+            android:label="买家" />
+        <activity
+            android:name=".ModifyBuyerActivity"
+            android:label="修改买家" />
+        <activity android:name=".ChecklistNoteActivity"></activity>
     </application>
 
 </manifest>

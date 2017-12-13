@@ -16,7 +16,7 @@ public class Account extends DataSupport implements Serializable{
     private String sku;
     @Column(nullable = false)
     private String name;
-    private String address, telephone, cellphoto, email, wechat, qq, descr, website, photo;
+    private String address, telephone, cellphone, email, wechat, qq, descr, website, photo;
 
     public int getId() {
         return id;
@@ -50,9 +50,7 @@ public class Account extends DataSupport implements Serializable{
         return address;
     }
 
-    public String getCellphoto() {
-        return cellphoto;
-    }
+
 
     public String getEmail() {
         return email;
@@ -90,9 +88,7 @@ public class Account extends DataSupport implements Serializable{
         this.address = address;
     }
 
-    public void setCellphoto(String cellphoto) {
-        this.cellphoto = cellphoto;
-    }
+
 
     public void setEmail(String email) {
         this.email = email;
@@ -112,5 +108,13 @@ public class Account extends DataSupport implements Serializable{
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 }
