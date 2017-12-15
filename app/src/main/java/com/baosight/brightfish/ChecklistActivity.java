@@ -3,11 +3,9 @@ package com.baosight.brightfish;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,17 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.baosight.brightfish.model.Checkin;
 import com.baosight.brightfish.model.Checklist;
-import com.baosight.brightfish.model.ChecklistNote;
 import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.ui.ChecklistAdapter;
 
 import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +28,6 @@ import java.util.Map;
 public class ChecklistActivity extends BasicActivity {
     ChecklistAdapter adapter;
     RecyclerView recyclerView;
-
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     private static final String TAG = "ChecklistActivity";
@@ -60,7 +54,6 @@ public class ChecklistActivity extends BasicActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-
     }
 
     /**
@@ -70,14 +63,16 @@ public class ChecklistActivity extends BasicActivity {
         List<Goods> goodsList= DataSupport.findAll(Goods.class);
         if(goodsList.size()>0){
             for(Goods goods:goodsList){
-                int checkinAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkin.class,"amount",int.class);
-                int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
+                int checkinAmount=DataSupport.where("goodsId="+goods.getId()).sum(Checkin.class,"amount",int.class);
+                int checkoutAmount=DataSupport.where("goodsId="+goods.getId()).sum(Checkout.class,"amount",int.class);
                 Checklist checklist=new Checklist();
-                checklist.setAmount(checkinAmount-checkoutAmount);
                 checklist.setGoodsId(goods.getId());
-                checklist.save();
-
-
+                checklist.setAmount(checkinAmount-checkoutAmount);
+                if(DataSupport.where("goodsId="+goods.getId()).find(Checklist.class)!=null){
+                    checklist.update(goods.getId());
+                }else {
+                    checklist.save();
+                }
             }
         }
         return DataSupport.findAll(Checklist.class);

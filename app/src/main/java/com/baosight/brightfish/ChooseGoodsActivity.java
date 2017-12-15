@@ -33,11 +33,8 @@ public class ChooseGoodsActivity extends AppCompatActivity {
     boolean sortdesc;
     Toolbar toolbar;
     List<Goods> chooseItemList=new ArrayList<>();
+    ChooseGoodsAdapter adapter;
 
-    public static void startChooseGoodsActivity(Context context) {
-        Intent intent = new Intent(context, ChooseGoodsActivity.class);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +54,7 @@ public class ChooseGoodsActivity extends AppCompatActivity {
             }
         });
         initChooseItemList();
-        ChooseGoodsAdapter adapter=new ChooseGoodsAdapter(chooseItemList,ChooseGoodsActivity.this);
+        adapter=new ChooseGoodsAdapter(chooseItemList,ChooseGoodsActivity.this);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.choose_rec);
         recyclerView.setLayoutManager(layoutManager);
@@ -123,10 +120,10 @@ public class ChooseGoodsActivity extends AppCompatActivity {
         Button sortCancel = (Button) sortDialog.findViewById(R.id.cancleDialog);
         Button sortOk = (Button) sortDialog.findViewById(R.id.okDialog);
         final Map<RelativeLayout, ImageView> sortMethods = new HashMap<>();
-        RelativeLayout sortName = (RelativeLayout) sortDialog.findViewById(R.id.sort_name);
+        final RelativeLayout sortName = (RelativeLayout) sortDialog.findViewById(R.id.sort_name);
         ImageView sortArrowName = (ImageView) sortDialog.findViewById(R.id.sort_arrow_name);
         sortMethods.put(sortName, sortArrowName);
-        RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
+        final RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
         ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
         sortMethods.put(sortSku, sortArrowSku);
         RelativeLayout sortPriceIn = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_in);
@@ -153,6 +150,21 @@ public class ChooseGoodsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ChooseGoodsActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                chooseItemList.clear();
+                if(currentSortMethod==sortName){
+                    if(!sortdesc){
+                        chooseItemList.addAll(DataSupport.order("name asc").find(Goods.class));
+                    }else {
+                        chooseItemList.addAll(DataSupport.order("name desc").find(Goods.class));
+                    }
+                }else if(currentSortMethod==sortSku){
+                    if(!sortdesc){
+                        chooseItemList.addAll(DataSupport.order("sku asc").find(Goods.class));
+                    }else {
+                        chooseItemList.addAll(DataSupport.order("sku desc").find(Goods.class));
+                    }
+                }
+                adapter.notifyDataSetChanged();
                 sortDialog.dismiss();
             }
         });
@@ -179,5 +191,12 @@ public class ChooseGoodsActivity extends AppCompatActivity {
         }
 
         sortDialog.show();
+    }
+
+    private void sort(){
+
+
+
+
     }
 }

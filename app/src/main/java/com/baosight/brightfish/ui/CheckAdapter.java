@@ -22,7 +22,6 @@ import java.util.List;
  */
 
 public class CheckAdapter extends ArrayAdapter<Checkin> {
-    private static final String TAG = "CheckAdapter";
     private int resourceId;
     public CheckAdapter(@NonNull Context context, int resource, @NonNull List<Checkin> objects) {
         super(context, resource, objects);

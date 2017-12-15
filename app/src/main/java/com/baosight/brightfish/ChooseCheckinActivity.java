@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.model.Checklist;
 import com.baosight.brightfish.ui.CheckAdapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -33,7 +34,7 @@ public class ChooseCheckinActivity extends BasicActivity{
     private static final String TAG = "ChooseCheckinActivity";
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    List<Checkin> checkinList= DataSupport.findAll(Checkin.class);
+    List<Checkin> checkinList;
     SwipeMenuListView listView;
     CheckAdapter adapter;
 
@@ -54,15 +55,9 @@ public class ChooseCheckinActivity extends BasicActivity{
     private void initControls() {
        initToolbar(R.color.colorGreen);
        listView = (SwipeMenuListView) findViewById(R.id.check_list);
-
+       checkinList= DataSupport.findAll(Checkin.class);
        adapter=new CheckAdapter(this,R.layout.item_checkin_note,checkinList);
        listView.setAdapter(adapter);
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-           }
-       });
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
@@ -95,8 +90,8 @@ public class ChooseCheckinActivity extends BasicActivity{
                         CheckinNoteActivity.startCheckinNoteActivity(ChooseCheckinActivity.this,checkinList.get(position));
                         break;
                     case 1:
-                        checkinList.remove(position);
-                        DataSupport.delete(Checkin.class,position+1);
+                        DataSupport.delete(Checkin.class,checkinList.get(position).getId());
+                        adapter.remove(checkinList.get(position));
                         adapter.notifyDataSetChanged();
                         break;
                 }
@@ -183,16 +178,22 @@ public class ChooseCheckinActivity extends BasicActivity{
                 Toast.makeText(ChooseCheckinActivity.this, "确定", Toast.LENGTH_SHORT).show();
                 if(currentSortMethod==sortAmount){
                     if(sortdesc){
+                        List<Checkin> checkins=DataSupport.order("amount desc").find(Checkin.class);
                         checkinList.clear();
-                        checkinList.addAll(DataSupport.order("amount desc").find(Checkin.class));
-                        adapter.notifyDataSetChanged();
-                        Log.d(TAG, "onClick: ==============="+checkinList.get(0).getAmount());
+                        checkinList.addAll(checkins);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
 
                     }else {
-                        checkinList.clear();
-                        checkinList.addAll(DataSupport.order("amount asc").find(Checkin.class));
+                        adapter.clear();
+                        adapter.addAll(DataSupport.order("amount asc").find(Checkin.class));
                         adapter.notifyDataSetChanged();
-                        Log.d(TAG, "onClick: ================"+checkinList.get(0).getAmount());
+
                     }
 
 
