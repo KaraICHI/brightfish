@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ChooseGoodsActivity extends AppCompatActivity {
+
+ 
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     Toolbar toolbar;
@@ -42,12 +44,11 @@ public class ChooseGoodsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_goods);
         initControls();
-
     }
 
     private void initControls() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorOrange));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +63,14 @@ public class ChooseGoodsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
     private void initChooseItemList() {
-        List<Goods> suppliers= DataSupport.findAll(Goods.class);
-        for (Goods s:suppliers) {
+        List<Goods> goodss= DataSupport.findAll(Goods.class);
+        for (Goods s:goodss) {
             chooseItemList.add(s);
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -177,5 +180,4 @@ public class ChooseGoodsActivity extends AppCompatActivity {
 
         sortDialog.show();
     }
-
 }

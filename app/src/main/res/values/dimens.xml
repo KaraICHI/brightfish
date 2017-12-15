@@ -24,6 +24,10 @@
     <dimen name="chooseName">16dp</dimen>
     <dimen name="chooseSku">14dp</dimen>
     <dimen name="tab">30dp</dimen>
-    <dimen name="checklistBtnHeight">40dp</dimen>
-    <dimen name="checklistBtnwidth">70dp</dimen>
+    <dimen name="checklistBtnHeight">50dp</dimen>
+    <dimen name="checklistBtnwidth">100dp</dimen>
+    <dimen name="textM">15sp</dimen>
+    <dimen name="analyzeIcon">26dp</dimen>
+    <dimen name="settiingItem">66dp</dimen>
+    <dimen name="settingIcon">25dp</dimen>
 </resources>

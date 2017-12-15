@@ -18,6 +18,7 @@ import com.baosight.brightfish.model.Buyer;
 import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.ui.ChooseBuyerDialogAdapter;
+import com.baosight.brightfish.util.CurrentTime;
 
 import org.litepal.crud.DataSupport;
 
@@ -47,7 +48,8 @@ public class CheckoutActivity  extends CheckBasicActivity implements View.OnClic
         initToolbar(R.color.colorBlue);
         initControls();
         initBuyerPart();
-
+        CurrentTime.currentTime=currentTime;
+        new CurrentTime().new TimeThread().start();
     }
     protected void initBuyerPart(){
         buyerName = (EditText) findViewById(R.id.buyer_name_checkin);
@@ -140,7 +142,7 @@ public class CheckoutActivity  extends CheckBasicActivity implements View.OnClic
             checkout.setAmount(Integer.parseInt(amount.getText().toString()));
             checkout.setPrice(Long.parseLong(price.getText().toString()));
             checkout.setDescr(description.getText().toString());
-            checkout.setBuyer(buyer);
+            checkout.setBuyerId(buyer.getId());
             @SuppressLint("SimpleDateFormat") SimpleDateFormat format=new SimpleDateFormat("yyyy MM月 dd HH:mm");
             checkout.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
             checkout.save();

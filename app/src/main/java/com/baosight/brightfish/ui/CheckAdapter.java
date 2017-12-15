@@ -34,7 +34,7 @@ public class CheckAdapter extends ArrayAdapter<Checkin> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         Checkin checkin=getItem(position);
-        Goods goods= DataSupport.find(Goods.class,checkin.getId());
+        Goods goods= DataSupport.find(Goods.class,checkin.getGoodsId());
         View view= LayoutInflater.from(parent.getContext()).inflate(resourceId,parent,false);
         TextView noteIcon=(TextView) view.findViewById(R.id.note_icon);
         TextView checkName=(TextView) view.findViewById(R.id.choose_name);

@@ -1,12 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.baosight.brightfish.AnalyzeActivity">
+    <include layout="@layout/toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/analyzeIcon"
+            android:layout_height="@dimen/analyzeIcon"
+            android:backgroundTint="@color/colorPur"
+            android:background="@drawable/ic_star_border_black_24dp"
+            />
+        <TextView
+            android:id="@+id/analyze_obj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="45dp"
+            android:text="综合"
+            />
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/to_all"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_chevron_right_white_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/analyzeIcon"
+            android:layout_height="@dimen/analyzeIcon"
+            android:backgroundTint="@color/colorPur"
+            android:background="@drawable/ic_devices_other_black_36dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="45dp"
+            android:text="货品"
+            />
+        <ImageButton
+            android:id="@+id/analyze_menu_goods"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_list_white_24dp"
+            android:layout_toLeftOf="@id/to_goods"
+            />
+        <ImageButton
+            android:id="@+id/to_goods"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_chevron_right_white_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/analyzeIcon"
+            android:layout_height="@dimen/analyzeIcon"
+            android:backgroundTint="@color/colorPur"
+            android:background="@drawable/ic_supplier_36dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="45dp"
+            android:text="供应商"
+            />
+        <ImageButton
+            android:id="@+id/analyze_menu_supplier"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_list_white_24dp"
+            android:layout_toLeftOf="@id/to_supplier"
+            />
+        <ImageButton
+            android:id="@+id/to_supplier"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_chevron_right_white_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/analyzeIcon"
+            android:layout_height="@dimen/analyzeIcon"
+            android:backgroundTint="@color/colorPur"
+            android:background="@drawable/ic_buyer_36dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="45dp"
+            android:text="货品"
+            />
+        <ImageButton
+            android:id="@+id/analyze_menu_buyer"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_list_white_24dp"
+            android:layout_toLeftOf="@id/to_buyer"
+            />
+        <ImageButton
+            android:id="@+id/to_buyer"
+            android:layout_width="@dimen/iconContent"
+            android:layout_height="@dimen/iconContent"
+            android:backgroundTint="@color/colorDarkGery"
+            android:background="@drawable/ic_chevron_right_white_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+
+</LinearLayout>

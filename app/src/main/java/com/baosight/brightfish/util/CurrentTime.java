@@ -58,8 +58,7 @@ public class CurrentTime {
         String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
         String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
         String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
-        String mSecond = String.valueOf(c.get(Calendar.SECOND));//秒
 
-        return mYear + " " + mMonth + "月" + mDay + " "  + mHour + ":" + mMinute + ":" + mSecond;
+        return mYear + " " + mMonth + "月" + mDay + " "  + mHour + ":" + mMinute ;
     }
 }

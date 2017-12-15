@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,11 @@ import com.baosight.brightfish.model.ChecklistNote;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.util.CurrentTime;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
 public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder> implements View.OnClickListener {
@@ -35,11 +40,11 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
     private boolean isOpen;
     private static Checklist currChecklist;
     private static Goods currGoods;
-    private int reason;
+    private int reason=R.string.reversion;
     private Dialog chooseReasonDialog;
-    private Dialog dialog = new Dialog(mContext,R.style.NoTitleDialog);
+    private Dialog dialog ;
     private ViewHolder currHolder;
-
+    private static final String TAG = "ChecklistAdapter";
     public ChecklistAdapter(List<Checklist> checklists){
         mChecklists=checklists;
     }
@@ -55,15 +60,15 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         final Checklist checklist=mChecklists.get(position);
-
-        holder.sku.setText(checklist.getGoods().getSku());
-        holder.name.setText(checklist.getGoods().getName());
+        final Goods goods= DataSupport.find(Goods.class,checklist.getGoodsId());
+        holder.sku.setText(goods.getSku());
+        holder.name.setText(goods.getName());
         holder.amount.setText(String.valueOf(checklist.getAmount()));
         holder.amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currChecklist=checklist;
-                currGoods=checklist.getGoods();
+                currGoods=goods;
                 currHolder=holder;
                 showDialog();
             }
@@ -120,6 +125,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
                 break;
             case R.id.commit_reason:
                 chooseReason.setText(reason);
+                chooseReasonDialog.dismiss();
                 break;
             case R.id.cancleDialog:
                 dialog.dismiss();
@@ -129,14 +135,18 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
                 break;
             case R.id.okDialog:
                 if(Integer.parseInt(checklistAmount.getText().toString())==currChecklist.getAmount()){
-                    Toast.makeText(mContext,"库存未变",Toast.LENGTH_SHORT);
+                    Toast.makeText(mContext,"库存未变",Toast.LENGTH_SHORT).show();
                 }else {
                     saveChecklistNote();
                     dialog.dismiss();
                     currHolder.amount.setText(checklistAmount.getText().toString());
-                    currChecklist.setAmount(Integer.parseInt(checklistAmount.getText().toString()));
-                    currChecklist.update(currChecklist.getId());
+                    Checklist checklist=new Checklist();
+                    checklist.setAmount(Integer.parseInt(checklistAmount.getText().toString()));
+                    Log.d(TAG, "onClick: ------id=="+currChecklist.getId()+" "+currGoods.getId());
+                    checklist.update(currChecklist.getId());
+
                 }
+
         }
 
     }
@@ -189,6 +199,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
         commitReason.setOnClickListener(this);
         Button cancelReason=(Button) chooseReasonDialog.findViewById(R.id.cancle_reason);
         cancelReason.setOnClickListener(this);
+        chooseReasonDialog.show();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -203,6 +214,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
     }
 
     private void showDialog(){
+        dialog = new Dialog(mContext,R.style.NoTitleDialog);
         dialog.setContentView(R.layout.dialog_checklist);
         amountDev=(TextView) dialog.findViewById(R.id.amount_dev);
         checklistAmount=(EditText) dialog.findViewById(R.id.checklist_amount);

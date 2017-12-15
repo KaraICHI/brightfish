@@ -1,12 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.baosight.brightfish.SettingActivity">
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
+        android:id="@+id/blueTooth"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settiingItem"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/settingIcon"
+            android:layout_height="@dimen/settingIcon"
+            android:background="@drawable/ic_bluetooth_black_24dp"
+            android:backgroundTint="@color/colorHome"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="20dp"
+            android:text="蓝牙扫码器"
+            />
 
-</RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+    <LinearLayout
+        android:id="@+id/scan_code"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settiingItem"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/settingIcon"
+            android:layout_height="@dimen/settingIcon"
+            android:background="@drawable/ic_scan_mode_rect_24dp"
+            android:backgroundTint="@color/colorHome"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="20dp"
+            android:text="条形码输入方法"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+    <LinearLayout
+        android:id="@+id/database"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settiingItem"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/settingIcon"
+            android:layout_height="@dimen/settingIcon"
+            android:background="@drawable/ic_database_maintance_24dp"
+            android:backgroundTint="@color/colorHome"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textM"
+            android:layout_marginLeft="20dp"
+            android:text="数据库维护"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"/>
+
+
+</LinearLayout>

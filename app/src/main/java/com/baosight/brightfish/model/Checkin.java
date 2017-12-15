@@ -23,7 +23,7 @@ public class Checkin extends DataSupport implements Serializable{
     @Column (nullable = false)
     private int goodsId;
     @Column(nullable = false)
-    private Supplier supplier;
+    private int supplierId;
     @Column(nullable = false)
     private String checkinDate;
 
@@ -62,9 +62,6 @@ public class Checkin extends DataSupport implements Serializable{
         return amount;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
-    }
 
     public void setPhoto(String photo) {
         this.photo = photo;
@@ -84,9 +81,6 @@ public class Checkin extends DataSupport implements Serializable{
         this.price = price;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
 
     public int getGoodsId() {
         return goodsId;
@@ -94,5 +88,13 @@ public class Checkin extends DataSupport implements Serializable{
 
     public void setGoodsId(int goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
     }
 }

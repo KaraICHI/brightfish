@@ -14,23 +14,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class GoodsActivity extends BasicActivity implements View.OnClickListener{
     private TabLayout mTabLayout;
     ImageView photo;
     ImageView selectAblum;
-    TextView sku, name;
+    TextView sku, name,updateTime,goodsAmount,recentDateFIn,recentDateSIn,recentDateFOut,recentDateSOut,recentAmountFIn,recentAmountSIn,
+            recentAmountFOut,recentAmountSOut;
+    Button allCheckin,allCheckout;
+    LinearLayout recentCheckin,recentCheckout;
+    RelativeLayout recentCheckinS,recentCheckoutS;
     EditText  brand, catagory, size, color, spec, descr;
     View view1,view2,view3,view4;
     Goods goods;
+    List<Checkin> checkinList;
+    List<Checkout> checkoutList;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
 
@@ -46,10 +62,17 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods);
+        goods=(Goods)getIntent().getBundleExtra("bundle").getSerializable("goods");
+        checkinList=  DataSupport.where("goodsId="+goods.getId()).find(Checkin.class);
+        checkoutList= DataSupport.where("goodsId="+goods.getId()).find(Checkout.class);
         initTab();
-        initControls();
-        initToolbar(R.color.colorOrange);
+        initControlsV1();
         showGoods();
+        initControlsV2();
+        initToolbar(R.color.colorOrange);
+
+
+
     }
     @SuppressLint("InflateParams")
     private void initTab(){
@@ -59,7 +82,7 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
 
         LayoutInflater mInflater = LayoutInflater.from(this);
         view1 = mInflater.inflate(R.layout.frag_tab_goods, null);
-        view2 = mInflater.inflate(R.layout.frag_tab_goods, null);
+        view2 = mInflater.inflate(R.layout.frag_tab_activity_goods, null);
         view3 = mInflater.inflate(R.layout.frag_tab_goods, null);
         view4 = mInflater.inflate(R.layout.frag_tab_goods, null);
 
@@ -88,7 +111,12 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         mTabLayout.setTabsFromPagerAdapter(mAdapter);//给Tabs设置适配器
 
     }
-    private void initControls(){
+
+    /**
+     *
+     * 货品基本参数初始化
+     */
+    private void initControlsV1(){
         photo = (ImageView) view1.findViewById(R.id.photo);
         selectAblum = (ImageView) view1.findViewById(R.id.select_ablum_btn);
         assert selectAblum != null;
@@ -102,6 +130,80 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         spec = (EditText) view1.findViewById(R.id.goods_spec);
         descr = (EditText) view1.findViewById(R.id.goods_descr);
     }
+
+    /**
+     * 最近活动
+     */
+    private void initControlsV2(){
+        updateTime=(TextView) view2.findViewById(R.id.update_time);
+        goodsAmount=(TextView) view2.findViewById(R.id.goods_amount);
+        recentAmountFIn=(TextView) view2.findViewById(R.id.amount_recent_first_in);
+        recentAmountFOut=(TextView) view2.findViewById(R.id.amount_recent_first_out);
+        recentAmountSIn=(TextView) view2.findViewById(R.id.amount_recent_second_in);
+        recentAmountSOut=(TextView) view2.findViewById(R.id.amount_recent_second_out);
+        recentDateFIn=(TextView) view2.findViewById(R.id.date_recent_first_in);
+        recentDateFOut=(TextView) view2.findViewById(R.id.date_recent_first_out);
+        recentDateSIn=(TextView) view2.findViewById(R.id.date_recent_second_in);
+        recentDateFOut=(TextView) view2.findViewById(R.id.date_recent_second_out);
+        recentCheckin=(LinearLayout) view2.findViewById(R.id.recent_checkin);
+        recentCheckout=(LinearLayout) view2.findViewById(R.id.recent_checkout);
+        recentCheckinS=(RelativeLayout) view2.findViewById(R.id.recent_checkin_s);
+        recentCheckoutS=(RelativeLayout) view2.findViewById(R.id.recent_checkout_s);
+        allCheckin=(Button) view2.findViewById(R.id.all_checkin);
+        allCheckout=(Button) view2.findViewById(R.id.all_checkout);
+        allCheckin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecentCheckinActivity.startRecentCheckinActivity(GoodsActivity.this,checkinList);
+            }
+        });
+        Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
+        String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
+        updateTime.setText("更新时间： "+mHour+":"+mMinute);
+        int checkinAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkin.class,"amount",int.class);
+        int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
+        goodsAmount.setText(checkinAmount-checkoutAmount+"");
+        if(checkinList.size()<1){
+            recentCheckin.setVisibility(View.GONE);
+        }else if(checkinList.size()<2){
+            Checkin fCheckin=checkinList.get(checkinList.size()-1);
+            recentDateFIn.setText(fCheckin.getCheckinDate());
+            recentAmountFIn.setText(fCheckin.getAmount()+"");
+            recentCheckinS.setVisibility(View.GONE);
+        }else {
+            Checkin fCheckin=checkinList.get(checkinList.size()-1);
+            recentDateFIn.setText(fCheckin.getCheckinDate());
+            recentAmountFIn.setText(fCheckin.getAmount()+"");
+            Checkin sCheckin=checkinList.get(checkinList.size()-2);
+            recentDateSIn.setText(sCheckin.getCheckinDate());
+            recentAmountSIn.setText(sCheckin.getAmount()+"");
+        }
+        if(checkoutList.size()<1){
+            recentCheckout.setVisibility(View.GONE);
+        }else if(checkoutList.size()<2){
+            recentCheckoutS.setVisibility(View.GONE);
+            Checkout fCheckout=checkoutList.get(checkoutList.size()-1);
+            recentDateFOut.setText(fCheckout.getCheckinDate());
+            recentAmountFOut.setText(fCheckout.getAmount()+"");
+        }else {
+            Checkout fCheckout=checkoutList.get(checkoutList.size()-1);
+            recentDateFOut.setText(fCheckout.getCheckinDate());
+            recentAmountFOut.setText(fCheckout.getAmount()+"");
+            Checkout sCheckout=checkoutList.get(checkoutList.size()-2);
+            recentDateSOut.setText(sCheckout.getCheckinDate());
+            recentAmountSOut.setText(sCheckout.getAmount()+"");
+
+
+        }
+
+
+
+
+
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -146,7 +248,7 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
 
     }
     private void showGoods(){
-        goods=(Goods)getIntent().getBundleExtra("bundle").getSerializable("goods");
+
         sku.setText(goods.getSku());
         name.setText(goods.getName());
         brand.setText(goods.getBrand());

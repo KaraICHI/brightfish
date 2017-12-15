@@ -13,9 +13,7 @@ public class Checklist extends DataSupport implements Serializable {
     private static final long serialVersionUID=1L;
     private int id;
     @Column (unique = true,nullable = false)
-    private Goods goods;
-    private String date;
-    private int deviation;
+    private int goodsId;
     @Column (nullable = false)
     private int amount;
 
@@ -28,13 +26,8 @@ public class Checklist extends DataSupport implements Serializable {
         this.id = id;
     }
 
-    public Goods getGoods() {
-        return goods;
-    }
 
-    public void setGoods(Goods goods) {
-        this.goods = goods;
-    }
+
 
     public int getAmount() {
         return amount;
@@ -44,19 +37,11 @@ public class Checklist extends DataSupport implements Serializable {
         this.amount = amount;
     }
 
-    public String getDate() {
-        return date;
+    public int getGoodsId() {
+        return goodsId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getDeviation() {
-        return deviation;
-    }
-
-    public void setDeviation(int deviation) {
-        this.deviation = deviation;
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
     }
 }

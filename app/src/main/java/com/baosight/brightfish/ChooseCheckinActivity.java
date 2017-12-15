@@ -3,24 +3,25 @@ package com.baosight.brightfish;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.Checkin;
-import com.baosight.brightfish.model.Checklist;
 import com.baosight.brightfish.ui.CheckAdapter;
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import org.litepal.crud.DataSupport;
 
@@ -29,11 +30,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ChooseCheckinActivity extends BasicActivity{
-
+    private static final String TAG = "ChooseCheckinActivity";
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    List<Checkin> checkinList;
-    ListView listView;
+    List<Checkin> checkinList= DataSupport.findAll(Checkin.class);
+    SwipeMenuListView listView;
     CheckAdapter adapter;
 
     public static void startChooseCheckinActivity(Context context) {
@@ -52,8 +53,8 @@ public class ChooseCheckinActivity extends BasicActivity{
 
     private void initControls() {
        initToolbar(R.color.colorGreen);
-       listView=(ListView)findViewById(R.id.check_list);
-       checkinList= DataSupport.findAll(Checkin.class);
+       listView = (SwipeMenuListView) findViewById(R.id.check_list);
+
        adapter=new CheckAdapter(this,R.layout.item_checkin_note,checkinList);
        listView.setAdapter(adapter);
        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,6 +63,46 @@ public class ChooseCheckinActivity extends BasicActivity{
 
            }
        });
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
+                        0xCE)));
+                openItem.setWidth(180);
+                openItem.setTitle("Open");
+                openItem.setTitleSize(18);
+                openItem.setTitleColor(Color.WHITE);
+                menu.addMenuItem(openItem);
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                deleteItem.setWidth(180);
+                deleteItem.setIcon(R.drawable.ic_delete_white_24dp);
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+        listView.setMenuCreator(creator);
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        CheckinNoteActivity.startCheckinNoteActivity(ChooseCheckinActivity.this,checkinList.get(position));
+                        break;
+                    case 1:
+                        checkinList.remove(position);
+                        DataSupport.delete(Checkin.class,position+1);
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -104,6 +145,7 @@ public class ChooseCheckinActivity extends BasicActivity{
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(ChooseCheckinActivity.this, "确定", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -118,25 +160,16 @@ public class ChooseCheckinActivity extends BasicActivity{
         Button sortCancel = (Button) sortDialog.findViewById(R.id.cancleDialog);
         Button sortOk = (Button) sortDialog.findViewById(R.id.okDialog);
         final Map<RelativeLayout, ImageView> sortMethods = new HashMap<>();
-        RelativeLayout sortName = (RelativeLayout) sortDialog.findViewById(R.id.sort_name);
-        ImageView sortArrowName = (ImageView) sortDialog.findViewById(R.id.sort_arrow_name);
-        sortMethods.put(sortName, sortArrowName);
-        RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
-        ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
-        sortMethods.put(sortSku, sortArrowSku);
-        RelativeLayout sortPriceIn = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_in);
+        RelativeLayout sortPrice = (RelativeLayout) sortDialog.findViewById(R.id.sort_price);
         ImageView sortArrowPriceIn = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_in);
-        sortMethods.put(sortPriceIn, sortArrowPriceIn);
-        RelativeLayout sortPriceOut = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_out);
-        ImageView sortArrowPriceOut = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_out);
-        sortMethods.put(sortPriceOut, sortArrowPriceOut);
+        sortMethods.put(sortPrice, sortArrowPriceIn);
         RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
         ImageView sortArrowTime = (ImageView) sortDialog.findViewById(R.id.sort_arrow_time);
         sortMethods.put(sortTime, sortArrowTime);
-        RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
+        final RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
         ImageView sortArrowAmount = (ImageView) sortDialog.findViewById(R.id.sort_arrow_amount);
         sortMethods.put(sortAmount, sortArrowAmount);
-        currentSortMethod = sortName;
+        currentSortMethod = sortAmount;
         sortCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +181,23 @@ public class ChooseCheckinActivity extends BasicActivity{
             @Override
             public void onClick(View v) {
                 Toast.makeText(ChooseCheckinActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                if(currentSortMethod==sortAmount){
+                    if(sortdesc){
+                        checkinList.clear();
+                        checkinList.addAll(DataSupport.order("amount desc").find(Checkin.class));
+                        adapter.notifyDataSetChanged();
+                        Log.d(TAG, "onClick: ==============="+checkinList.get(0).getAmount());
+
+                    }else {
+                        checkinList.clear();
+                        checkinList.addAll(DataSupport.order("amount asc").find(Checkin.class));
+                        adapter.notifyDataSetChanged();
+                        Log.d(TAG, "onClick: ================"+checkinList.get(0).getAmount());
+                    }
+
+
+                }
+
                 sortDialog.dismiss();
             }
         });

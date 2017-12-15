@@ -27,10 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChooseSupplierActivity extends AppCompatActivity {
+public class ChooseSupplierActivity extends BasicActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    Toolbar toolbar;
     List<Supplier> chooseItemList=new ArrayList<>();
 
     public static void startChooseSupplierActivity(Context context) {
@@ -47,15 +46,7 @@ public class ChooseSupplierActivity extends AppCompatActivity {
     }
 
     private void initControls() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        initToolbar(R.color.colorGreen);
         initChooseItemList();
         ChooseSupplierAdapter adapter=new ChooseSupplierAdapter(chooseItemList,ChooseSupplierActivity.this);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);

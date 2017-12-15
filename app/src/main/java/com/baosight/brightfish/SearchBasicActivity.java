@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.baosight.brightfish.model.ConditionItem;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.model.Supplier;
-import com.baosight.brightfish.ui.ChooseSupplierAdapter;
 import com.baosight.brightfish.ui.ConditionAdapter;
 
 import java.util.ArrayList;
@@ -224,7 +223,7 @@ public class SearchBasicActivity extends BasicActivity implements View.OnClickLi
                 dialog.dismiss();
                 break;
             case R.id.check_good_menu:
-                intent = new Intent(this, ChooseGoodsActivity.class);
+                intent = new Intent(this, ChooseGoodsNoteActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.check_supplier_menu:

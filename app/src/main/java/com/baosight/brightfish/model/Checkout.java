@@ -2,13 +2,7 @@ package com.baosight.brightfish.model;
 
 import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
-
 import java.io.Serializable;
-import java.util.Date;
-
-/**
- * Created by Administrator on 2017/12/4.
- */
 
 public class Checkout extends DataSupport implements Serializable{
     private static final long serialVersionUID=1L;
@@ -22,7 +16,7 @@ public class Checkout extends DataSupport implements Serializable{
     @Column (nullable = false)
     private int goodsId;
     @Column(nullable = false)
-    private Buyer buyer;
+    private int buyerId;
     @Column(nullable = false)
     private String checkinDate;
 
@@ -61,9 +55,6 @@ public class Checkout extends DataSupport implements Serializable{
         return photo;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
-    }
 
     public void setPrice(double price) {
         this.price = price;
@@ -82,9 +73,6 @@ public class Checkout extends DataSupport implements Serializable{
         this.photo = photo;
     }
 
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
 
     public int getGoodsId() {
         return goodsId;
@@ -92,5 +80,13 @@ public class Checkout extends DataSupport implements Serializable{
 
     public void setGoodsId(int goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public int getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
     }
 }

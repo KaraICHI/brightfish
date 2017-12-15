@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.baosight.brightfish.model.Checkin;
 import com.baosight.brightfish.model.Checklist;
+import com.baosight.brightfish.model.ChecklistNote;
 import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.ui.ChecklistAdapter;
@@ -66,7 +67,6 @@ public class ChecklistActivity extends BasicActivity {
      * 获取货品现存数量
      */
     private List<Checklist> getChecklists(){
-        List<Checklist> checklists=new ArrayList<>();
         List<Goods> goodsList= DataSupport.findAll(Goods.class);
         if(goodsList.size()>0){
             for(Goods goods:goodsList){
@@ -74,12 +74,13 @@ public class ChecklistActivity extends BasicActivity {
                 int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
                 Checklist checklist=new Checklist();
                 checklist.setAmount(checkinAmount-checkoutAmount);
-                checklist.setGoods(goods);
-                checklists.add(checklist);
+                checklist.setGoodsId(goods.getId());
+                checklist.save();
+
 
             }
         }
-        return checklists;
+        return DataSupport.findAll(Checklist.class);
     }
 
 

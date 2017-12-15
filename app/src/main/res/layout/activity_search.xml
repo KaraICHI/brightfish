@@ -249,7 +249,7 @@
             android:layout_gravity="center_vertical"
             />
         <ImageButton
-            android:id="@+id/choose_dianhuo"
+            android:id="@+id/choose_checklist"
             android:layout_width="@dimen/searchIcon"
             android:layout_height="@dimen/searchIcon"
             android:layout_gravity="center_vertical"
@@ -258,7 +258,7 @@
             android:backgroundTint="@color/colorDarkGery"
             />
         <ImageButton
-            android:id="@+id/search_dianhuo"
+            android:id="@+id/search_checklist"
             android:layout_width="@dimen/searchIcon"
             android:layout_height="@dimen/searchIcon"
             android:layout_gravity="center_vertical"

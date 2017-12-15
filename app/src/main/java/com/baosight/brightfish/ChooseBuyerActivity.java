@@ -15,9 +15,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import com.baosight.brightfish.model.Buyer;
 import com.baosight.brightfish.ui.ChooseBuyerAdapter;
+
 import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,25 +42,25 @@ public class ChooseBuyerActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_buyer);
         initControls();
-        initToolbar(R.color.colorBlue);
+
     }
 
     private void initControls() {
+        initToolbar(R.color.colorBlue);
         initChooseItemList();
-        ChooseBuyerAdapter adapter=new  ChooseBuyerAdapter(chooseItemList,ChooseBuyerActivity.this);
+        ChooseBuyerAdapter adapter=new ChooseBuyerAdapter(chooseItemList,ChooseBuyerActivity.this);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.choose_rec);
-        assert recyclerView != null;
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
     private void initChooseItemList() {
-        List<Buyer> suppliers= DataSupport.findAll(Buyer.class);
-        for (Buyer s:suppliers) {
+        List<Buyer> buyers= DataSupport.findAll(Buyer.class);
+        for (Buyer s:buyers) {
             chooseItemList.add(s);
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.choose_menu, menu);

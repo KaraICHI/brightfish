@@ -3,6 +3,7 @@ package com.baosight.brightfish.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,23 +18,26 @@ import com.baosight.brightfish.model.Goods;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by Administrator on 2017/12/13.
- */
+import java.util.List;
+import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
+
 
 public class ChecklistNoteAdapter extends ArrayAdapter<ChecklistNote>{
     private int resourceId;
-    public ChecklistNoteAdapter(@NonNull Context context, int resource, int textViewResourceId) {
-        super(context, resource, textViewResourceId);
-        resourceId=resource;
 
+    public ChecklistNoteAdapter(@NonNull Context context, int resource, @NonNull List<ChecklistNote> objects) {
+        super(context, resource, objects);
+        resourceId=resource;
     }
+
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ChecklistNote checklistNote=getItem(position);
-        Goods goods= DataSupport.find(Goods.class,checklistNote.getId());
+        Goods goods= DataSupport.find(Goods.class,checklistNote.getGoodsId());
         View view= LayoutInflater.from(parent.getContext()).inflate(resourceId,parent,false);
         TextView noteIcon=(TextView) view.findViewById(R.id.note_icon);
         TextView checkName=(TextView) view.findViewById(R.id.choose_name);
@@ -42,13 +46,16 @@ public class ChecklistNoteAdapter extends ArrayAdapter<ChecklistNote>{
         TextView checkChange=(TextView) view.findViewById(R.id.check_change);
         TextView checkDate=(TextView) view.findViewById(R.id.check_date);
         noteIcon.setBackground(parent.getContext().getResources().getDrawable(R.drawable.rect_green));
-        char firstName=goods.getName().charAt(0);
-        noteIcon.setText(firstName+"");
-        checkName.setText(goods.getName());
-        checkSku.setText(goods.getSku());
-        checkAmount.setText(checklistNote.getCurrAmount()+"");
-        checkChange.setText(checklistNote.getChange().split(" ")[1]);
-        checkDate.setText(checklistNote.getNoteDate());
+        if(goods!=null){
+            char firstName=goods.getName().charAt(0);
+            noteIcon.setText(firstName+"");
+            checkName.setText(goods.getName());
+            checkSku.setText(goods.getSku());
+            checkAmount.setText(checklistNote.getCurrAmount()+"");
+            checkChange.setText(checklistNote.getChange());
+            checkDate.setText(checklistNote.getNoteDate());
+
+        }
         return view;
     }
 }

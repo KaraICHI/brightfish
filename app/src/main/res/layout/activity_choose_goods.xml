@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baosight.brightfish.ChooseGoodsActivity">
+    tools:context="com.baosight.brightfish.ChooseSupplierActivity">
     <include layout="@layout/toolbar"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/choose_rec"
@@ -22,7 +22,7 @@
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="无任何记录"
+        android:text="已显示全部记录"
         android:gravity="center"
         android:textSize="@dimen/bottomContent"
         />

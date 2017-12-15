@@ -31,7 +31,10 @@
             android:id="@+id/checklist_amount"
             android:layout_gravity="center_vertical"
             android:layout_width="@dimen/checklistBtnwidth"
-            android:layout_height="@dimen/checklistBtnHeight" />
+            android:layout_height="@dimen/checklistBtnHeight"
+            android:textSize="22dp"
+            android:textColor="#8f000000"
+            />
 
     </LinearLayout>
     <View

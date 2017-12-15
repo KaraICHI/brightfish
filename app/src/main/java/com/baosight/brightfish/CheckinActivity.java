@@ -1,10 +1,8 @@
 package com.baosight.brightfish;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import com.baosight.brightfish.model.Checkin;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.model.Supplier;
 import com.baosight.brightfish.ui.ChooseSupplierDialogAdapter;
+import com.baosight.brightfish.util.CurrentTime;
 
 import org.litepal.crud.DataSupport;
 
@@ -49,9 +49,12 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
         initSupplierPart();
         initControls();
         setCheckLisener();
+        CurrentTime.currentTime=currentTime;
+        new CurrentTime().new TimeThread().start();
 
     }
     protected void initSupplierPart(){
+
         supplierName = (EditText) findViewById(R.id.supplier_name_checkin);
         supplierSku = (EditText) findViewById(R.id.supplier_sku_checkin);
         supplierMenu = (ImageButton) findViewById(R.id.check_supplier_menu);
@@ -159,9 +162,9 @@ public class CheckinActivity extends CheckBasicActivity implements View.OnClickL
             checkin.setPrice(Long.parseLong(price.getText().toString()));
             checkin.setAmount(Integer.parseInt(amount.getText().toString()));
             checkin.setDescr(description.getText().toString());
-            checkin.setSupplier(supplier);
-           SimpleDateFormat format=new SimpleDateFormat("yyyy MM月 dd HH:mm");
-         checkin.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
+            checkin.setSupplierId(supplier.getId());
+            SimpleDateFormat format=new SimpleDateFormat("yyyy MM月 dd HH:mm");
+            checkin.setCheckinDate(format.format(new Date(System.currentTimeMillis())));
             checkin.setPhoto(checkinPhotoPath);
             checkin.save();
             clearEditText();

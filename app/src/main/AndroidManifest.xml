@@ -42,13 +42,13 @@
             android:name=".ChecklistActivity"
             android:label="现有库存数量" />
         <activity
-            android:name=".ChooseGoodsActivity"
+            android:name=".ChooseGoodsNoteActivity"
             android:label="选取货物" />
         <activity
             android:name=".ChooseSupplierActivity"
             android:label="选择供应商" />
         <activity
-            android:name=".ChooseBuyerActivity"
+            android:name=".ChooseBuyerNoteActivity"
             android:label="选择买家" />
         <activity
             android:name=".CheckinAblumActivity"
@@ -122,7 +122,31 @@
         <activity
             android:name=".ModifyBuyerActivity"
             android:label="修改买家" />
-        <activity android:name=".ChecklistNoteActivity"></activity>
+        <activity
+            android:name=".ChecklistNoteHistoryActivity"
+            android:label="盘货历史记录" />
+        <activity
+            android:name=".ChecklistNoteActivity"
+            android:label="盘货记录" />
+        <activity
+            android:name=".CheckinNoteActivity"
+            android:label="入库记录" />
+        <activity
+            android:name=".CheckoutNoteActivity"
+            android:label="出库记录" />
+        <activity
+            android:name=".ChooseGoodsActivity"
+            android:label="选择货品" />
+        <activity
+            android:name=".ChooseBuyerActivity"
+            android:label="选择买家" />
+        <activity
+            android:name=".ChooseSupplierNoteActivity"
+            android:label="选择供应商" />
+        <activity
+            android:name=".AnalyzeAllActivity"
+            android:label="综合分析" />
+        <activity android:name=".RecentCheckinActivity"></activity>
     </application>
 
 </manifest>

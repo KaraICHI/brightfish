@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.ui.ChooseGoodsdDialogAdapter;
+import com.baosight.brightfish.util.CurrentTime;
 
 import org.litepal.crud.DataSupport;
 
@@ -62,7 +63,7 @@ public class CheckBasicActivity extends BasicActivity implements View.OnClickLis
     protected void initControls() {
 
         currentTime = (TextView) findViewById(R.id.current_time);
-        new CheckinActivity.TimeThread().start();
+
         commit = (Button) findViewById(R.id.checkin_commit);
         assert commit != null;
         goodsSku = (EditText) findViewById(R.id.goods_sku_checkin);
@@ -98,54 +99,6 @@ public class CheckBasicActivity extends BasicActivity implements View.OnClickLis
     public void onClick(View v) {
 
     }
-
-    //显示时间线程
-    public class TimeThread extends Thread {
-        @Override
-        public void run() {
-            do {
-                try {
-                    Thread.sleep(1000);
-                    Message msg = new Message();
-                    msg.what = msgKey1;
-                    mHandler.sendMessage(msg);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } while (true);
-        }
-    }
-
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case msgKey1:
-                    currentTime.setText(getTime());
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    //获得当前年月日时分秒星期
-    public String getTime() {
-        final Calendar c = Calendar.getInstance();
-        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
-        String mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
-        String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
-        String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
-        String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
-        String mSecond = String.valueOf(c.get(Calendar.SECOND));//秒
-
-        return mYear + " " + mMonth + "月" + mDay + " "  + mHour + ":" + mMinute + ":" + mSecond;
-    }
-
-
 
     //创建菜单
     @Override

@@ -30,7 +30,11 @@ public class ModifyAccountActivity extends EditActivity {
         setContentView(R.layout.activity_modify_account);
         initToolbar(R.color.colorLightGery);
         initControls();
-        initAccount();
+        account=DataSupport.find(Account.class,1);
+        if(account!=null){
+            initAccount();
+        }
+
 
     }
 
@@ -54,7 +58,6 @@ public class ModifyAccountActivity extends EditActivity {
         }
     }
     private void initAccount(){
-        account=DataSupport.find(Account.class,1);
         sku.setText(account.getSku());
         name.setText(account.getName());
         address.setText(account.getAddress());
