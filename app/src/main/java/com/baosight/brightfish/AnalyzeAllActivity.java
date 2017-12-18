@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import com.baosight.brightfish.util.CurrentTime;
+
 public class AnalyzeAllActivity extends BasicActivity implements View.OnClickListener{
     RadioGroup timeStandard,stockDater;
     LinearLayout defineTimeGroup;
@@ -51,6 +53,8 @@ public class AnalyzeAllActivity extends BasicActivity implements View.OnClickLis
         endTime=(EditText) findViewById(R.id.end_time);
         startTime.setOnClickListener(this);
         endTime.setOnClickListener(this);
+        startTime.setText(new CurrentTime().getYMDTime(6));
+        endTime.setText(new CurrentTime().getYMDTime(0));
     }
 
     @Override

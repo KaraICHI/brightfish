@@ -152,7 +152,10 @@
         <activity
             android:name=".RecentCheckoutActivity"
             android:label="最近出库" />
-        <activity android:name=".SearchResultActivity" android:label="查找结果"/>
+        <activity
+            android:name=".SearchResultActivity"
+            android:label="查找结果" />
+        <activity android:name=".ActivtyAllActivity"></activity>
     </application>
 
 </manifest>

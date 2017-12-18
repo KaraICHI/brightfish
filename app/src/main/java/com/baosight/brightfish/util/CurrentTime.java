@@ -61,7 +61,17 @@ public class CurrentTime {
 
         return mYear + " " + mMonth + "月" + mDay + " "  + mHour + ":" + mMinute ;
     }
-    //获得当前年月日时分秒星期
+
+    public String getYMDTime(int month) {
+        final Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
+        int mMonth =c.get(Calendar.MONTH) + 1;// 获取当前月份
+        String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
+
+        return mYear + " " + (mMonth-month) + "月" + mDay  ;
+    }
+    //获得当前年时分
     public String getHMTime() {
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -70,6 +80,8 @@ public class CurrentTime {
 
         return  mHour + ":" + mMinute ;
     }
+
+
 
 
 }

@@ -18,7 +18,6 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 public class ChecklistNoteHistoryActivity extends BasicActivity {
-    private static final String TAG = "ChecklistNoteHistoryAct";
     List<ChecklistNote> checklistNoteList= DataSupport.findAll(ChecklistNote.class);
     SwipeMenuListView listView;
     ChecklistNoteAdapter adapter;
@@ -40,43 +39,7 @@ public class ChecklistNoteHistoryActivity extends BasicActivity {
         listView = (SwipeMenuListView) findViewById(R.id.check_list);
         adapter=new ChecklistNoteAdapter(ChecklistNoteHistoryActivity.this,R.layout.item_checklist_note,checklistNoteList);
         listView.setAdapter(adapter);
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
-                // set item width
-                openItem.setWidth(180);
-                // set item title
-                openItem.setTitle("Open");
-                // set item title fontsize
-                openItem.setTitleSize(18);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(openItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
-                deleteItem.setWidth(180);
-                // set a icon
-                deleteItem.setIcon(R.drawable.ic_delete_white_24dp);
-                // add to menu
-                menu.addMenuItem(deleteItem);
-            }
-        };
-
-        listView.setMenuCreator(creator);
+        listView.setMenuCreator(getSlideMenuCreator());
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
@@ -85,14 +48,11 @@ public class ChecklistNoteHistoryActivity extends BasicActivity {
                         ChecklistNoteActivity.startChecklistNoteActivity(ChecklistNoteHistoryActivity.this,checklistNoteList.get(position));
                         break;
                     case 1:
-                        checklistNoteList.remove(position);
-                        DataSupport.delete(ChecklistNote.class,position+1);
-                        Log.d(TAG, "onMenuItemClick: ========="+position);
-                        Log.d(TAG, "onMenuItemClick: =====size"+DataSupport.findAll(ChecklistNote.class).size());
-                        adapter.notifyDataSetChanged();
+                        DataSupport.delete(ChecklistNote.class,checklistNoteList.remove(position).getId());
+                        adapter=new ChecklistNoteAdapter(ChecklistNoteHistoryActivity.this,R.layout.item_checklist_note,checklistNoteList);
+                        listView.setAdapter(adapter);
                         break;
                 }
-                // false : close the menu; true : not close the menu
                 return false;
             }
         });
