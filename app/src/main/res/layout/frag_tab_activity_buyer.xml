@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/update_time"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="@dimen/textM"
+        android:text="更新时间："
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cutline"
+        android:background="@color/colorMGery"
+        android:layout_marginBottom="20dp"
+        />
+
+
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:id="@+id/recent_checkin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最近入库"
+                android:textColor="@color/colorBlue"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textM"
+                />
+            <Button
+                android:id="@+id/all_checkin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlue"
+                android:layout_alignParentRight="true"
+                android:text="全部记录"
+                style="?android:attr/borderlessButtonStyle"
+                android:textStyle="italic"
+                android:textSize="@dimen/textM"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightGreen"
+            android:padding="8dp"
+            >
+            <TextView
+                android:id="@+id/date_recent_first_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017 12月 11 11:16"
+                android:textSize="@dimen/textM"
+                />
+            <TextView
+                android:id="@+id/amount_recent_first_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Qt:23"
+                android:textSize="@dimen/textM"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/recent_checkin_s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightGreen"
+            android:padding="8dp"
+            android:layout_marginTop="2dp"
+            >
+            <TextView
+                android:id="@+id/date_recent_second_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017 12月 11 11:16"
+                android:textSize="@dimen/textM"
+                />
+            <TextView
+                android:id="@+id/amount_recent_second_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Qt:23"
+                android:textSize="@dimen/textM"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:id="@+id/recent_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最近出库"
+                android:textColor="@color/colorBlue"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textM"
+                />
+            <Button
+                android:id="@+id/all_checkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlue"
+                android:layout_alignParentRight="true"
+                android:text="全部记录"
+                android:textSize="@dimen/textM"
+                style="?android:attr/borderlessButtonStyle"
+                android:textStyle="italic"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightBlue"
+            android:padding="8dp"
+            >
+            <TextView
+                android:id="@+id/date_recent_first_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017 12月 11 11:16"
+                android:textSize="@dimen/textM"
+                />
+            <TextView
+                android:id="@+id/amount_recent_first_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Qt:23"
+                android:textSize="@dimen/textM"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/recent_checkout_s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightBlue"
+            android:padding="8dp"
+            android:layout_marginTop="2dp"
+            >
+            <TextView
+                android:id="@+id/date_recent_second_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017 12月 11 11:16"
+                android:textSize="@dimen/textM"
+                />
+            <TextView
+                android:id="@+id/amount_recent_second_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Qt:23"
+                android:textSize="@dimen/textM"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

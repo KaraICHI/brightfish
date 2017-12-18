@@ -142,7 +142,6 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
                     currHolder.amount.setText(checklistAmount.getText().toString());
                     Checklist checklist=new Checklist();
                     checklist.setAmount(Integer.parseInt(checklistAmount.getText().toString()));
-                    Log.d(TAG, "onClick: ------id=="+currChecklist.getId()+" "+currGoods.getId());
                     checklist.update(currChecklist.getId());
 
                 }

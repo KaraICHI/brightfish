@@ -5,18 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import com.baosight.brightfish.model.Goods;
-import com.baosight.brightfish.ui.GoodsAdapter;
+
+import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.ui.CheckAdapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -28,71 +28,53 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChooseGoodsNoteActivity extends BasicActivity {
+public class SearchResultActivity extends BasicActivity {
+
+   
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    Toolbar toolbar;
-    List<Goods> chooseItemList=DataSupport.findAll(Goods.class);
+    static List<Checkin> mCheckinList;
     SwipeMenuListView listView;
-    GoodsAdapter adapter;
+    CheckAdapter adapter;
 
-    public static void startChooseGoodsActivity(Context context) {
-        Intent intent = new Intent(context, ChooseGoodsNoteActivity.class);
+    public static void startSearchResultActivity(Context context,List<Checkin> checkinList) {
+        Intent intent = new Intent(context, SearchResultActivity.class);
         context.startActivity(intent);
+        mCheckinList=checkinList;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_goods_note);
+        setContentView(R.layout.activity_search_result);
         initControls();
-
     }
 
     private void initControls() {
-        initToolbar(R.color.colorOrange);
+        initToolbar(R.color.colorGreen);
         listView = (SwipeMenuListView) findViewById(R.id.check_list);
-
-        adapter=new GoodsAdapter(this,R.layout.item_checkin_note,chooseItemList);
+        adapter=new CheckAdapter(this,R.layout.item_checkin_note,mCheckinList);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
-                // create "open" item
                 SwipeMenuItem openItem = new SwipeMenuItem(
                         getApplicationContext());
-                // set item background
                 openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
-                // set item width
                 openItem.setWidth(180);
-                // set item title
                 openItem.setTitle("Open");
-                // set item title fontsize
                 openItem.setTitleSize(18);
-                // set item title font color
                 openItem.setTitleColor(Color.WHITE);
-                // add to menu
                 menu.addMenuItem(openItem);
-
-                // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
                         getApplicationContext());
-                // set item background
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
-                // set item width
                 deleteItem.setWidth(180);
-                // set a icon
                 deleteItem.setIcon(R.drawable.ic_delete_white_24dp);
-                // add to menu
                 menu.addMenuItem(deleteItem);
             }
         };
@@ -103,19 +85,20 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        GoodsActivity.startGoodsActivity(ChooseGoodsNoteActivity.this,chooseItemList.get(position));
+                        CheckinNoteActivity.startCheckinNoteActivity(SearchResultActivity.this,mCheckinList.get(position));
                         break;
                     case 1:
-                        chooseItemList.remove(position);
-                        DataSupport.delete(Goods.class,position+1);
+                        DataSupport.delete(Checkin.class,mCheckinList.get(position).getId());
+                        adapter.remove(mCheckinList.get(position));
                         adapter.notifyDataSetChanged();
                         break;
                 }
-                // false : close the menu; true : not close the menu
                 return false;
             }
         });
     }
+
+
 
 
     @Override
@@ -141,21 +124,22 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
 
     private void openSkipMenu() {
         final Dialog dialog = new Dialog(this, R.style.NoTitleDialog);
-        dialog.setContentView(R.layout.dialog_skip_goods);
+        dialog.setContentView(R.layout.dialog_skip_checkin);
         dialog.setCanceledOnTouchOutside(true);
         Button cancel = (Button) dialog.findViewById(R.id.cancleDialog);
         Button ok = (Button) dialog.findViewById(R.id.okDialog);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchResultActivity.this, "取消", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "确定", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(SearchResultActivity.this, "确定", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -164,35 +148,55 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
 
     private void openSortMenu() {
         final Dialog sortDialog = new Dialog(this, R.style.NoTitleDialog);
-        sortDialog.setContentView(R.layout.dialog_sort_goods);
+        sortDialog.setContentView(R.layout.dialog_sort_checkin);
         sortDialog.setCanceledOnTouchOutside(true);
         Button sortCancel = (Button) sortDialog.findViewById(R.id.cancleDialog);
         Button sortOk = (Button) sortDialog.findViewById(R.id.okDialog);
         final Map<RelativeLayout, ImageView> sortMethods = new HashMap<>();
-        RelativeLayout sortName = (RelativeLayout) sortDialog.findViewById(R.id.sort_name);
-        ImageView sortArrowName = (ImageView) sortDialog.findViewById(R.id.sort_arrow_name);
-        sortMethods.put(sortName, sortArrowName);
-        RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
-        ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
-        sortMethods.put(sortSku, sortArrowSku);
+        RelativeLayout sortPrice = (RelativeLayout) sortDialog.findViewById(R.id.sort_price);
+        ImageView sortArrowPriceIn = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_in);
+        sortMethods.put(sortPrice, sortArrowPriceIn);
         RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
         ImageView sortArrowTime = (ImageView) sortDialog.findViewById(R.id.sort_arrow_time);
         sortMethods.put(sortTime, sortArrowTime);
-        RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
+        final RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
         ImageView sortArrowAmount = (ImageView) sortDialog.findViewById(R.id.sort_arrow_amount);
         sortMethods.put(sortAmount, sortArrowAmount);
-        currentSortMethod = sortName;
+        currentSortMethod = sortAmount;
         sortCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchResultActivity.this, "取消", Toast.LENGTH_SHORT).show();
                 sortDialog.dismiss();
             }
         });
         sortOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchResultActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                if(currentSortMethod==sortAmount){
+                    if(sortdesc){
+                        List<Checkin> checkins=DataSupport.order("amount desc").find(Checkin.class);
+                        mCheckinList.clear();
+                        mCheckinList.addAll(checkins);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
+
+                    }else {
+                        adapter.clear();
+                        adapter.addAll(DataSupport.order("amount asc").find(Checkin.class));
+                        adapter.notifyDataSetChanged();
+
+                    }
+
+
+                }
+
                 sortDialog.dismiss();
             }
         });
@@ -220,5 +224,4 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
 
         sortDialog.show();
     }
-
 }

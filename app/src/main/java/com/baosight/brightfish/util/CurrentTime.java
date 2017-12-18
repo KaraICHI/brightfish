@@ -61,4 +61,15 @@ public class CurrentTime {
 
         return mYear + " " + mMonth + "月" + mDay + " "  + mHour + ":" + mMinute ;
     }
+    //获得当前年月日时分秒星期
+    public String getHMTime() {
+        final Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
+        String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
+
+        return  mHour + ":" + mMinute ;
+    }
+
+
 }

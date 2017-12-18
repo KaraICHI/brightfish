@@ -124,6 +124,7 @@
 
     </LinearLayout>
     <Button
+        android:id="@+id/search_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottomBar"
         android:layout_alignParentBottom="true"

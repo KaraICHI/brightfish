@@ -80,16 +80,16 @@
                 android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/start_time"
-                    android:layout_width="100dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
+                    android:focusable="false"
                     />
                 <EditText
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="50dp"
                     android:id="@+id/end_time"
-                    android:layout_width="100dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
+                    android:focusable="false"
                     />
             </LinearLayout>
             <TextView
@@ -109,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPur"
                     android:checked="true"
+                    android:text="日"
                     />
 
                 <RadioButton
@@ -117,6 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPur"
+                    android:text="月"
                     />
 
             </RadioGroup>

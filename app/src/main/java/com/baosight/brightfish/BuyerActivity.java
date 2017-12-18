@@ -1,7 +1,9 @@
 package com.baosight.brightfish;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baosight.brightfish.model.Buyer;
+import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.model.Supplier;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +81,7 @@ public class BuyerActivity extends EditActivity {
 
         LayoutInflater mInflater = LayoutInflater.from(this);
         view1 = mInflater.inflate(R.layout.frag_tab_buyer, null);
-        view2 = mInflater.inflate(R.layout.frag_tab_buyer, null);
+        view2 = mInflater.inflate(R.layout.frag_tab_activity_buyer, null);
         view3 = mInflater.inflate(R.layout.frag_tab_buyer, null);
         view4 = mInflater.inflate(R.layout.frag_tab_buyer, null);
 
@@ -149,6 +154,25 @@ public class BuyerActivity extends EditActivity {
         switch (item.getItemId()) {
             case R.id.edit_mark:
                 ModifyBuyerActivity.startModifyActivity(BuyerActivity.this,buyer);
+                break;
+            case R.id.delete_btn:
+                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                dialog.setMessage("确定删除");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DataSupport.delete(Buyer.class,buyer.getId());
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
                 break;
 
         }

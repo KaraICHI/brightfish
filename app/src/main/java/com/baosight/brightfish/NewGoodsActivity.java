@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.baosight.brightfish.model.Goods;
@@ -25,7 +26,8 @@ public class NewGoodsActivity extends CameraBasicActivity implements View.OnClic
     ImageView selectAblum;
     EditText sku, name, brand, catagory, size, color, spec, descr;
     Button saveBtn;
-
+    int cata;
+    Dialog chooseCataDialog;
     public static void startGoodsActivity(Context context) {
         Intent intent = new Intent(context, NewGoodsActivity.class);
         context.startActivity(intent);
@@ -56,6 +58,7 @@ public class NewGoodsActivity extends CameraBasicActivity implements View.OnClic
         descr = (EditText) findViewById(R.id.goods_descr);
         saveBtn = (Button) findViewById(R.id.checkin_commit);
         saveBtn.setOnClickListener(this);
+        catagory.setOnClickListener(this);
 
 
     }
@@ -69,6 +72,16 @@ public class NewGoodsActivity extends CameraBasicActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.goods_cata:
+                showchooseCataDialog();
+                break;
+            case R.id.commit_cata:
+                catagory.setText(cata);
+                chooseCataDialog.dismiss();
+                break;
+            case R.id.cancle_cata:
+                chooseCataDialog.dismiss();
+                break;
             case R.id.photo:
                 final Dialog dialog = new Dialog(this, R.style.NoTitleDialog);
                 dialog.setContentView(R.layout.layout_dialog);
@@ -135,6 +148,41 @@ public class NewGoodsActivity extends CameraBasicActivity implements View.OnClic
         catagory.setText("");
         brand.setText("");
 
+    }
+    private void showchooseCataDialog() {
+        chooseCataDialog=new Dialog(NewGoodsActivity.this,R.style.NoTitleDialog);
+        chooseCataDialog.setContentView(R.layout.dialog_choose_cata);
+        RadioGroup choosecataGroup=(RadioGroup) chooseCataDialog.findViewById(R.id.catas);
+        choosecataGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.cata_product:
+                        cata=R.string.product;
+                        break;
+                    case R.id.cata_material:
+                        cata=R.string.material;
+                        break;
+                    case R.id.cata_service:
+                        cata=R.string.service;
+                        break;
+                    case R.id.cata_retail:
+                        cata=R.string.retail;
+                        break;
+                    case R.id.cata_device:
+                        cata=R.string.device;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+        });
+        Button commitcata=(Button) chooseCataDialog.findViewById(R.id.commit_cata);
+        commitcata.setOnClickListener(this);
+        Button cancelcata=(Button) chooseCataDialog.findViewById(R.id.cancle_cata);
+        cancelcata.setOnClickListener(this);
+        chooseCataDialog.show();
     }
 
 }

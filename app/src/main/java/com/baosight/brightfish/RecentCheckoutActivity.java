@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import com.baosight.brightfish.model.Goods;
-import com.baosight.brightfish.ui.GoodsAdapter;
+
+import com.baosight.brightfish.model.Checkout;
+import com.baosight.brightfish.ui.CheckAdapter;
+import com.baosight.brightfish.ui.CheckoutAdapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -28,32 +30,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChooseGoodsNoteActivity extends BasicActivity {
+public class RecentCheckoutActivity extends BasicActivity{
+
+    private static final String TAG = "ChoosecheckoutActivity";
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    Toolbar toolbar;
-    List<Goods> chooseItemList=DataSupport.findAll(Goods.class);
+    static List<Checkout> mCheckoutList;
     SwipeMenuListView listView;
-    GoodsAdapter adapter;
+    CheckoutAdapter adapter;
 
-    public static void startChooseGoodsActivity(Context context) {
-        Intent intent = new Intent(context, ChooseGoodsNoteActivity.class);
+    public static void startRecentCheckoutActivity(Context context,List<Checkout> checkoutList) {
+        Intent intent = new Intent(context, RecentCheckoutActivity.class);
         context.startActivity(intent);
+        mCheckoutList=checkoutList;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_goods_note);
+        setContentView(R.layout.activity_recent_checkout);
         initControls();
 
     }
 
     private void initControls() {
-        initToolbar(R.color.colorOrange);
+        initToolbar(R.color.colorGreen);
         listView = (SwipeMenuListView) findViewById(R.id.check_list);
 
-        adapter=new GoodsAdapter(this,R.layout.item_checkin_note,chooseItemList);
+        adapter=new CheckoutAdapter(this,R.layout.item_checkin_note,mCheckoutList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -103,11 +108,11 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        GoodsActivity.startGoodsActivity(ChooseGoodsNoteActivity.this,chooseItemList.get(position));
+                        CheckoutNoteActivity.startCheckoutNoteActivity(RecentCheckoutActivity.this,mCheckoutList.get(position));
                         break;
                     case 1:
-                        chooseItemList.remove(position);
-                        DataSupport.delete(Goods.class,position+1);
+                        mCheckoutList.remove(position);
+                        DataSupport.delete(Checkout.class,position+1);
                         adapter.notifyDataSetChanged();
                         break;
                 }
@@ -116,6 +121,8 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
             }
         });
     }
+
+
 
 
     @Override
@@ -141,21 +148,22 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
 
     private void openSkipMenu() {
         final Dialog dialog = new Dialog(this, R.style.NoTitleDialog);
-        dialog.setContentView(R.layout.dialog_skip_goods);
+        dialog.setContentView(R.layout.dialog_skip_checkout);
         dialog.setCanceledOnTouchOutside(true);
         Button cancel = (Button) dialog.findViewById(R.id.cancleDialog);
         Button ok = (Button) dialog.findViewById(R.id.okDialog);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecentCheckoutActivity.this, "取消", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "确定", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(RecentCheckoutActivity.this, "确定", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -164,35 +172,49 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
 
     private void openSortMenu() {
         final Dialog sortDialog = new Dialog(this, R.style.NoTitleDialog);
-        sortDialog.setContentView(R.layout.dialog_sort_goods);
+        sortDialog.setContentView(R.layout.dialog_sort_checkout);
         sortDialog.setCanceledOnTouchOutside(true);
         Button sortCancel = (Button) sortDialog.findViewById(R.id.cancleDialog);
         Button sortOk = (Button) sortDialog.findViewById(R.id.okDialog);
         final Map<RelativeLayout, ImageView> sortMethods = new HashMap<>();
-        RelativeLayout sortName = (RelativeLayout) sortDialog.findViewById(R.id.sort_name);
-        ImageView sortArrowName = (ImageView) sortDialog.findViewById(R.id.sort_arrow_name);
-        sortMethods.put(sortName, sortArrowName);
-        RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
-        ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
-        sortMethods.put(sortSku, sortArrowSku);
+        RelativeLayout sortPrice = (RelativeLayout) sortDialog.findViewById(R.id.sort_price);
+        ImageView sortArrowPriceIn = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_in);
+        sortMethods.put(sortPrice, sortArrowPriceIn);
         RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
         ImageView sortArrowTime = (ImageView) sortDialog.findViewById(R.id.sort_arrow_time);
         sortMethods.put(sortTime, sortArrowTime);
-        RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
+        final RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
         ImageView sortArrowAmount = (ImageView) sortDialog.findViewById(R.id.sort_arrow_amount);
         sortMethods.put(sortAmount, sortArrowAmount);
-        currentSortMethod = sortName;
+        currentSortMethod = sortAmount;
         sortCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecentCheckoutActivity.this, "取消", Toast.LENGTH_SHORT).show();
                 sortDialog.dismiss();
             }
         });
         sortOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChooseGoodsNoteActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecentCheckoutActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                if(currentSortMethod==sortAmount){
+                    if(sortdesc){
+                        mCheckoutList.clear();
+                        mCheckoutList.addAll(DataSupport.order("amount desc").find(Checkout.class));
+                        adapter.notifyDataSetChanged();
+                        Log.d(TAG, "onClick: ==============="+mCheckoutList.get(0).getAmount());
+
+                    }else {
+                        mCheckoutList.clear();
+                        mCheckoutList.addAll(DataSupport.order("amount asc").find(Checkout.class));
+                        adapter.notifyDataSetChanged();
+                        Log.d(TAG, "onClick: ================"+mCheckoutList.get(0).getAmount());
+                    }
+
+
+                }
+
                 sortDialog.dismiss();
             }
         });
@@ -220,5 +242,4 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
 
         sortDialog.show();
     }
-
 }

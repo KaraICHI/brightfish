@@ -1,8 +1,6 @@
 package com.baosight.brightfish;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baosight.brightfish.model.Checklist;
 import com.baosight.brightfish.model.Goods;
 import com.baosight.brightfish.ui.ChooseGoodsAdapter;
 
@@ -45,7 +44,7 @@ public class ChooseGoodsActivity extends AppCompatActivity {
 
     private void initControls() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorOrange));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,16 +125,10 @@ public class ChooseGoodsActivity extends AppCompatActivity {
         final RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
         ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
         sortMethods.put(sortSku, sortArrowSku);
-        RelativeLayout sortPriceIn = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_in);
-        ImageView sortArrowPriceIn = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_in);
-        sortMethods.put(sortPriceIn, sortArrowPriceIn);
-        RelativeLayout sortPriceOut = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_out);
-        ImageView sortArrowPriceOut = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_out);
-        sortMethods.put(sortPriceOut, sortArrowPriceOut);
-        RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
+          RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
         ImageView sortArrowTime = (ImageView) sortDialog.findViewById(R.id.sort_arrow_time);
         sortMethods.put(sortTime, sortArrowTime);
-        RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
+        final RelativeLayout sortAmount = (RelativeLayout) sortDialog.findViewById(R.id.sort_amount);
         ImageView sortArrowAmount = (ImageView) sortDialog.findViewById(R.id.sort_arrow_amount);
         sortMethods.put(sortAmount, sortArrowAmount);
         currentSortMethod = sortName;
@@ -163,6 +156,17 @@ public class ChooseGoodsActivity extends AppCompatActivity {
                     }else {
                         chooseItemList.addAll(DataSupport.order("sku desc").find(Goods.class));
                     }
+                }else if(currentSortMethod==sortAmount){
+                    if(!sortdesc){
+                        for(Checklist checklist:DataSupport.order("amount asc").find(Checklist.class)) {
+                            chooseItemList.add(DataSupport.find(Goods.class,checklist.getGoodsId()));
+                        }
+                    }else {
+                        for(Checklist checklist:DataSupport.order("amount desc").find(Checklist.class)) {
+                            chooseItemList.add(DataSupport.find(Goods.class,checklist.getGoodsId()));
+                        }
+                    }
+
                 }
                 adapter.notifyDataSetChanged();
                 sortDialog.dismiss();

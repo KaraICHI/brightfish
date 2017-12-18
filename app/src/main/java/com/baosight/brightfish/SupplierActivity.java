@@ -1,8 +1,10 @@
 package com.baosight.brightfish;
 
  import android.annotation.SuppressLint;
-        import android.content.Context;
-        import android.content.Intent;
+ import android.app.AlertDialog;
+ import android.content.Context;
+ import android.content.DialogInterface;
+ import android.content.Intent;
  import android.graphics.Bitmap;
  import android.graphics.BitmapFactory;
  import android.os.Bundle;
@@ -19,9 +21,12 @@ package com.baosight.brightfish;
  import android.widget.ImageView;
  import android.widget.TextView;
 
+ import com.baosight.brightfish.model.Goods;
  import com.baosight.brightfish.model.Supplier;
 
-        import java.util.ArrayList;
+ import org.litepal.crud.DataSupport;
+
+ import java.util.ArrayList;
         import java.util.List;
 
 
@@ -148,7 +153,25 @@ public class SupplierActivity extends EditActivity {
             case R.id.edit_mark:
                 ModifySupplierActivity.startModifySupplierActivity(SupplierActivity.this,supplier);
                 break;
+            case R.id.delete_btn:
+                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                dialog.setMessage("确定删除");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DataSupport.delete(Supplier.class,supplier.getId());
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
 
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

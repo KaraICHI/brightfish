@@ -139,66 +139,8 @@
             android:layout_marginTop="@dimen/lineMargin"
             android:background="@color/colorLightGery" />
 
-        <RelativeLayout
-            android:id="@+id/sort_price_in"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    
 
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="默认入库价格￥"
-                android:textSize="@dimen/dialogContent" />
-
-            <ImageView
-                android:id="@+id/sort_arrow_price_in"
-                android:layout_width="@dimen/iconContent"
-                android:layout_height="@dimen/iconContent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/ic_arrow_up_24dp"
-                android:backgroundTint="@color/colorOrange"
-                android:visibility="invisible" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cutline"
-            android:layout_marginBottom="@dimen/lineMargin"
-            android:layout_marginTop="@dimen/lineMargin"
-            android:background="@color/colorLightGery" />
-
-        <RelativeLayout
-            android:id="@+id/sort_price_out"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="默认出库价格￥"
-                android:textSize="@dimen/dialogContent" />
-
-            <ImageView
-                android:id="@+id/sort_arrow_price_out"
-                android:layout_width="@dimen/iconContent"
-                android:layout_height="@dimen/iconContent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/ic_arrow_up_24dp"
-                android:backgroundTint="@color/colorOrange"
-                android:tint="@color/colorOrange"
-                android:visibility="invisible" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cutline"
-            android:layout_marginBottom="@dimen/lineMargin"
-            android:layout_marginTop="@dimen/lineMargin"
-            android:background="@color/colorLightGery" />
 
         <LinearLayout
             android:layout_width="match_parent"

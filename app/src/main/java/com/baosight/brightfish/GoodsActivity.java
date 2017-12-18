@@ -1,7 +1,9 @@
 package com.baosight.brightfish;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,8 +24,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.model.Checklist;
 import com.baosight.brightfish.model.Checkout;
 import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.util.CurrentTime;
 
 import org.litepal.crud.DataSupport;
 
@@ -144,7 +148,7 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         recentDateFIn=(TextView) view2.findViewById(R.id.date_recent_first_in);
         recentDateFOut=(TextView) view2.findViewById(R.id.date_recent_first_out);
         recentDateSIn=(TextView) view2.findViewById(R.id.date_recent_second_in);
-        recentDateFOut=(TextView) view2.findViewById(R.id.date_recent_second_out);
+        recentDateSOut=(TextView) view2.findViewById(R.id.date_recent_second_out);
         recentCheckin=(LinearLayout) view2.findViewById(R.id.recent_checkin);
         recentCheckout=(LinearLayout) view2.findViewById(R.id.recent_checkout);
         recentCheckinS=(RelativeLayout) view2.findViewById(R.id.recent_checkin_s);
@@ -163,11 +167,12 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                 RecentCheckoutActivity.startRecentCheckoutActivity(GoodsActivity.this,checkoutList);
             }
         });
-        Calendar c = Calendar.getInstance();
-        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String mHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));//时
-        String mMinute = String.valueOf(c.get(Calendar.MINUTE));//分
-        updateTime.setText("更新时间： "+mHour+":"+mMinute);
+      showView2();
+
+    }
+
+    public void showView2(){
+        updateTime.setText("更新时间： "+new CurrentTime().getHMTime());
         int checkinAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkin.class,"amount",int.class);
         int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
         goodsAmount.setText(checkinAmount-checkoutAmount+"");
@@ -201,12 +206,7 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
             recentDateSOut.setText(sCheckout.getCheckinDate());
             recentAmountSOut.setText(sCheckout.getAmount()+"");
 
-
         }
-
-
-
-
 
     }
 
@@ -275,6 +275,28 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         switch (item.getItemId()) {
             case R.id.edit_mark:
                ModifyGoodsActivity.startModifyActivity(GoodsActivity.this,goods);
+                break;
+            case R.id.delete_btn:
+                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                dialog.setMessage("确定删除");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DataSupport.delete(Goods.class,goods.getId());
+                        DataSupport.deleteAll(Checklist.class,"goodsId=?",goods.getId()+"");
+                        DataSupport.deleteAll(Checkin.class,"goodsId=?",goods.getId()+"");
+                        DataSupport.deleteAll(Checkout.class,"goodsId=?",goods.getId()+"");
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
                 break;
 
         }

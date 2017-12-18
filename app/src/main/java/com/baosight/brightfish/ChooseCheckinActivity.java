@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ChooseCheckinActivity extends BasicActivity{
-    private static final String TAG = "ChooseCheckinActivity";
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     List<Checkin> checkinList;
@@ -90,8 +89,7 @@ public class ChooseCheckinActivity extends BasicActivity{
                         CheckinNoteActivity.startCheckinNoteActivity(ChooseCheckinActivity.this,checkinList.get(position));
                         break;
                     case 1:
-                        DataSupport.delete(Checkin.class,checkinList.get(position).getId());
-                        adapter.remove(checkinList.get(position));
+                        DataSupport.delete(Checkin.class,checkinList.remove(position).getId());
                         adapter.notifyDataSetChanged();
                         break;
                 }

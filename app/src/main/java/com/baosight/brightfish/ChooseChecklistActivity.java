@@ -106,12 +106,6 @@ public class ChooseChecklistActivity extends AppCompatActivity {
         RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
         ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
         sortMethods.put(sortSku, sortArrowSku);
-        RelativeLayout sortPriceIn = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_in);
-        ImageView sortArrowPriceIn = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_in);
-        sortMethods.put(sortPriceIn, sortArrowPriceIn);
-        RelativeLayout sortPriceOut = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_out);
-        ImageView sortArrowPriceOut = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_out);
-        sortMethods.put(sortPriceOut, sortArrowPriceOut);
         RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
         ImageView sortArrowTime = (ImageView) sortDialog.findViewById(R.id.sort_arrow_time);
         sortMethods.put(sortTime, sortArrowTime);

@@ -12,64 +12,64 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:text="选择原因"
+            android:text="选择类别"
             />
 
     </LinearLayout>
     <RadioGroup
-        android:id="@+id/reasons"
+        android:id="@+id/catas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         >
         <RadioButton
-            android:id="@+id/reason_output"
+            android:id="@+id/cata_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@android:drawable/btn_radio"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
-            android:text="@string/output"
+            android:text="@string/product"
 
 
             />
         <RadioButton
-            android:id="@+id/reason_consumption"
+            android:id="@+id/cata_material"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@android:drawable/btn_radio"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
-            android:text="@string/consumption"
+            android:text="@string/material"
 
             />
         <RadioButton
-            android:id="@+id/reason_wear"
+            android:id="@+id/cata_device"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@android:drawable/btn_radio"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
-            android:text="@string/wear"
+            android:text="@string/device"
 
             />
         <RadioButton
-            android:id="@+id/reason_lost"
+            android:id="@+id/cata_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@android:drawable/btn_radio"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
-            android:text="@string/lost"
+            android:text="@string/service"
             />
         <RadioButton
-            android:id="@+id/reason_reversion_mistake"
+            android:id="@+id/cata_retail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@android:drawable/btn_radio"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
-            android:text="@string/reversion"
+            android:text="@string/retail"
             android:checked="true"
             />
 
@@ -80,7 +80,7 @@
         android:padding="15dp"
         >
         <Button
-            android:id="@+id/cancle_reason"
+            android:id="@+id/cancle_cata"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="38dp"
@@ -89,7 +89,7 @@
             android:textColor="@color/colorOrange"
             />
         <Button
-            android:id="@+id/commit_reason"
+            android:id="@+id/commit_cata"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="38dp"

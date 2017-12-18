@@ -12,5 +12,10 @@
     <string name="lost">丢失</string>
     <string name="wear">磨损</string>
     <string name="reversion">修订错误</string>
+    <string name="product">产品</string>
+    <string name="material">原料</string>
+    <string name="device">设备</string>
+    <string name="service">服务</string>
+    <string name="retail">零售</string>
 </resources>
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ChecklistActivity extends BasicActivity {
     RecyclerView recyclerView;
     RelativeLayout currentSortMethod;
     boolean sortdesc;
+    List<Goods> goodsList;
     private static final String TAG = "ChecklistActivity";
 
     public static void startChecklistActivity(Context context) {
@@ -60,7 +62,7 @@ public class ChecklistActivity extends BasicActivity {
      * 获取货品现存数量
      */
     private List<Checklist> getChecklists(){
-        List<Goods> goodsList= DataSupport.findAll(Goods.class);
+        goodsList= DataSupport.findAll(Goods.class);
         if(goodsList.size()>0){
             for(Goods goods:goodsList){
                 int checkinAmount=DataSupport.where("goodsId="+goods.getId()).sum(Checkin.class,"amount",int.class);
@@ -68,7 +70,7 @@ public class ChecklistActivity extends BasicActivity {
                 Checklist checklist=new Checklist();
                 checklist.setGoodsId(goods.getId());
                 checklist.setAmount(checkinAmount-checkoutAmount);
-                if(DataSupport.where("goodsId="+goods.getId()).find(Checklist.class)!=null){
+                if(DataSupport.where("goodsId="+goods.getId()).find(Checklist.class).size()>0){
                     checklist.update(goods.getId());
                 }else {
                     checklist.save();
@@ -134,12 +136,6 @@ public class ChecklistActivity extends BasicActivity {
         RelativeLayout sortSku = (RelativeLayout) sortDialog.findViewById(R.id.sort_sku);
         ImageView sortArrowSku = (ImageView) sortDialog.findViewById(R.id.sort_arrow_sku);
         sortMethods.put(sortSku, sortArrowSku);
-        RelativeLayout sortPriceIn = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_in);
-        ImageView sortArrowPriceIn = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_in);
-        sortMethods.put(sortPriceIn, sortArrowPriceIn);
-        RelativeLayout sortPriceOut = (RelativeLayout) sortDialog.findViewById(R.id.sort_price_out);
-        ImageView sortArrowPriceOut = (ImageView) sortDialog.findViewById(R.id.sort_arrow_price_out);
-        sortMethods.put(sortPriceOut, sortArrowPriceOut);
         RelativeLayout sortTime = (RelativeLayout) sortDialog.findViewById(R.id.sort_time);
         ImageView sortArrowTime = (ImageView) sortDialog.findViewById(R.id.sort_arrow_time);
         sortMethods.put(sortTime, sortArrowTime);
