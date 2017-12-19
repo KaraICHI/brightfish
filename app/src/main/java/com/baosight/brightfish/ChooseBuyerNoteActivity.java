@@ -72,8 +72,8 @@ public class ChooseBuyerNoteActivity extends BasicActivity {
                        BuyerActivity.startBuyerActivity(ChooseBuyerNoteActivity.this,chooseItemList.get(position));
                         break;
                     case 1:
-                        chooseItemList.remove(position);
-                        DataSupport.delete(Buyer.class,position+1);
+
+                        deleteBuyer(chooseItemList.remove(position).getId());
                         adapter.notifyDataSetChanged();
                         break;
                 }

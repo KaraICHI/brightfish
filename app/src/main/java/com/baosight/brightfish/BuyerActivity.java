@@ -36,17 +36,18 @@ public class BuyerActivity extends EditActivity {
     private TabLayout mTabLayout;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
-    View view1,view2,view3,view4;
+    View view1, view2, view3, view4;
     Buyer buyer;
-    TextView supplierSku,supplierName;
+    TextView supplierSku, supplierName;
 
-    public static void startBuyerActivity(Context context, Buyer buyer){
-        Intent intent=new Intent(context,BuyerActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("buyer",buyer);
-        intent.putExtra("bundle",bundle);
+    public static void startBuyerActivity(Context context, Buyer buyer) {
+        Intent intent = new Intent(context, BuyerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("buyer", buyer);
+        intent.putExtra("bundle", bundle);
         context.startActivity(intent);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,21 +61,21 @@ public class BuyerActivity extends EditActivity {
     protected void initControls() {
         photo = (ImageView) view1.findViewById(R.id.photo);
         selectAblum = (ImageView) view1.findViewById(R.id.select_ablum_btn);
-        supplierSku=(TextView) view1.findViewById(R.id.sku_edit);
-        supplierName=(TextView) view1.findViewById(R.id.name_edit);
-        address=(EditText) view1.findViewById(R.id.address_edit);
-        telephone=(EditText) view1.findViewById(R.id.telephone_edit);
-        cellphone=(EditText)view1.findViewById(R.id.cellphone_edit);
-        email=(EditText) view1.findViewById(R.id.email_edit);
-        descr=(EditText) view1.findViewById(R.id.describe_edit);
-        qq=(EditText) view1.findViewById(R.id.qq_edit);
-        wechat=(EditText) view1.findViewById(R.id.wechat_edit);
-        website=(EditText) view1.findViewById(R.id.web_edit);
+        supplierSku = (TextView) view1.findViewById(R.id.sku_edit);
+        supplierName = (TextView) view1.findViewById(R.id.name_edit);
+        address = (EditText) view1.findViewById(R.id.address_edit);
+        telephone = (EditText) view1.findViewById(R.id.telephone_edit);
+        cellphone = (EditText) view1.findViewById(R.id.cellphone_edit);
+        email = (EditText) view1.findViewById(R.id.email_edit);
+        descr = (EditText) view1.findViewById(R.id.describe_edit);
+        qq = (EditText) view1.findViewById(R.id.qq_edit);
+        wechat = (EditText) view1.findViewById(R.id.wechat_edit);
+        website = (EditText) view1.findViewById(R.id.web_edit);
 
     }
 
     @SuppressLint("InflateParams")
-    private void initTab(){
+    private void initTab() {
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) findViewById(R.id.toolbar_tab);
@@ -146,22 +147,24 @@ public class BuyerActivity extends EditActivity {
         }
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.edit_bar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_mark:
-                ModifyBuyerActivity.startModifyActivity(BuyerActivity.this,buyer);
+                ModifyBuyerActivity.startModifyActivity(BuyerActivity.this, buyer);
                 break;
             case R.id.delete_btn:
-                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setMessage("确定删除");
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DataSupport.delete(Buyer.class,buyer.getId());
+                        deleteBuyer(buyer.getId());
                         finish();
                     }
                 });
@@ -179,8 +182,8 @@ public class BuyerActivity extends EditActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showBuyer(){
-        buyer=(Buyer)getIntent().getBundleExtra("bundle").getSerializable("buyer");
+    private void showBuyer() {
+        buyer = (Buyer) getIntent().getBundleExtra("bundle").getSerializable("buyer");
         supplierSku.setText(buyer.getSku());
         supplierName.setText(buyer.getName());
         address.setText(buyer.getAddress());

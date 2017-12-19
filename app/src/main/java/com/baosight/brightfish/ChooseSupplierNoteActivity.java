@@ -33,7 +33,7 @@ import java.util.Map;
 public class ChooseSupplierNoteActivity extends BasicActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
-    List<Supplier> chooseItemList= DataSupport.findAll(Supplier.class);
+    List<Supplier> chooseItemList = DataSupport.findAll(Supplier.class);
     SwipeMenuListView listView;
     SupplierAdapter adapter;
 
@@ -54,7 +54,7 @@ public class ChooseSupplierNoteActivity extends BasicActivity {
         initToolbar(R.color.colorGreen);
         listView = (SwipeMenuListView) findViewById(R.id.check_list);
 
-        adapter=new SupplierAdapter(this,R.layout.item_checkin_note,chooseItemList);
+        adapter = new SupplierAdapter(this, R.layout.item_checkin_note, chooseItemList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,11 +69,10 @@ public class ChooseSupplierNoteActivity extends BasicActivity {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        SupplierActivity.startSupplierActivity(ChooseSupplierNoteActivity.this,chooseItemList.get(position));
+                        SupplierActivity.startSupplierActivity(ChooseSupplierNoteActivity.this, chooseItemList.get(position));
                         break;
                     case 1:
-                        chooseItemList.remove(position);
-                        DataSupport.delete(Supplier.class,position+1);
+                        deleteSuppiler(chooseItemList.remove(position).getId());
                         adapter.notifyDataSetChanged();
                         break;
                 }
@@ -183,7 +182,7 @@ public class ChooseSupplierNoteActivity extends BasicActivity {
 
         sortDialog.show();
     }
-    
-    
+
+
 }
 

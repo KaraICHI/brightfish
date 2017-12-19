@@ -53,11 +53,6 @@ public class SearchActivity extends BasicActivity implements View.OnClickListene
         searchSupplier.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.blue_tooth_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public void onClick(View v) {
@@ -79,7 +74,7 @@ public class SearchActivity extends BasicActivity implements View.OnClickListene
                 ChooseGoodsNoteActivity.startChooseGoodsActivity(this);
                 break;
             case R.id.choose_checklist:
-                ChecklistNoteHistoryActivity.startChecklistNoteHistoryActivity(this);
+                ChooseChecklistNoteActivity.startChecklistNoteHistoryActivity(this);
                 break;
             case R.id.search_buyer:
                 break;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -168,7 +169,6 @@ public class CameraBasicActivity extends BasicActivity {
     }
 
     protected String getPhotoOutputUri(){
-        Log.d(TAG, "getPhotoOutputUri: ==========="+count);
         return "file:////sdcard/image_output"+count+".jpg";
         
     }

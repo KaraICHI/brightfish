@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.baosight.brightfish">
-
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -83,9 +83,6 @@
             android:name=".ChooseCheckoutActivity"
             android:label="选择出库记录" />
         <activity
-            android:name=".ChooseChecklistActivity"
-            android:label="选择盘货记录" />
-        <activity
             android:name=".SearchCheckinActivity"
             android:label="查找入库" />
         <activity android:name=".SplashActivity">
@@ -123,7 +120,7 @@
             android:name=".ModifyBuyerActivity"
             android:label="修改买家" />
         <activity
-            android:name=".ChecklistNoteHistoryActivity"
+            android:name=".ChooseChecklistNoteActivity"
             android:label="盘货历史记录" />
         <activity
             android:name=".ChecklistNoteActivity"
@@ -155,7 +152,7 @@
         <activity
             android:name=".SearchResultActivity"
             android:label="查找结果" />
-        <activity android:name=".ActivtyAllActivity"></activity>
+        <activity android:name=".ActivtyAllActivity" android:label="所有活动"/>
     </application>
 
 </manifest>

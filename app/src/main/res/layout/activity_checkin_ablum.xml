@@ -23,6 +23,9 @@
             android:id="@+id/add_photo"
             android:layout_width="@dimen/addPhoto"
             android:layout_height="@dimen/addPhoto"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:background="@color/colorLightGery"
             xmlns:android="http://schemas.android.com/apk/res/android">
             <ImageView

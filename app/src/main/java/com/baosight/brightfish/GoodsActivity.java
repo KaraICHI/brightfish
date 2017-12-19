@@ -37,25 +37,25 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class GoodsActivity extends BasicActivity implements View.OnClickListener{
+public class GoodsActivity extends BasicActivity implements View.OnClickListener {
     private TabLayout mTabLayout;
     ImageView photo;
     ImageView selectAblum;
-    TextView sku, name,updateTime,goodsAmount,recentDateFIn,recentDateSIn,recentDateFOut,recentDateSOut,recentAmountFIn,recentAmountSIn,
-            recentAmountFOut,recentAmountSOut;
-    Button allCheckin,allCheckout;
-    LinearLayout recentCheckin,recentCheckout;
-    RelativeLayout recentCheckinS,recentCheckoutS;
-    EditText  brand, catagory, size, color, spec, descr;
-    View view1,view2,view3,view4;
+    TextView sku, name, updateTime, goodsAmount, recentDateFIn, recentDateSIn, recentDateFOut, recentDateSOut, recentAmountFIn, recentAmountSIn,
+            recentAmountFOut, recentAmountSOut;
+    Button allCheckin, allCheckout;
+    LinearLayout recentCheckin, recentCheckout;
+    RelativeLayout recentCheckinS, recentCheckoutS;
+    EditText brand, catagory, size, color, spec, descr;
+    View view1, view2, view3, view4;
     Goods goods;
     List<Checkin> checkinList;
     List<Checkout> checkoutList;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
 
-    public static void startGoodsActivity(Context context,Goods goods){
-        Intent intent=new Intent(context,GoodsActivity.class);
+    public static void startGoodsActivity(Context context, Goods goods) {
+        Intent intent = new Intent(context, GoodsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("goods", goods);
         intent.putExtra("bundle", bundle);
@@ -66,9 +66,9 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods);
-        goods=(Goods)getIntent().getBundleExtra("bundle").getSerializable("goods");
-        checkinList=  DataSupport.where("goodsId="+goods.getId()).find(Checkin.class);
-        checkoutList= DataSupport.where("goodsId="+goods.getId()).find(Checkout.class);
+        goods = (Goods) getIntent().getBundleExtra("bundle").getSerializable("goods");
+        checkinList = DataSupport.where("goodsId=" + goods.getId()).find(Checkin.class);
+        checkoutList = DataSupport.where("goodsId=" + goods.getId()).find(Checkout.class);
         initTab();
         initControlsV1();
         showGoods();
@@ -76,10 +76,10 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         initToolbar(R.color.colorOrange);
 
 
-
     }
+
     @SuppressLint("InflateParams")
-    private void initTab(){
+    private void initTab() {
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) findViewById(R.id.toolbar_tab);
@@ -117,10 +117,9 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     }
 
     /**
-     *
      * 货品基本参数初始化
      */
-    private void initControlsV1(){
+    private void initControlsV1() {
         photo = (ImageView) view1.findViewById(R.id.photo);
         selectAblum = (ImageView) view1.findViewById(R.id.select_ablum_btn);
         assert selectAblum != null;
@@ -138,73 +137,73 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     /**
      * 最近活动
      */
-    private void initControlsV2(){
-        updateTime=(TextView) view2.findViewById(R.id.update_time);
-        goodsAmount=(TextView) view2.findViewById(R.id.goods_amount);
-        recentAmountFIn=(TextView) view2.findViewById(R.id.amount_recent_first_in);
-        recentAmountFOut=(TextView) view2.findViewById(R.id.amount_recent_first_out);
-        recentAmountSIn=(TextView) view2.findViewById(R.id.amount_recent_second_in);
-        recentAmountSOut=(TextView) view2.findViewById(R.id.amount_recent_second_out);
-        recentDateFIn=(TextView) view2.findViewById(R.id.date_recent_first_in);
-        recentDateFOut=(TextView) view2.findViewById(R.id.date_recent_first_out);
-        recentDateSIn=(TextView) view2.findViewById(R.id.date_recent_second_in);
-        recentDateSOut=(TextView) view2.findViewById(R.id.date_recent_second_out);
-        recentCheckin=(LinearLayout) view2.findViewById(R.id.recent_checkin);
-        recentCheckout=(LinearLayout) view2.findViewById(R.id.recent_checkout);
-        recentCheckinS=(RelativeLayout) view2.findViewById(R.id.recent_checkin_s);
-        recentCheckoutS=(RelativeLayout) view2.findViewById(R.id.recent_checkout_s);
-        allCheckin=(Button) view2.findViewById(R.id.all_checkin);
-        allCheckout=(Button) view2.findViewById(R.id.all_checkout);
+    private void initControlsV2() {
+        updateTime = (TextView) view2.findViewById(R.id.update_time);
+        goodsAmount = (TextView) view2.findViewById(R.id.goods_amount);
+        recentAmountFIn = (TextView) view2.findViewById(R.id.amount_recent_first_in);
+        recentAmountFOut = (TextView) view2.findViewById(R.id.amount_recent_first_out);
+        recentAmountSIn = (TextView) view2.findViewById(R.id.amount_recent_second_in);
+        recentAmountSOut = (TextView) view2.findViewById(R.id.amount_recent_second_out);
+        recentDateFIn = (TextView) view2.findViewById(R.id.date_recent_first_in);
+        recentDateFOut = (TextView) view2.findViewById(R.id.date_recent_first_out);
+        recentDateSIn = (TextView) view2.findViewById(R.id.date_recent_second_in);
+        recentDateSOut = (TextView) view2.findViewById(R.id.date_recent_second_out);
+        recentCheckin = (LinearLayout) view2.findViewById(R.id.recent_checkin);
+        recentCheckout = (LinearLayout) view2.findViewById(R.id.recent_checkout);
+        recentCheckinS = (RelativeLayout) view2.findViewById(R.id.recent_checkin_s);
+        recentCheckoutS = (RelativeLayout) view2.findViewById(R.id.recent_checkout_s);
+        allCheckin = (Button) view2.findViewById(R.id.all_checkin);
+        allCheckout = (Button) view2.findViewById(R.id.all_checkout);
         allCheckin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecentCheckinActivity.startRecentCheckinActivity(GoodsActivity.this,checkinList);
+                RecentCheckinActivity.startRecentCheckinActivity(GoodsActivity.this, checkinList);
             }
         });
         allCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecentCheckoutActivity.startRecentCheckoutActivity(GoodsActivity.this,checkoutList);
+                RecentCheckoutActivity.startRecentCheckoutActivity(GoodsActivity.this, checkoutList);
             }
         });
-      showView2();
+        showView2();
 
     }
 
-    public void showView2(){
-        updateTime.setText("更新时间： "+new CurrentTime().getHMTime());
-        int checkinAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkin.class,"amount",int.class);
-        int checkoutAmount=DataSupport.where("goodsId='"+goods.getId()+"'").sum(Checkout.class,"amount",int.class);
-        goodsAmount.setText(checkinAmount-checkoutAmount+"");
-        if(checkinList.size()<1){
+    public void showView2() {
+        updateTime.setText("更新时间： " + new CurrentTime().getHMTime());
+        int checkinAmount = DataSupport.where("goodsId='" + goods.getId() + "'").sum(Checkin.class, "amount", int.class);
+        int checkoutAmount = DataSupport.where("goodsId='" + goods.getId() + "'").sum(Checkout.class, "amount", int.class);
+        goodsAmount.setText(checkinAmount - checkoutAmount + "");
+        if (checkinList.size() < 1) {
             recentCheckin.setVisibility(View.GONE);
-        }else if(checkinList.size()<2){
-            Checkin fCheckin=checkinList.get(checkinList.size()-1);
+        } else if (checkinList.size() < 2) {
+            Checkin fCheckin = checkinList.get(checkinList.size() - 1);
             recentDateFIn.setText(fCheckin.getCheckinDate());
-            recentAmountFIn.setText(fCheckin.getAmount()+"");
+            recentAmountFIn.setText(fCheckin.getAmount() + "");
             recentCheckinS.setVisibility(View.GONE);
-        }else {
-            Checkin fCheckin=checkinList.get(checkinList.size()-1);
+        } else {
+            Checkin fCheckin = checkinList.get(checkinList.size() - 1);
             recentDateFIn.setText(fCheckin.getCheckinDate());
-            recentAmountFIn.setText(fCheckin.getAmount()+"");
-            Checkin sCheckin=checkinList.get(checkinList.size()-2);
+            recentAmountFIn.setText(fCheckin.getAmount() + "");
+            Checkin sCheckin = checkinList.get(checkinList.size() - 2);
             recentDateSIn.setText(sCheckin.getCheckinDate());
-            recentAmountSIn.setText(sCheckin.getAmount()+"");
+            recentAmountSIn.setText(sCheckin.getAmount() + "");
         }
-        if(checkoutList.size()<1){
+        if (checkoutList.size() < 1) {
             recentCheckout.setVisibility(View.GONE);
-        }else if(checkoutList.size()<2){
+        } else if (checkoutList.size() < 2) {
             recentCheckoutS.setVisibility(View.GONE);
-            Checkout fCheckout=checkoutList.get(checkoutList.size()-1);
+            Checkout fCheckout = checkoutList.get(checkoutList.size() - 1);
             recentDateFOut.setText(fCheckout.getCheckinDate());
-            recentAmountFOut.setText(fCheckout.getAmount()+"");
-        }else {
-            Checkout fCheckout=checkoutList.get(checkoutList.size()-1);
+            recentAmountFOut.setText(fCheckout.getAmount() + "");
+        } else {
+            Checkout fCheckout = checkoutList.get(checkoutList.size() - 1);
             recentDateFOut.setText(fCheckout.getCheckinDate());
-            recentAmountFOut.setText(fCheckout.getAmount()+"");
-            Checkout sCheckout=checkoutList.get(checkoutList.size()-2);
+            recentAmountFOut.setText(fCheckout.getAmount() + "");
+            Checkout sCheckout = checkoutList.get(checkoutList.size() - 2);
             recentDateSOut.setText(sCheckout.getCheckinDate());
-            recentAmountSOut.setText(sCheckout.getAmount()+"");
+            recentAmountSOut.setText(sCheckout.getAmount() + "");
 
         }
 
@@ -213,7 +212,7 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.select_ablum_btn:
                 GoodsAblumActivity.startGoodsAblumActivity(GoodsActivity.this);
         }
@@ -253,7 +252,8 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         }
 
     }
-    private void showGoods(){
+
+    private void showGoods() {
 
         sku.setText(goods.getSku());
         name.setText(goods.getName());
@@ -267,25 +267,24 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         photo.setImageBitmap(bitmap);
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.edit_bar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_mark:
-               ModifyGoodsActivity.startModifyActivity(GoodsActivity.this,goods);
+                ModifyGoodsActivity.startModifyActivity(GoodsActivity.this, goods);
                 break;
             case R.id.delete_btn:
-                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setMessage("确定删除");
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DataSupport.delete(Goods.class,goods.getId());
-                        DataSupport.deleteAll(Checklist.class,"goodsId=?",goods.getId()+"");
-                        DataSupport.deleteAll(Checkin.class,"goodsId=?",goods.getId()+"");
-                        DataSupport.deleteAll(Checkout.class,"goodsId=?",goods.getId()+"");
+                        deleteGoods(goods.getId());
                         finish();
                     }
                 });

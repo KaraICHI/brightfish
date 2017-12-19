@@ -50,11 +50,6 @@ public class EditActivity extends CameraBasicActivity implements View.OnClickLis
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.blue_tooth_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
 
     protected void setAlertDialog() {

@@ -72,8 +72,7 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
                         GoodsActivity.startGoodsActivity(ChooseGoodsNoteActivity.this,chooseItemList.get(position));
                         break;
                     case 1:
-                        chooseItemList.remove(position);
-                        DataSupport.delete(Goods.class,position+1);
+                        deleteGoods(chooseItemList.remove(position).getId());
                         adapter.notifyDataSetChanged();
                         break;
                 }

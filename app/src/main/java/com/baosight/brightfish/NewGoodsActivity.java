@@ -63,11 +63,7 @@ public class NewGoodsActivity extends CameraBasicActivity implements View.OnClic
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.blue_tooth_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
 
     @Override
     public void onClick(View v) {

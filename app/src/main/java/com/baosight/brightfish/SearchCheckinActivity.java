@@ -21,8 +21,8 @@ import java.util.List;
  * 查找入库
  */
 public class SearchCheckinActivity extends SearchBasicActivity implements View.OnClickListener {
-    private String mGoodsSkuStr,mSupplierSkuStr,mDateStr,mDescr,mDateMin,mDateMax,mAmount,mAmountMin,mAmountMax;
-
+    private String mDateStr,mDescr,mDateMin,mDateMax,mAmount,mAmountMin,mAmountMax;
+    private int mGoodsId,mSupplierId;
     public static void startSearchCheckinActivity(Context context) {
         Intent intent = new Intent(context, SearchCheckinActivity.class);
         context.startActivity(intent);
@@ -205,20 +205,43 @@ public class SearchCheckinActivity extends SearchBasicActivity implements View.O
 
     private List<Checkin> getSearchResult() {
         List<Checkin> mCheckinList;
-        Goods goods= DataSupport.where("sku=?",goodsSku.getText().toString()).find(Goods.class).get(0);
-      /*  if(searchSupSku!=null){
+        if(goodsSku!=null){
+            Goods goods= DataSupport.where("sku=?",goodsSku.getText().toString()).find(Goods.class).get(0);
+            mGoodsId=goods.getId();
+        }
+        if(searchSupSku!=null){
             Supplier supplier=DataSupport.where("sku=?",searchSupSku.getText().toString()).find(Supplier.class).get(0);
-        }*/
-     /*   mGoodsSkuStr=goods.getSku();
-        mSupplierSkuStr=supplier.getSku();
-        mAmount=amountEquals.getText().toString();
+            mSupplierId=supplier.getId();
+        }
+        if(searchAmountOnly!=null){
+            mAmount=searchAmountOnly.getText().toString();
+        }
+        if (searchAmountMax!=null){
+            mAmountMax=searchAmountMax.getText().toString();
+            mAmountMin=searchAmountMin.getText().toString();
+        }
+        if(searchDateOnly!=null){
+            mDateStr=searchDateOnly.getText().toString();
+        }
+
+     /*
         mAmountMin=amountMin.getText().toString();
         mAmountMax=amountMax.getText().toString();
         mDateStr=searchDateOnly.getText().toString();
         mDateMax=searchDateMax.getText().toString();
         mDateMin=searchDateMin.getText().toString();
         mDescr=searchDescribeWord.getText().toString();*/
-        mCheckinList= DataSupport.where("goodsId=? ",goods.getId()+"").find(Checkin.class);
+        if(mGoodsId>0&&mSupplierId>0&&mAmount!=null){
+            mCheckinList= DataSupport.where("goodsId=?and supplierId=? and amount=? ",
+                    mGoodsId+"",mSupplierId+"",mAmount).find(Checkin.class);
+        }else if(mGoodsId>0&&mSupplierId>0){
+            mCheckinList= DataSupport.where("goodsId=?and supplierId=? ",
+                    mGoodsId+"",mSupplierId+"").find(Checkin.class);
+        }else{
+            mCheckinList= DataSupport.where("goodsId=?",
+                    mGoodsId+"").find(Checkin.class);
+        }
+
 
         return mCheckinList;
     }
