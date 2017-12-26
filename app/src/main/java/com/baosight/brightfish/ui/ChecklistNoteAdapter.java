@@ -3,25 +3,19 @@ package com.baosight.brightfish.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.baosight.brightfish.BasicActivity;
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Checkin;
 import com.baosight.brightfish.model.ChecklistNote;
 import com.baosight.brightfish.model.Goods;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
-import java.util.Objects;
-
-import static android.content.ContentValues.TAG;
 
 
 public class ChecklistNoteAdapter extends ArrayAdapter<ChecklistNote>{

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialogTitle"
+        android:background="@color/colorHome"
+        android:text="设置蓝牙扫描器"
+        android:textColor="#fff"
+        android:gravity="center"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/colorLightGery"
+        android:padding="15dp"
+        android:layout_gravity="center_vertical"
+        >
+
+
+        <Switch
+            android:id="@+id/bluetooth_swith"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:checked="false"
+            android:text="关闭"
+            android:textSize="23sp"
+            android:textColor="@color/colorHome"
+            android:buttonTint="@color/colorHome"
+            tools:checked="false" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/show_bluetooth"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorHome"
+            android:text="蓝牙设备"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cutline"
+            android:background="@color/colorMGery"/>
+        <ListView
+            android:id="@+id/bluetooth_devices_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        >
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="返回"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorHome"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

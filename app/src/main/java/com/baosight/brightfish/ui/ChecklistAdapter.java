@@ -6,7 +6,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +16,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baosight.brightfish.GoodsActivity;
 import com.baosight.brightfish.R;
 import com.baosight.brightfish.model.Checklist;
 import com.baosight.brightfish.model.ChecklistNote;
 import com.baosight.brightfish.model.Goods;
-import com.baosight.brightfish.util.CurrentTime;
+import com.baosight.brightfish.util.CurrentTimeUtil;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 
 public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder> implements View.OnClickListener {
@@ -254,8 +250,8 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
         checklistAmount.setText(currChecklist.getAmount()+"");
         goodsName.setText(currGoods.getName());
         goodsSku.setText(currGoods.getSku());
-        CurrentTime.currentTime=currentTime;
-        new CurrentTime().new TimeThread().start();
+        CurrentTimeUtil.currentTime=currentTime;
+        new CurrentTimeUtil().new TimeThread().start();
         dialog.show();
     }
 

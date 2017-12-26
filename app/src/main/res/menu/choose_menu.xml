@@ -14,11 +14,6 @@
         android:icon="@drawable/ic_sort_white_24dp"
         app:showAsAction="always"
         />
-    <item
-        android:id="@id/blueTooth"
-        android:title="蓝牙扫描器"
-        app:showAsAction="never"
-        />
 
 
 </menu>

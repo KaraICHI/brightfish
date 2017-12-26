@@ -1,7 +1,6 @@
 package com.baosight.brightfish.ui;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baosight.brightfish.AccountActivity;
-import com.baosight.brightfish.AnalyzeActivity;
-import com.baosight.brightfish.NewBuyerActivity;
-import com.baosight.brightfish.CheckinActivity;
-import com.baosight.brightfish.ChecklistActivity;
-import com.baosight.brightfish.CheckoutActivity;
-import com.baosight.brightfish.NewGoodsActivity;
 import com.baosight.brightfish.model.HomeItem;
-import com.baosight.brightfish.MainActivity;
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.SearchActivity;
-import com.baosight.brightfish.SettingActivity;
-import com.baosight.brightfish.NewSupplierActivity;
+import com.baosight.brightfish.ui.account.AccountActivity;
+import com.baosight.brightfish.ui.analyze.AnalyzeActivity;
 
 import java.util.List;
 

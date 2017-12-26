@@ -12,55 +12,55 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="我的仓库" />
         <activity
-            android:name=".CheckinActivity"
+            android:name=".ui.CheckinActivity"
             android:label="新入库" />
         <activity
-            android:name=".CheckoutActivity"
+            android:name=".ui.CheckoutActivity"
             android:label="新出库" />
         <activity
-            android:name=".NewSupplierActivity"
+            android:name=".ui.NewSupplierActivity"
             android:label="新供应商" />
         <activity
-            android:name=".NewBuyerActivity"
+            android:name=".ui.NewBuyerActivity"
             android:label="新买家" />
         <activity
-            android:name=".AccountActivity"
+            android:name=".ui.account.AccountActivity"
             android:label="我的账号" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".ui.SettingActivity"
             android:label="设置" />
         <activity
-            android:name=".NewGoodsActivity"
+            android:name=".ui.NewGoodsActivity"
             android:label="新货品" />
         <activity
-            android:name=".AnalyzeActivity"
+            android:name=".ui.analyze.AnalyzeActivity"
             android:label="数据分析" />
         <activity
-            android:name=".ChecklistActivity"
+            android:name=".ui.ChecklistActivity"
             android:label="现有库存数量" />
         <activity
-            android:name=".ChooseGoodsNoteActivity"
+            android:name=".ui.search.choose.ChooseGoodsNoteActivity"
             android:label="选取货物" />
         <activity
-            android:name=".ChooseSupplierActivity"
+            android:name=".ui.search.choose.ChooseSupplierActivity"
             android:label="选择供应商" />
         <activity
-            android:name=".ChooseBuyerNoteActivity"
+            android:name=".ui.buyer.ChooseBuyerNoteActivity"
             android:label="选择买家" />
         <activity
-            android:name=".CheckinAblumActivity"
+            android:name=".ui.album.CheckinAblumActivity"
             android:label="入库相册" />
         <activity
-            android:name=".SupplierAblumActivity"
+            android:name=".ui.album.SupplierAblumActivity"
             android:label="供应商相册" />
         <activity
-            android:name=".BuyerAblumActivity"
+            android:name=".ui.album.BuyerAblumActivity"
             android:label="买家相册" />
         <activity
-            android:name=".GoodsAblumActivity"
+            android:name=".ui.album.GoodsAblumActivity"
             android:label="货品相册" />
 
         <provider
@@ -74,18 +74,18 @@
         </provider>
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".ui.SearchActivity"
             android:label="查找" />
         <activity
-            android:name=".ChooseCheckinActivity"
+            android:name=".ui.search.choose.ChooseCheckinActivity"
             android:label="选择入库记录" />
         <activity
-            android:name=".ChooseCheckoutActivity"
+            android:name=".ui.search.choose.ChooseCheckoutActivity"
             android:label="选择出库记录" />
         <activity
-            android:name=".SearchCheckinActivity"
+            android:name=".ui.SearchCheckinActivity"
             android:label="查找入库" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,66 +93,66 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchCheckoutActivity"
+            android:name=".ui.SearchCheckoutActivity"
             android:label="查找出库" />
         <activity
-            android:name=".SearchGoodsActivity"
+            android:name=".ui.SearchGoodsActivity"
             android:label="查找货物" />
         <activity
-            android:name=".ModifyAccountActivity"
+            android:name=".ui.ModifyAccountActivity"
             android:label="修改我的账号" />
         <activity
-            android:name=".GoodsActivity"
+            android:name=".ui.GoodsActivity"
             android:label="货品" />
         <activity
-            android:name=".ModifyGoodsActivity"
+            android:name=".ui.ModifyGoodsActivity"
             android:label="修改货物" />
         <activity
-            android:name=".SupplierActivity"
+            android:name=".ui.SupplierActivity"
             android:label="供应商" />
         <activity
-            android:name=".ModifySupplierActivity"
+            android:name=".ui.ModifySupplierActivity"
             android:label="修改供应商" />
         <activity
-            android:name=".BuyerActivity"
+            android:name=".ui.buyer.BuyerActivity"
             android:label="买家" />
         <activity
-            android:name=".ModifyBuyerActivity"
+            android:name=".ui.ModifyBuyerActivity"
             android:label="修改买家" />
         <activity
-            android:name=".ChooseChecklistNoteActivity"
+            android:name=".ui.search.choose.ChooseChecklistNoteActivity"
             android:label="盘货历史记录" />
         <activity
-            android:name=".ChecklistNoteActivity"
+            android:name=".ui.ChecklistNoteActivity"
             android:label="盘货记录" />
         <activity
-            android:name=".CheckinNoteActivity"
+            android:name=".ui.CheckinNoteActivity"
             android:label="入库记录" />
         <activity
-            android:name=".CheckoutNoteActivity"
+            android:name=".ui.CheckoutNoteActivity"
             android:label="出库记录" />
         <activity
-            android:name=".ChooseGoodsActivity"
+            android:name=".ui.search.choose.ChooseGoodsActivity"
             android:label="选择货品" />
         <activity
-            android:name=".ChooseBuyerActivity"
+            android:name=".ui.buyer.ChooseBuyerActivity"
             android:label="选择买家" />
         <activity
-            android:name=".ChooseSupplierNoteActivity"
+            android:name=".ui.search.choose.ChooseSupplierNoteActivity"
             android:label="选择供应商" />
         <activity
-            android:name=".AnalyzeAllActivity"
+            android:name=".ui.analyze.AnalyzeAllActivity"
             android:label="综合分析" />
         <activity
-            android:name=".RecentCheckinActivity"
+            android:name=".ui.RecentCheckinActivity"
             android:label="最近入库" />
         <activity
-            android:name=".RecentCheckoutActivity"
+            android:name=".ui.RecentCheckoutActivity"
             android:label="最近出库" />
         <activity
-            android:name=".SearchResultActivity"
+            android:name=".ui.SearchResultActivity"
             android:label="查找结果" />
-        <activity android:name=".ActivtyAllActivity" android:label="所有活动"/>
+        <activity android:name=".ui.analyze.ActivtyAllActivity" android:label="所有活动"/>
     </application>
 
 </manifest>

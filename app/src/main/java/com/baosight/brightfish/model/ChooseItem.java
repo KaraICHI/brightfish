@@ -1,7 +1,5 @@
 package com.baosight.brightfish.model;
 
-import com.baosight.brightfish.ChooseSet;
-
 /**
  * Created by Administrator on 2017/12/4.
  */
