@@ -14,7 +14,7 @@
     <dimen name="cutline">0.5dp</dimen>
     <dimen name="lineMargin">10dp</dimen>
     <dimen name="addPhotoIcon">56dp</dimen>
-    <dimen name="addPhoto">130dp</dimen>
+    <dimen name="addPhoto">120dp</dimen>
     <dimen name="searchItem">70dp</dimen>
     <dimen name="searchIcon">25dp</dimen>
     <dimen name="searchFontSize">16sp</dimen>

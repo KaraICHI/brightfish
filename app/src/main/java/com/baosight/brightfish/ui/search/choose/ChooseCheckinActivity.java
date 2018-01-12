@@ -13,10 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Checkin;
+import com.baosight.brightfish.domain.Checkin;
 import com.baosight.brightfish.ui.BasicActivity;
 import com.baosight.brightfish.ui.CheckAdapter;
-import com.baosight.brightfish.ui.CheckinNoteActivity;
+import com.baosight.brightfish.ui.checkin.CheckinNoteActivity;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 

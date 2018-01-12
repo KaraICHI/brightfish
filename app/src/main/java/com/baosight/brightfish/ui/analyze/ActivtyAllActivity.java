@@ -10,13 +10,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Checkin;
-import com.baosight.brightfish.model.Checkout;
+import com.baosight.brightfish.domain.Checkin;
+import com.baosight.brightfish.domain.Checkout;
 import com.baosight.brightfish.ui.BasicActivity;
-import com.baosight.brightfish.ui.RecentCheckinActivity;
-import com.baosight.brightfish.ui.RecentCheckinAdapter;
-import com.baosight.brightfish.ui.RecentCheckoutActivity;
-import com.baosight.brightfish.ui.RecentCheckoutAdapter;
+import com.baosight.brightfish.ui.checkin.RecentCheckinActivity;
+import com.baosight.brightfish.ui.checkin.RecentCheckinAdapter;
+import com.baosight.brightfish.ui.checkout.RecentCheckoutActivity;
+import com.baosight.brightfish.ui.checkout.RecentCheckoutAdapter;
 import com.baosight.brightfish.util.CurrentTimeUtil;
 
 import org.litepal.crud.DataSupport;

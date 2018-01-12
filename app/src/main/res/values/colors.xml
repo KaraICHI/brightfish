@@ -20,4 +20,7 @@
     <color name="colorMBlue">#79b0df</color>
     <color name="colorMGery">#dad9dc</color>
     <color name="colorTGery">#fefefe</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorYello">#f4e248</color>
+    <color name="milkyYellow">#f6feef</color>
 </resources>

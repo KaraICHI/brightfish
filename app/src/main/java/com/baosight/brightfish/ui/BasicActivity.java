@@ -24,12 +24,12 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Buyer;
-import com.baosight.brightfish.model.Checkin;
-import com.baosight.brightfish.model.Checklist;
-import com.baosight.brightfish.model.Checkout;
-import com.baosight.brightfish.model.Goods;
-import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.domain.Buyer;
+import com.baosight.brightfish.domain.Checkin;
+import com.baosight.brightfish.domain.Checklist;
+import com.baosight.brightfish.domain.Checkout;
+import com.baosight.brightfish.domain.Goods;
+import com.baosight.brightfish.domain.Supplier;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -45,8 +45,8 @@ import java.util.Set;
 
 public class BasicActivity extends AppCompatActivity {
     private final int REQUEST_ENABLE_BT = 5;
-    RelativeLayout currentSortMethod;
-    boolean sortdesc;
+    protected RelativeLayout currentSortMethod;
+    protected boolean sortdesc;
     Toolbar toolbar;
     private Dialog mBlueToothDialog;
     private Switch mBluetoothSwith;

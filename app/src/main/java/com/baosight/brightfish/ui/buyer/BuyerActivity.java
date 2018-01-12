@@ -21,9 +21,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Buyer;
+import com.baosight.brightfish.domain.Buyer;
 import com.baosight.brightfish.ui.EditActivity;
-import com.baosight.brightfish.ui.ModifyBuyerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class BuyerActivity extends EditActivity {
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
     View view1, view2, view3, view4;
     Buyer buyer;
-    TextView supplierSku, supplierName;
+    TextView buyerSku, buyerName;
 
     public static void startBuyerActivity(Context context, Buyer buyer) {
         Intent intent = new Intent(context, BuyerActivity.class);
@@ -59,8 +58,8 @@ public class BuyerActivity extends EditActivity {
     protected void initControls() {
         photo = (ImageView) view1.findViewById(R.id.photo);
         selectAblum = (ImageView) view1.findViewById(R.id.select_ablum_btn);
-        supplierSku = (TextView) view1.findViewById(R.id.sku_edit);
-        supplierName = (TextView) view1.findViewById(R.id.name_edit);
+        buyerSku = (TextView) view1.findViewById(R.id.sku_edit);
+        buyerName = (TextView) view1.findViewById(R.id.name_edit);
         address = (EditText) view1.findViewById(R.id.address_edit);
         telephone = (EditText) view1.findViewById(R.id.telephone_edit);
         cellphone = (EditText) view1.findViewById(R.id.cellphone_edit);
@@ -180,10 +179,10 @@ public class BuyerActivity extends EditActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showBuyer() {
-        buyer = (Buyer) getIntent().getBundleExtra("bundle").getSerializable("buyer");
-        supplierSku.setText(buyer.getSku());
-        supplierName.setText(buyer.getName());
+    private void showBuyer(){
+        buyer=(Buyer)getIntent().getBundleExtra("bundle").getSerializable("buyer");
+        buyerSku.setText(buyer.getSku());
+        buyerName.setText(buyer.getName());
         address.setText(buyer.getAddress());
         telephone.setText(buyer.getTelephone());
         cellphone.setText(buyer.getCellphone());

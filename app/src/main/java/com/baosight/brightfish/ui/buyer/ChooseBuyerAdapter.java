@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Buyer;
+import com.baosight.brightfish.domain.Buyer;
 
 import java.util.List;
 

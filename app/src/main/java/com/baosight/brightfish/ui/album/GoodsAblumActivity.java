@@ -24,10 +24,6 @@ public class GoodsAblumActivity extends AlbumBasicActivity {
         setCropSize();
     }
 
-    private void initControls() {
-
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

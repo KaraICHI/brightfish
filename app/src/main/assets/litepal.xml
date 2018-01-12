@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <litepal>
     <dbname value="BrightFishStore" />
-    <version value="14"/>
+    <version value="15"/>
     <list>
-        <mapping class="com.baosight.brightfish.model.Supplier"/>
-        <mapping class="com.baosight.brightfish.model.Buyer"/>
-        <mapping class="com.baosight.brightfish.model.Checkin"/>
-        <mapping class="com.baosight.brightfish.model.Checkout"/>
-        <mapping class="com.baosight.brightfish.model.Goods"/>
-        <mapping class="com.baosight.brightfish.model.Account"/>
-        <mapping class="com.baosight.brightfish.model.Checklist"/>
-        <mapping class="com.baosight.brightfish.model.ChecklistNote"/>
+        <mapping class="com.baosight.brightfish.domain.Supplier"/>
+        <mapping class="com.baosight.brightfish.domain.Buyer"/>
+        <mapping class="com.baosight.brightfish.domain.Checkin"/>
+        <mapping class="com.baosight.brightfish.domain.Checkout"/>
+        <mapping class="com.baosight.brightfish.domain.Goods"/>
+        <mapping class="com.baosight.brightfish.domain.Account"/>
+        <mapping class="com.baosight.brightfish.domain.Checklist"/>
+        <mapping class="com.baosight.brightfish.domain.ChecklistNote"/>
     </list>
 </litepal>

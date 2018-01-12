@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/EditTextGreenStyle"
-    tools:context="com.baosight.brightfish.ui.ModifySupplierActivity">
+    tools:context="com.baosight.brightfish.ui.supplier.ModifySupplierActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_alignParentTop="true"

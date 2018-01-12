@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/EditTextOrangeStyle"
-    tools:context="com.baosight.brightfish.ui.NewSupplierActivity">
+    tools:context="com.baosight.brightfish.ui.supplier.NewSupplierActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_alignParentTop="true"
@@ -160,7 +160,9 @@
                             android:id="@+id/goods_size"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789"
+                            />
                         <EditText
                             android:id="@+id/goods_color"
                             android:layout_width="0dp"

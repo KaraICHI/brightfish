@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
 
         @Override
         public void onAnimationStart(Animation animation) {
-            welcomeImg.setBackgroundResource(R.drawable.splash);
+            welcomeImg.setBackgroundResource(R.drawable.orange);
         }
 
         @Override
@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void skip() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 }

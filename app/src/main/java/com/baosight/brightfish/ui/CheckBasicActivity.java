@@ -14,7 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.domain.Goods;
+import com.baosight.brightfish.ui.checkin.CheckinActivity;
 import com.baosight.brightfish.ui.search.choose.ChooseGoodsdDialogAdapter;
 
 import org.litepal.crud.DataSupport;
@@ -26,16 +27,16 @@ import java.util.List;
 public class CheckBasicActivity extends BasicActivity implements View.OnClickListener{
     protected String content = "";
     protected boolean isFocus;
-    TextView currentTime;
+    protected TextView currentTime;
     Button commit;
-    static EditText goodsSku;
-    static EditText goodsName;
-    EditText price;
-    EditText amount;
-    EditText description;
-    Dialog dialog;
+    protected static EditText goodsSku;
+    protected static EditText goodsName;
+    protected EditText price;
+    protected EditText amount;
+    protected EditText description;
+    protected Dialog dialog;
     ImageButton goodsMenu, goodsRefesh, goodsPhoto;
-    List<EditText> editTexts = new ArrayList<>();
+    protected List<EditText> editTexts = new ArrayList<>();
 
 
 

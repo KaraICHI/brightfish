@@ -10,9 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Account;
+import com.baosight.brightfish.domain.Account;
 import com.baosight.brightfish.ui.EditActivity;
-import com.baosight.brightfish.ui.ModifyAccountActivity;
 
 import org.litepal.crud.DataSupport;
 
@@ -40,15 +39,16 @@ public class AccountActivity extends EditActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_mark:
-              ModifyAccountActivity.startModifyAccountActivity(this);
+                startActivityForResult(new Intent(this,ModifyAccountActivity.class),1);
+           //   ModifyAccountActivity.startModifyAccountActivity(this);
                 break;
 
         }
         return super.onOptionsItemSelected(item);
     }
     private void initEditText(){
-
-        Account account= DataSupport.find(Account.class,1);
+        int id=getApplicationContext().getSharedPreferences("userRecent",Context.MODE_PRIVATE).getInt("accountId",0);
+        Account account= DataSupport.find(Account.class,id);
         if(account!=null) {
             accountSku.setText(account.getSku());
             accountName.setText(account.getName());
@@ -64,5 +64,16 @@ public class AccountActivity extends EditActivity {
             photo.setImageBitmap(bitmap);
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(requestCode==RESULT_OK){
+
+                }
+        }
     }
 }

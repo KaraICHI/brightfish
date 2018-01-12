@@ -14,10 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.domain.Supplier;
 import com.baosight.brightfish.ui.BasicActivity;
-import com.baosight.brightfish.ui.SupplierActivity;
-import com.baosight.brightfish.ui.SupplierAdapter;
+import com.baosight.brightfish.ui.supplier.SupplierActivity;
+import com.baosight.brightfish.ui.supplier.SupplierAdapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 

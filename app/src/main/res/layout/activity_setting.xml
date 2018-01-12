@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baosight.brightfish.ui.SettingActivity">
+    tools:context="com.baosight.brightfish.ui.setting.SettingActivity">
     <include layout="@layout/toolbar"/>
     <LinearLayout
         android:id="@+id/blueTooth"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/EditTextBlueStyle"
-    tools:context="com.baosight.brightfish.ui.NewSupplierActivity">
+    tools:context="com.baosight.brightfish.ui.supplier.NewSupplierActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_alignParentTop="true"
@@ -133,12 +133,16 @@
                             android:id="@+id/telephone_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            />
                         <EditText
                             android:id="@+id/cellphone_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            />
 
                     </LinearLayout>
                     <TextView
@@ -151,6 +155,7 @@
                         android:id="@+id/email_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -182,7 +187,9 @@
                             android:id="@+id/qq_edit"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            />
 
                     </LinearLayout>
                     <TextView

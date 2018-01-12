@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Supplier;
+import com.baosight.brightfish.domain.Supplier;
 import com.baosight.brightfish.ui.BasicActivity;
 
 import org.litepal.crud.DataSupport;

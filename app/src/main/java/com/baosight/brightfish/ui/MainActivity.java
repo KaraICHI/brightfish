@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.HomeItem;
+import com.baosight.brightfish.domain.HomeItem;
 
 import java.util.ArrayList;
 import java.util.List;

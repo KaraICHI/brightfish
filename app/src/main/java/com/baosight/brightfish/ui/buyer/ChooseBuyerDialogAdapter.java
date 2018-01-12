@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Buyer;
-import com.baosight.brightfish.ui.CheckoutActivity;
+import com.baosight.brightfish.domain.Buyer;
+import com.baosight.brightfish.ui.checkout.CheckoutActivity;
 
 import java.util.List;
 

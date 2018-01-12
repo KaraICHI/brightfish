@@ -5,18 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
-import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.AlbumItem;
+import com.baosight.brightfish.domain.AlbumItem;
 
 import java.io.File;
-import java.util.ArrayList;
 
 public class SupplierAblumActivity extends AlbumBasicActivity {
 
@@ -34,42 +29,13 @@ public class SupplierAblumActivity extends AlbumBasicActivity {
         setCropSize();
     }
 
-
-
-
-    private void initAblum() {
-        albumItemList = new ArrayList<>();
-        AlbumItem album = new AlbumItem();
-        albumItemList.add(album);
-
-    }
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.checkin_ablum, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    protected void initControls() {
-        recyclerView = (RecyclerView) findViewById(R.id.add_Ablum_rec);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
-        initAblum();
-        adapter = new AlbumAdapter(albumItemList);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
-        addPhoto = (RelativeLayout) findViewById(R.id.add_photo);
-        initCameraControls(addPhoto, null, null);
-        addPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startCamera();
-            }
 
-        });
-
-    }
 
 
     @Override

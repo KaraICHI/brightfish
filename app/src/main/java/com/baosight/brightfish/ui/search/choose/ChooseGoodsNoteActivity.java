@@ -15,10 +15,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.domain.Goods;
 import com.baosight.brightfish.ui.BasicActivity;
-import com.baosight.brightfish.ui.GoodsActivity;
-import com.baosight.brightfish.ui.GoodsAdapter;
+import com.baosight.brightfish.ui.goods.GoodsActivity;
+import com.baosight.brightfish.ui.goods.GoodsAdapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
@@ -73,7 +73,8 @@ public class ChooseGoodsNoteActivity extends BasicActivity {
                         break;
                     case 1:
                         deleteGoods(chooseItemList.remove(position).getId());
-                        adapter.notifyDataSetChanged();
+                        adapter=new GoodsAdapter(ChooseGoodsNoteActivity.this,R.layout.item_checkin_note,chooseItemList);
+                        listView.setAdapter(adapter);
                         break;
                 }
                 // false : close the menu; true : not close the menu

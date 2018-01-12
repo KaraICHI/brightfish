@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Goods;
-import com.baosight.brightfish.ui.GoodsActivity;
+import com.baosight.brightfish.domain.Goods;
+import com.baosight.brightfish.ui.goods.GoodsActivity;
 
 import java.util.List;
 

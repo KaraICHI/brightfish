@@ -15,10 +15,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Checkout;
+import com.baosight.brightfish.domain.Checkout;
 import com.baosight.brightfish.ui.BasicActivity;
-import com.baosight.brightfish.ui.CheckoutAdapter;
-import com.baosight.brightfish.ui.CheckoutNoteActivity;
+import com.baosight.brightfish.ui.checkout.CheckoutAdapter;
+import com.baosight.brightfish.ui.checkout.CheckoutNoteActivity;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 

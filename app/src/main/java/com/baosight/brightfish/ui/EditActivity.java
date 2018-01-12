@@ -17,8 +17,8 @@ public class EditActivity extends CameraBasicActivity implements View.OnClickLis
     Toolbar toolbar;
     protected ImageView photo;
     protected ImageView selectAblum;
-    EditText sku;
-    EditText name;
+    protected EditText sku;
+    protected EditText name;
     protected EditText address;
     protected EditText cellphone;
     protected EditText telephone;
@@ -27,7 +27,7 @@ public class EditActivity extends CameraBasicActivity implements View.OnClickLis
     protected EditText qq;
     protected EditText descr;
     protected EditText website;
-    Button saveBtn;
+    protected Button saveBtn;
 
 
      /*

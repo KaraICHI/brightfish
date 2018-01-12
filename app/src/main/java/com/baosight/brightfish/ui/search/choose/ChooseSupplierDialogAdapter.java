@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Supplier;
-import com.baosight.brightfish.ui.CheckinActivity;
+import com.baosight.brightfish.domain.Supplier;
+import com.baosight.brightfish.ui.checkin.CheckinActivity;
 
 import java.util.List;
 

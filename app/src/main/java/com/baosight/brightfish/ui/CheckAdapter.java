@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.Checkin;
-import com.baosight.brightfish.model.Goods;
+import com.baosight.brightfish.domain.Checkin;
+import com.baosight.brightfish.domain.Goods;
 
 import org.litepal.crud.DataSupport;
 

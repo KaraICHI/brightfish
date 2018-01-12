@@ -8,10 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baosight.brightfish.model.HomeItem;
+import com.baosight.brightfish.domain.HomeItem;
 import com.baosight.brightfish.R;
 import com.baosight.brightfish.ui.account.AccountActivity;
 import com.baosight.brightfish.ui.analyze.AnalyzeActivity;
+import com.baosight.brightfish.ui.buyer.NewBuyerActivity;
+import com.baosight.brightfish.ui.checkin.CheckinActivity;
+import com.baosight.brightfish.ui.checklist.ChecklistActivity;
+import com.baosight.brightfish.ui.checkout.CheckoutActivity;
+import com.baosight.brightfish.ui.goods.NewGoodsActivity;
+import com.baosight.brightfish.ui.search.SearchActivity;
+import com.baosight.brightfish.ui.setting.SettingActivity;
+import com.baosight.brightfish.ui.supplier.NewSupplierActivity;
 
 import java.util.List;
 

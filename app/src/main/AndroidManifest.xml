@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.baosight.brightfish">
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name="org.litepal.LitePalApplication"
@@ -15,31 +21,31 @@
             android:name=".ui.MainActivity"
             android:label="我的仓库" />
         <activity
-            android:name=".ui.CheckinActivity"
+            android:name=".ui.checkin.CheckinActivity"
             android:label="新入库" />
         <activity
-            android:name=".ui.CheckoutActivity"
+            android:name=".ui.checkout.CheckoutActivity"
             android:label="新出库" />
         <activity
-            android:name=".ui.NewSupplierActivity"
+            android:name=".ui.supplier.NewSupplierActivity"
             android:label="新供应商" />
         <activity
-            android:name=".ui.NewBuyerActivity"
+            android:name=".ui.buyer.NewBuyerActivity"
             android:label="新买家" />
         <activity
             android:name=".ui.account.AccountActivity"
             android:label="我的账号" />
         <activity
-            android:name=".ui.SettingActivity"
+            android:name=".ui.setting.SettingActivity"
             android:label="设置" />
         <activity
-            android:name=".ui.NewGoodsActivity"
+            android:name=".ui.goods.NewGoodsActivity"
             android:label="新货品" />
         <activity
             android:name=".ui.analyze.AnalyzeActivity"
             android:label="数据分析" />
         <activity
-            android:name=".ui.ChecklistActivity"
+            android:name=".ui.checklist.ChecklistActivity"
             android:label="现有库存数量" />
         <activity
             android:name=".ui.search.choose.ChooseGoodsNoteActivity"
@@ -74,7 +80,7 @@
         </provider>
 
         <activity
-            android:name=".ui.SearchActivity"
+            android:name=".ui.search.SearchActivity"
             android:label="查找" />
         <activity
             android:name=".ui.search.choose.ChooseCheckinActivity"
@@ -83,7 +89,7 @@
             android:name=".ui.search.choose.ChooseCheckoutActivity"
             android:label="选择出库记录" />
         <activity
-            android:name=".ui.SearchCheckinActivity"
+            android:name=".ui.search.SearchCheckinActivity"
             android:label="查找入库" />
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
@@ -93,43 +99,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SearchCheckoutActivity"
+            android:name=".ui.search.SearchCheckoutActivity"
             android:label="查找出库" />
         <activity
-            android:name=".ui.SearchGoodsActivity"
+            android:name=".ui.search.SearchGoodsActivity"
             android:label="查找货物" />
         <activity
-            android:name=".ui.ModifyAccountActivity"
+            android:name=".ui.account.ModifyAccountActivity"
             android:label="修改我的账号" />
         <activity
-            android:name=".ui.GoodsActivity"
+            android:name=".ui.goods.GoodsActivity"
             android:label="货品" />
         <activity
-            android:name=".ui.ModifyGoodsActivity"
+            android:name=".ui.goods.ModifyGoodsActivity"
             android:label="修改货物" />
         <activity
-            android:name=".ui.SupplierActivity"
+            android:name=".ui.supplier.SupplierActivity"
             android:label="供应商" />
         <activity
-            android:name=".ui.ModifySupplierActivity"
+            android:name=".ui.supplier.ModifySupplierActivity"
             android:label="修改供应商" />
         <activity
             android:name=".ui.buyer.BuyerActivity"
             android:label="买家" />
         <activity
-            android:name=".ui.ModifyBuyerActivity"
+            android:name=".ui.buyer.ModifyBuyerActivity"
             android:label="修改买家" />
         <activity
             android:name=".ui.search.choose.ChooseChecklistNoteActivity"
             android:label="盘货历史记录" />
         <activity
-            android:name=".ui.ChecklistNoteActivity"
+            android:name=".ui.checklist.ChecklistNoteActivity"
             android:label="盘货记录" />
         <activity
-            android:name=".ui.CheckinNoteActivity"
+            android:name=".ui.checkin.CheckinNoteActivity"
             android:label="入库记录" />
         <activity
-            android:name=".ui.CheckoutNoteActivity"
+            android:name=".ui.checkout.CheckoutNoteActivity"
             android:label="出库记录" />
         <activity
             android:name=".ui.search.choose.ChooseGoodsActivity"
@@ -144,15 +150,22 @@
             android:name=".ui.analyze.AnalyzeAllActivity"
             android:label="综合分析" />
         <activity
-            android:name=".ui.RecentCheckinActivity"
+            android:name=".ui.checkin.RecentCheckinActivity"
             android:label="最近入库" />
         <activity
-            android:name=".ui.RecentCheckoutActivity"
+            android:name=".ui.checkout.RecentCheckoutActivity"
             android:label="最近出库" />
         <activity
-            android:name=".ui.SearchResultActivity"
+            android:name=".ui.search.SearchResultActivity"
             android:label="查找结果" />
-        <activity android:name=".ui.analyze.ActivtyAllActivity" android:label="所有活动"/>
+        <activity
+            android:name=".ui.analyze.ActivtyAllActivity"
+            android:label="所有活动" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".ui.RegisterActivity"></activity>
     </application>
 
 </manifest>

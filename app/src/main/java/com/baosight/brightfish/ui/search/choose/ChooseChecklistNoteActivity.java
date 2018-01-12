@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.baosight.brightfish.R;
-import com.baosight.brightfish.model.ChecklistNote;
+import com.baosight.brightfish.domain.ChecklistNote;
 import com.baosight.brightfish.ui.BasicActivity;
-import com.baosight.brightfish.ui.ChecklistNoteActivity;
-import com.baosight.brightfish.ui.ChecklistNoteAdapter;
+import com.baosight.brightfish.ui.checklist.ChecklistNoteActivity;
+import com.baosight.brightfish.ui.checklist.ChecklistNoteAdapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
