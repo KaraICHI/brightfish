@@ -47,7 +47,15 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     Button allCheckin, allCheckout;
     LinearLayout recentCheckin, recentCheckout;
     RelativeLayout recentCheckinS, recentCheckoutS;
-    EditText brand, catagory, size, color, spec, descr;
+    EditText brand, catagory, size, spec, descr;
+    View color;
+    TextView colorText;
+    ImageView colorIcon;
+    int[] colorIcons=new int[]{R.drawable.rect_color_blue,R.drawable.rect_color_orange,R.drawable.rect_color_green,
+            R.drawable.rect_color_pur,R.drawable.rect_color_yellow,R.drawable.rect_color_lblue,R.drawable.rect_color_white,
+            R.drawable.rect_color_gery,R.drawable.rect_color_black,R.drawable.rect_color_red,
+            R.drawable.rect_color_brown};
+    String[] colorTexts;
     View view1, view2, view3, view4;
     Goods goods;
     List<Checkin> checkinList;
@@ -130,7 +138,8 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         brand = (EditText) view1.findViewById(R.id.goods_brand);
         catagory = (EditText) view1.findViewById(R.id.goods_cata);
         size = (EditText) view1.findViewById(R.id.goods_size);
-        color = (EditText) view1.findViewById(R.id.goods_color);
+        colorIcon= (ImageView) view1.findViewById(R.id.color_icon);
+        colorText= (TextView) view1.findViewById(R.id.color_text);
         spec = (EditText) view1.findViewById(R.id.goods_spec);
         descr = (EditText) view1.findViewById(R.id.goods_descr);
     }
@@ -255,14 +264,17 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void showGoods() {
-
+        colorTexts=getResources().getStringArray(R.array.color_text_list);
         sku.setText(goods.getSku());
         name.setText(goods.getName());
         brand.setText(goods.getBrand());
         catagory.setText(goods.getCatagory());
         spec.setText(goods.getSpec());
         size.setText(goods.getSize());
-        color.setText(goods.getColor());
+        if(goods.getColor()>=0){
+            colorIcon.setImageResource(colorIcons[goods.getColor()]);
+            colorText.setText(colorTexts[goods.getColor()]);
+        }
         descr.setText(goods.getDescr());
         Bitmap bitmap = BitmapFactory.decodeFile(goods.getPhoto());
         photo.setImageBitmap(bitmap);
@@ -277,7 +289,12 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_mark:
-                ModifyGoodsActivity.startModifyActivity(GoodsActivity.this, goods);
+            //    ModifyGoodsActivity.startModifyActivity(GoodsActivity.this, goods);
+                Intent intent=new Intent(this,ModifyGoodsActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("goods",goods);
+                intent.putExtra("bundle",bundle);
+                startActivityForResult(intent,1);
                 break;
             case R.id.delete_btn:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -303,6 +320,17 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(resultCode==RESULT_OK){
+                    goods=(Goods)data.getBundleExtra("bundle").getSerializable("goods");
+                    showGoods();
+                }
+        }
+    }
 }
 
 

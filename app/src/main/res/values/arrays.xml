@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="color_list">
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_orange</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+        <item>@drawable/rect_color_blue</item>
+
+    </integer-array>
+    <string-array name="color_text_list">
+        <item>蓝</item>
+        <item>橙</item>
+        <item>绿</item>
+        <item>紫</item>
+        <item>黄</item>
+        <item>浅蓝</item>
+        <item>白</item>
+        <item>灰</item>
+        <item>黑</item>
+        <item>红</item>
+        <item>棕</item>
+    </string-array>
+</resources>

@@ -23,4 +23,7 @@
     <color name="colorWhite">#fff</color>
     <color name="colorYello">#f4e248</color>
     <color name="milkyYellow">#f6feef</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorBrown">#A0522D</color>
 </resources>

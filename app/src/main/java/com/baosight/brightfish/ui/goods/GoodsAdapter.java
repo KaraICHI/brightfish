@@ -3,6 +3,7 @@ package com.baosight.brightfish.ui.goods;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ public class GoodsAdapter extends ArrayAdapter<Goods> {
             noteIcon.setBackground(parent.getContext().getResources().getDrawable(R.drawable.rect_mgreen));
         }else if(position%3==0){
             noteIcon.setBackground(parent.getContext().getResources().getDrawable(R.drawable.rect_blue));
+        }   if(TextUtils.isEmpty(goods.getName())){
+            goods.setName("emtpy");
         }
             char firstName = goods.getName().charAt(0);
             noteIcon.setText(firstName + "");

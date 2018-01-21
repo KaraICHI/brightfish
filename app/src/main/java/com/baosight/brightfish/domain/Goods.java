@@ -20,8 +20,10 @@ public class Goods extends DataSupport implements Serializable{
     private String size;
     private String spec;
     private String descr;
-    private String color;
+    private int color;
     private String photo;
+
+
 
     public int getId() {
         return id;
@@ -39,13 +41,7 @@ public class Goods extends DataSupport implements Serializable{
         this.photo = photo;
     }
 
-    public String getColor() {
-        return color;
-    }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public String getBrand() {
         return brand;
@@ -104,4 +100,11 @@ public class Goods extends DataSupport implements Serializable{
     }
 
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
 }
