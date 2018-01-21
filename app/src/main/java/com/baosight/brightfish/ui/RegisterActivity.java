@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         }else{
 
-            String address="http://192.168.137.1:8084/register";
+            String address=getString(R.string.path)+"/register";
             RequestBody requestBody=new FormBody.Builder().add("username",user).add("password",password).build();
             HttpUtil.sendOkHttpRequestPost(address, requestBody, new Callback() {
                 @Override
@@ -87,10 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    Account account=new Account();
-                    account.setName(user);
-                    account.setPassword(password);
-                    account.save();
+
                     startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                     finish();
 

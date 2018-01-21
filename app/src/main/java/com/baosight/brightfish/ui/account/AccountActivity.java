@@ -5,18 +5,28 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.baosight.brightfish.MyApp;
 import com.baosight.brightfish.R;
 import com.baosight.brightfish.domain.Account;
 import com.baosight.brightfish.ui.EditActivity;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.List;
+
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
+
 public class AccountActivity extends EditActivity {
+    MyApp app;
     TextView accountSku,accountName;
+    private static final String TAG = "AccountActivity";
+    Account account;
     public static void startAccountActivity(Context context) {
         Intent intent = new Intent(context, AccountActivity.class);
         context.startActivity(intent);
@@ -26,8 +36,10 @@ public class AccountActivity extends EditActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        app= (MyApp) getApplication();
         initToolbar(R.color.colorHome);
         initControls();
+
         accountSku=(TextView) findViewById(R.id.account_sku);
         accountName=(TextView) findViewById(R.id.account_name);
         initEditText();
@@ -39,7 +51,11 @@ public class AccountActivity extends EditActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_mark:
-                startActivityForResult(new Intent(this,ModifyAccountActivity.class),1);
+                Intent intent=new Intent(this,ModifyAccountActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("account",account);
+                intent.putExtra("bundle",bundle);
+                startActivityForResult(intent,1);
            //   ModifyAccountActivity.startModifyAccountActivity(this);
                 break;
 
@@ -47,8 +63,7 @@ public class AccountActivity extends EditActivity {
         return super.onOptionsItemSelected(item);
     }
     private void initEditText(){
-        int id=getApplicationContext().getSharedPreferences("userRecent",Context.MODE_PRIVATE).getInt("accountId",0);
-        Account account= DataSupport.find(Account.class,id);
+        account= app.getAccount();
         if(account!=null) {
             accountSku.setText(account.getSku());
             accountName.setText(account.getName());
@@ -66,14 +81,18 @@ public class AccountActivity extends EditActivity {
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case 1:
-                if(requestCode==RESULT_OK){
-
+                if(resultCode==RESULT_OK){
+                    Log.e(TAG, "onActivityResult: =======================");
+                    initEditText();
                 }
+                break;
         }
     }
+
 }

@@ -14,7 +14,6 @@ import com.baosight.brightfish.R;
 
 
 public class EditActivity extends CameraBasicActivity implements View.OnClickListener{
-    Toolbar toolbar;
     protected ImageView photo;
     protected ImageView selectAblum;
     protected EditText sku;
@@ -83,6 +82,7 @@ public class EditActivity extends CameraBasicActivity implements View.OnClickLis
         wechat.setText("");
         qq.setText("");
         website.setText("");
+
     }
     protected void showCameraDialog(){
         final Dialog dialog = new Dialog(this, R.style.NoTitleDialog);

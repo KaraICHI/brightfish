@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.baosight.brightfish.MyApp;
 import com.baosight.brightfish.R;
 import com.baosight.brightfish.domain.Account;
 import com.baosight.brightfish.util.HttpUtil;
@@ -52,13 +53,14 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
+import static com.baosight.brightfish.util.StringUtil.replaceNullwithBlank;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via user/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    private MyApp app;
     private static final String TAG = "LoginActivity";
     private  Account account;
     private Map<String,String> users;
@@ -87,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        initUsers();
+        //initUsers();
         toRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +115,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Button mUserSignInButton = (Button) findViewById(R.id.user_sign_in_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-
                 attemptLogin();
             }
         });
@@ -219,7 +220,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void login(String username,String password) {
-        String address = "http://192.168.137.1:8084/login?username="+username+"&password="+password;
+        String address = getString(R.string.path)+"/login?username="+username+"&password="+password;
         HttpUtil.sendOkHttpRequestGet(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -227,7 +228,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(LoginActivity.this, R.string.net_connect_fail,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, R.string.net_connect_fail,Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -257,10 +258,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     break;
                 case 0:
                     JSONObject accountW=result.getJSONObject("data");
-                    String user=accountW.getString("username");
-                    String password=accountW.getString("password");
-                    account=(Account)DataSupport.where("name=?",user).find(Account.class).get(0);
-                    getApplicationContext().getSharedPreferences("userRecent", Context.MODE_PRIVATE).edit().putInt("accountId",account.getId()).apply();
+
+                    initAccount(accountW);
+
+                  //  getApplicationContext().getSharedPreferences("userRecent", Context.MODE_PRIVATE).edit().putInt("accountServerId",id).apply();
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                     finish();
                     break;
@@ -271,6 +272,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initAccount(JSONObject accountW) throws JSONException {
+        account=new Account();
+        account.setId(accountW.getInt("id"));
+        account.setName(accountW.getString("username"));
+        account.setPassword(accountW.getString("password"));
+        account.setSku(replaceNullwithBlank(accountW.getString("sku")));
+        account.setAddress(replaceNullwithBlank(accountW.getString("address")));
+        account.setTelephone(replaceNullwithBlank(accountW.getString("telephone")));
+        account.setCellphone(replaceNullwithBlank(accountW.getString("cellphone")));
+        account.setDescr(replaceNullwithBlank(accountW.getString("descr")));
+        account.setEmail(replaceNullwithBlank(accountW.getString("email")));
+        account.setPhoto(replaceNullwithBlank(accountW.getString("photo")));
+        account.setQq(replaceNullwithBlank(accountW.getString("qq")));
+        account.setWechat(replaceNullwithBlank(accountW.getString("wechat")));
+        app= (MyApp) getApplication();
+        app.setAccount(account);
     }
 
     private boolean isuserValid(String user) {
@@ -419,12 +438,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     }
-    public void initUsers() {
-        users = new HashMap<>();
-        List<Account> accounts = DataSupport.findAll(Account.class);
-        for(Account account:accounts){
-            users.put(account.getName(),account.getPassword());
-        }
-    }
+//    public void initUsers() {
+//        users = new HashMap<>();
+//        List<Account> accounts = DataSupport.findAll(Account.class);
+//        for(Account account:accounts){
+//            users.put(account.getName(),account.getPassword());
+//        }
+//    }
 }
 

@@ -9,12 +9,10 @@ import java.io.Serializable;
  * Created by Administrator on 2017/12/4.
  */
 
-public class Account extends DataSupport implements Serializable{
+public class Account implements Serializable{
     private static final long serialVersionUID=1L;
     private int id;
-    @Column(unique = true)
     private String sku;
-    @Column(nullable = false,unique = true)
     private String name;
     private String password;
     private String address, telephone, cellphone, email, wechat, qq, descr, website, photo;

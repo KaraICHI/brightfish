@@ -20,6 +20,9 @@ public class HttpUtil {
         Request request=new Request.Builder().url(address).post(requestBody).build();
         client.newCall(request).enqueue(callback);
     }
-
-
+    public static void sendOkHttpRequestPut(String address, RequestBody requestBody,okhttp3.Callback callback){
+        OkHttpClient client=new OkHttpClient();
+        Request request=new Request.Builder().url(address).put(requestBody).build();
+        client.newCall(request).enqueue(callback);
+    }
 }

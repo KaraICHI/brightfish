@@ -8,7 +8,6 @@
         <mapping class="com.baosight.brightfish.domain.Checkin"/>
         <mapping class="com.baosight.brightfish.domain.Checkout"/>
         <mapping class="com.baosight.brightfish.domain.Goods"/>
-        <mapping class="com.baosight.brightfish.domain.Account"/>
         <mapping class="com.baosight.brightfish.domain.Checklist"/>
         <mapping class="com.baosight.brightfish.domain.ChecklistNote"/>
     </list>
