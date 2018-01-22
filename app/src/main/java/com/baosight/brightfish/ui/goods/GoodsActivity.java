@@ -17,10 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,11 +35,13 @@ import com.baosight.brightfish.domain.Goods;
 import com.baosight.brightfish.domain.SupplierData;
 import com.baosight.brightfish.ui.BasicActivity;
 import com.baosight.brightfish.ui.buyer.ChooseBuyerActivity;
+import com.baosight.brightfish.ui.buyer.ChooseBuyerNoteActivity;
 import com.baosight.brightfish.ui.checkin.RecentCheckinActivity;
 import com.baosight.brightfish.ui.checkout.RecentCheckoutActivity;
 import com.baosight.brightfish.ui.album.GoodsAblumActivity;
 import com.baosight.brightfish.Dao.CheckinDao;
 import com.baosight.brightfish.ui.search.choose.ChooseSupplierActivity;
+import com.baosight.brightfish.ui.search.choose.ChooseSupplierNoteActivity;
 import com.baosight.brightfish.util.CurrentTimeUtil;
 
 import org.litepal.crud.DataSupport;
@@ -84,6 +88,8 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     String[] colorTexts;
     View view1, view2, view3, view4;
     Goods goods;
+    ListView checkinListView;
+    ListView checkoutListView;
     List<Checkin> checkinList;
     List<Checkout> checkoutList;
     Set<SupplierData> supplierDataSet;
@@ -212,7 +218,6 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     }
     void initControl3(){
         week = (TextView)view3.findViewById(R.id.week);
-        Log.d(TAG, "initControl3: =============================="+week);
         month = (TextView)view3.findViewById(R.id.month);
         one_year = (TextView)view3.findViewById(R.id.one_year);
         five_year = (TextView)view3.findViewById(R.id.five_year);
@@ -220,18 +225,21 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         supplier_money = (TextView)view3.findViewById(R.id.supplier_money);
         supplier_price = (TextView)view3.findViewById(R.id.supplier_price);
         checkin_head = (TextView)view3.findViewById(R.id.checkin_head);
-        count_checkin = (TextView)view3.findViewById(R.id.count_checkin);
-        checkin_percent = (TextView)view3.findViewById(R.id.checkin_percent);
+
+       checkinListView=(ListView)view3.findViewById(R.id.listview);
+       checkoutListView=(ListView)view3.findViewById(R.id.listview_buyer);
+     /*   count_checkin = (TextView)view3.findViewById(R.id.count_checkin);
+        checkin_percent = (TextView)view3.findViewById(R.id.checkin_percent);*/
         supplier_all = (TextView)view3.findViewById(R.id.supplier_all);
 
         buyer_count = (TextView)view3.findViewById(R.id.buyer_count);
         buyer_money = (TextView)view3.findViewById(R.id.buyer_money);
         buyer_price = (TextView)view3.findViewById(R.id.buyer_price);
         checkout_head = (TextView)view3.findViewById(R.id.checkout_head);
-        count_checkout = (TextView)view3.findViewById(R.id.count_checkout);
-        checkout_percent = (TextView)view3.findViewById(R.id.checkout_percent);
-        buyer_all = (TextView)view3.findViewById(R.id.buyer_all);
 
+        buyer_all = (TextView)view3.findViewById(R.id.buyer_all);
+        showSupplier();
+        showBuyer();
     }
 
     public void showView2() {
@@ -329,15 +337,13 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                     count_checkin.setVisibility(View.GONE);
                     checkin_percent.setVisibility(View.GONE);
                     supplier_all.setVisibility(View.GONE);
+                    checkin_head.setText("0供货商/入库总量0");
                 } else {
-                    count_checkin.setVisibility(View.VISIBLE);
-                    checkin_percent.setVisibility(View.VISIBLE);
+                  /*  count_checkin.setVisibility(View.VISIBLE);
+                    checkin_percent.setVisibility(View.VISIBLE);*/
                     supplier_all.setVisibility(View.VISIBLE);
-                   // showSupplier();
-                    for (Checkin checkin : checkinList) {
-                        checkin_head.setText("1供货商/入库总量"+ CheckinDao.sumAllCheckinAmountByGoodsId(goods.getId()));
-                        count_checkin.setText(CheckinDao.sumAllCheckinAmountByGoodsId(goods.getId())+"");
-                    }
+                    showSupplier();
+
                 }
                 break;
             case R.id.supplier_money:
@@ -347,18 +353,11 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                 if (checkinList.size() == 0) {
                     checkin_head.setHeight(60);
                     checkin_head.setText("0供货商/入库总额0￥");
-                    count_checkin.setVisibility(View.GONE);
-                    checkin_percent.setVisibility(View.GONE);
-                    supplier_all.setVisibility(View.GONE);
+                    checkinListView.deferNotifyDataSetChanged();
                 } else {
-                    count_checkin.setVisibility(View.VISIBLE);
-                    checkin_percent.setVisibility(View.VISIBLE);
                     supplier_all.setVisibility(View.VISIBLE);
-                    checkin_head.setText("1供货商/入库总额"+ CheckinDao.sumAllCheckinMoneyByGoodsId(goods.getId())+"￥");
-/*
-                    for (Checkin checkin : checkinList) {
-                        count_checkin.setText(checkin.getPrice());
-                    }*/
+                    showSupplier();
+
 
                 }
                 break;
@@ -369,17 +368,12 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                 if (checkinList.size() == 0) {
                     checkin_head.setHeight(60);
                     checkin_head.setText("0供货商");
-                    count_checkin.setVisibility(View.GONE);
-                    checkin_percent.setVisibility(View.GONE);
+                    checkinListView.deferNotifyDataSetChanged();
                     supplier_all.setVisibility(View.GONE);
                 } else {
-                    count_checkin.setVisibility(View.VISIBLE);
-                    checkin_percent.setVisibility(View.VISIBLE);
+                    checkin_head.setText("1供货商");
                     supplier_all.setVisibility(View.VISIBLE);
-                    for (SupplierData supplierData : supplierDataSet) {
-                        checkin_head.setText("1供货商");
-                        count_checkin.setText(supplierData.getPriceAvg()+"");
-                    }
+                    showSupplier();
                 }
                 break;
             case R.id.buyer_count:
@@ -388,17 +382,11 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                 buyer_price.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 if (checkoutList.size() == 0) {
                     checkout_head.setHeight(60);
-                    count_checkout.setVisibility(View.GONE);
-                    checkout_percent.setVisibility(View.GONE);
+                    checkoutListView.deferNotifyDataSetChanged();
                     buyer_all.setVisibility(View.GONE);
                 } else {
-                    count_checkout.setVisibility(View.VISIBLE);
-                    checkout_percent.setVisibility(View.VISIBLE);
                     buyer_all.setVisibility(View.VISIBLE);
-                    checkout_head.setText("1买家/出库总量"+CheckoutDao.sumAllCheckoutAmountByGoodsId(goods.getId()));
-                    for (BuyerData buyerData : buyerDataSet) {
-                        count_checkout.setText(buyerData.getAmount()+"");
-                    }
+                     showBuyer();
                 }
                 break;
             case R.id.buyer_money:
@@ -408,17 +396,12 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                 if (checkoutList.size() == 0) {
                     checkout_head.setHeight(60);
                     checkout_head.setText("0买家/出库总额0￥");
-                    count_checkout.setVisibility(View.GONE);
-                    checkout_percent.setVisibility(View.GONE);
+                    checkoutListView.deferNotifyDataSetChanged();
                     buyer_all.setVisibility(View.GONE);
                 } else {
-                    count_checkout.setVisibility(View.VISIBLE);
-                    checkout_percent.setVisibility(View.VISIBLE);
+
                     buyer_all.setVisibility(View.VISIBLE);
-                    checkout_head.setText("1买家/出库总额"+CheckoutDao.sumAllCheckoutMoneyByGoodsId(goods.getId())+"￥");
-                    for (BuyerData buyerData : buyerDataSet) {
-                        count_checkout.setText(buyerData.getPriceSum()+"");
-                    }
+                  showBuyer();
 
                 }
                 break;
@@ -429,31 +412,34 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
                 if (checkoutList.size() == 0) {
                     checkout_head.setHeight(60);
                     checkout_head.setText("0供货商");
-                    count_checkout.setVisibility(View.GONE);
-                    checkout_percent.setVisibility(View.GONE);
+                   checkoutListView.deferNotifyDataSetChanged();
                     buyer_all.setVisibility(View.GONE);
                 } else {
-                    count_checkout.setVisibility(View.VISIBLE);
-                    checkout_percent.setVisibility(View.VISIBLE);
+
                     buyer_all.setVisibility(View.VISIBLE);
-                    for (BuyerData buyerData : buyerDataSet) {
-                        checkout_head.setText("1买家");
-                        count_checkout.setText(buyerData.getPriceAvg()+"");
-                    }
+                   showBuyer();
                 }
                 break;
             case R.id.supplier_all:
-                startActivity(new Intent(this, ChooseSupplierActivity.class));
+                startActivity(new Intent(this, ChooseSupplierNoteActivity.class));
                 break;
             case R.id.buyer_all:
-                startActivity(new Intent(this, ChooseBuyerActivity.class));
+                startActivity(new Intent(this, ChooseBuyerNoteActivity.class));
                 break;
             default:break;
         }
     }
 
-    private void showSupplier() {
 
+    private void showSupplier() {
+        checkin_head.setText(supplierDataSet.size()+"供货商/入库总量"+ CheckinDao.sumAllCheckinAmountByGoodsId(goods.getId()));
+        ListAdapter adapter=new ListAdapter(supplierDataSet);
+        checkinListView.setAdapter(adapter);
+    }
+    private void showBuyer(){
+        checkout_head.setText(buyerDataSet.size()+"买家/出库总量"+ CheckoutDao.sumAllCheckoutAmountByGoodsId(goods.getId()));
+        ListAdapter adapter=new ListAdapter(buyerDataSet);
+        checkoutListView.setAdapter(adapter);
     }
 
     class MyPagerAdapter extends PagerAdapter {

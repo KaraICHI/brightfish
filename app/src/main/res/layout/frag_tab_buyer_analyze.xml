@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="20dp"
+
+    >
 
     <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
@@ -66,7 +68,6 @@
             android:textSize="20dp"
             android:textColor="@color/colorHome"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -102,19 +103,25 @@
             android:gravity="center"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"/>
+            />
 
     </RelativeLayout>
- <!--   <LinearLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGreen"/>
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/checkin_head"
+                android:text="0供货商/入库总量0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -128,92 +135,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/supplier_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:textColor="@color/colorGreen"
+                android:text="@string/all_supplier"
+                android:onClick="onClick"
                 />
         </RelativeLayout>
-    </LinearLayout>-->
+    </LinearLayout>
 
-    <RelativeLayout
-        android:background="@color/colorLightGery"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimary"/>
-
-        <TextView
-            android:id="@+id/checkin_head"
-            android:text="0供货商/入库总量0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:id="@+id/count_checkin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/checkin_head"
-            android:layout_alignRight="@+id/checkin_percent"
-            android:layout_alignEnd="@+id/checkin_percent" />
-
-        <TextView
-            android:text="100%"
-            android:textColor="@color/colorWhite"
-            android:gravity="right"
-            android:background="@drawable/tv_fillet_green"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkin_percent" />
-        <ListView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </ListView>
-
-        <TextView
-            android:onClick="onClick"
-            android:id="@+id/supplier_all"
-            android:text="所有供货商"
-            android:textColor="@color/colorGreen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_alignRight="@+id/checkin_percent"
-            android:layout_alignEnd="@+id/checkin_percent" />
-
-        <View
-            android:id="@+id/supplier_all_view"
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:background="@color/colorGreen"
-            android:layout_alignRight="@+id/supplier_all"
-            android:layout_alignEnd="@+id/supplier_all"
-            android:layout_below="@+id/supplier_all"
-            android:layout_alignLeft="@+id/supplier_all"
-            android:layout_alignStart="@+id/supplier_all" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/supplier_all"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_marginTop="25dp"
@@ -225,7 +158,6 @@
             android:textSize="20dp"
             android:textColor="@color/colorHome"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -261,79 +193,48 @@
             android:gravity="center"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"/>
+            />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:background="@color/colorLightGery"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="1dp"
+        android:background="@color/colorBlue"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-        <View
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimary"/>
-
-        <TextView
-            android:id="@+id/checkout_head"
-            android:text="0买家/出库总量0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:id="@+id/count_checkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/checkout_head"
-            android:layout_alignRight="@+id/checkout_percent"
-            android:layout_alignEnd="@+id/checkout_percent" />
-
-        <TextView
-            android:text="100%"
-            android:textColor="@color/colorHome"
-            android:gravity="right"
-            android:background="@drawable/tv_fillet_blue"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/checkout_head"
+                android:text="0买商/出库总量0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/listview_buyer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkout_percent" />
-
-        <TextView
-            android:onClick="onClick"
-            android:id="@+id/buyer_all"
-            android:text="所有买家"
-            android:textColor="@color/colorBlue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_alignRight="@+id/checkout_percent"
-            android:layout_alignEnd="@+id/checkout_percent" />
-
-        <View
-            android:id="@+id/buyer_all_view"
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:background="@color/colorBlue"
-            android:layout_alignRight="@+id/buyer_all"
-            android:layout_alignEnd="@+id/buyer_all"
-            android:layout_below="@+id/buyer_all"
-            android:layout_alignLeft="@+id/buyer_all"
-            android:layout_alignStart="@+id/buyer_all" />
-
-        <TextView
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/buyer_all"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/buyer_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorBlue"
+                android:text="@string/all_buyer"
+                android:onClick="onClick"
+                />
+        </RelativeLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
 
 </LinearLayout>

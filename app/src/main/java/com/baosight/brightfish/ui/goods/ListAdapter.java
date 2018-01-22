@@ -1,5 +1,6 @@
 package com.baosight.brightfish.ui.goods;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import com.baosight.brightfish.R;
 import com.baosight.brightfish.domain.BuyerData;
 import com.baosight.brightfish.domain.SupplierData;
 
+import java.text.DecimalFormat;
 import java.util.Set;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Administrator on 2018/1/22.
@@ -52,15 +56,20 @@ public class ListAdapter extends BaseAdapter {
             if(mSet[position]instanceof SupplierData){
                 SupplierData supplierData=(SupplierData)mSet[position];
                 name.setText(supplierData.getName());
-                data.setText(supplierData.getAmount());
-                percent.setProgress((int)supplierData.getPrecent());
-                percentText.setText(supplierData.getPrecent()+"");
+                data.setText(supplierData.getAmount()+"");
+                percent.setMax(supplierData.getAmountSum());
+                percent.setProgress(supplierData.getAmount());
+                DecimalFormat df = new DecimalFormat("#.00");
+                percentText.setText(df.format(supplierData.getPrecent())+"%");
             }else if (mSet[position]instanceof BuyerData){
                 BuyerData buyerData=(BuyerData)mSet[position];
                 name.setText(buyerData.getName());
-                data.setText(buyerData.getAmount());
-                percent.setProgress((int)buyerData.getPrecent());
-                percentText.setText(buyerData.getPrecent()+"");
+                data.setText(buyerData.getAmount()+"");
+                percent.setMax(buyerData.getAmountSum());
+                percent.setProgress(buyerData.getAmount());
+                percent.setProgressTintList(parent.getResources().getColorStateList(R.color.colorBlue));
+                DecimalFormat df = new DecimalFormat("#.00");
+                percentText.setText(df.format(buyerData.getPrecent())+"%");
             }
         }
 

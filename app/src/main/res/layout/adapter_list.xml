@@ -23,9 +23,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:progressTint="@color/colorGreen"
         android:background="@color/colorMGery"
+
         />
     <TextView
         android:id="@+id/percent_text"

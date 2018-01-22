@@ -10,6 +10,15 @@ public class BuyerData {
     double precent;
     double priceSum;
     double priceAvg;
+    int amountSum;
+
+    public int getAmountSum() {
+        return amountSum;
+    }
+
+    public void setAmountSum(int amountSum) {
+        this.amountSum = amountSum;
+    }
 
     public double getPriceSum() {
         return priceSum;
@@ -44,7 +53,8 @@ public class BuyerData {
     }
 
     public double getPrecent() {
-        return precent;
+        return amount*100.00/amountSum;
+
     }
 
     public void setPrecent(double precent) {
