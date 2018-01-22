@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,22 +24,30 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baosight.brightfish.Dao.CheckoutDao;
 import com.baosight.brightfish.R;
+import com.baosight.brightfish.domain.BuyerData;
 import com.baosight.brightfish.domain.Checkin;
 import com.baosight.brightfish.domain.Checkout;
 import com.baosight.brightfish.domain.Goods;
+import com.baosight.brightfish.domain.SupplierData;
 import com.baosight.brightfish.ui.BasicActivity;
+import com.baosight.brightfish.ui.buyer.ChooseBuyerActivity;
 import com.baosight.brightfish.ui.checkin.RecentCheckinActivity;
 import com.baosight.brightfish.ui.checkout.RecentCheckoutActivity;
 import com.baosight.brightfish.ui.album.GoodsAblumActivity;
+import com.baosight.brightfish.Dao.CheckinDao;
+import com.baosight.brightfish.ui.search.choose.ChooseSupplierActivity;
 import com.baosight.brightfish.util.CurrentTimeUtil;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class GoodsActivity extends BasicActivity implements View.OnClickListener {
+    private static final String TAG = "GoodsActivity";
     private TabLayout mTabLayout;
     ImageView photo;
     ImageView selectAblum;
@@ -48,9 +57,26 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     LinearLayout recentCheckin, recentCheckout;
     RelativeLayout recentCheckinS, recentCheckoutS;
     EditText brand, catagory, size, spec, descr;
-    View color;
     TextView colorText;
     ImageView colorIcon;
+    private TextView week;
+    private TextView month;
+    private TextView one_year;
+    private TextView five_year;
+    private TextView supplierCount;
+    private TextView supplier_money;
+    private TextView supplier_price;
+    private TextView checkin_head;
+    private TextView count_checkin;
+    private TextView checkin_percent;
+    private TextView supplier_all;
+    private TextView buyer_count;
+    private TextView buyer_money;
+    private TextView buyer_price;
+    private TextView checkout_head;
+    private TextView count_checkout;
+    private TextView checkout_percent;
+    private TextView buyer_all;
     int[] colorIcons=new int[]{R.drawable.rect_color_blue,R.drawable.rect_color_orange,R.drawable.rect_color_green,
             R.drawable.rect_color_pur,R.drawable.rect_color_yellow,R.drawable.rect_color_lblue,R.drawable.rect_color_white,
             R.drawable.rect_color_gery,R.drawable.rect_color_black,R.drawable.rect_color_red,
@@ -60,6 +86,8 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
     Goods goods;
     List<Checkin> checkinList;
     List<Checkout> checkoutList;
+    Set<SupplierData> supplierDataSet;
+    Set<BuyerData> buyerDataSet;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
 
@@ -78,10 +106,13 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         goods = (Goods) getIntent().getBundleExtra("bundle").getSerializable("goods");
         checkinList = DataSupport.where("goodsId=" + goods.getId()).find(Checkin.class);
         checkoutList = DataSupport.where("goodsId=" + goods.getId()).find(Checkout.class);
+        supplierDataSet= CheckinDao.getSupplierDataByGoodsId(goods.getId());
+        buyerDataSet= CheckoutDao.getBuyerDataByGoodsId(goods.getId());
         initTab();
         initControlsV1();
         showGoods();
         initControlsV2();
+        initControl3();
         initToolbar(R.color.colorOrange);
 
 
@@ -96,14 +127,14 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         LayoutInflater mInflater = LayoutInflater.from(this);
         view1 = mInflater.inflate(R.layout.frag_tab_goods, null);
         view2 = mInflater.inflate(R.layout.frag_tab_activity_goods, null);
-        view3 = mInflater.inflate(R.layout.frag_tab_goods, null);
-        view4 = mInflater.inflate(R.layout.frag_tab_goods, null);
+        view3 = mInflater.inflate(R.layout.frag_tab_buyer_analyze, null);
+        view4 = mInflater.inflate(R.layout.frag_tab_buyer_analyze, null);
 
         //添加页卡视图
         mViewList.add(view1);
         mViewList.add(view2);
         mViewList.add(view3);
-        mViewList.add(view4);
+        mViewList.add(view4);//
 
         //添加页卡标题
         mTitleList.add("基本参数");
@@ -179,6 +210,29 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         showView2();
 
     }
+    void initControl3(){
+        week = (TextView)view3.findViewById(R.id.week);
+        Log.d(TAG, "initControl3: =============================="+week);
+        month = (TextView)view3.findViewById(R.id.month);
+        one_year = (TextView)view3.findViewById(R.id.one_year);
+        five_year = (TextView)view3.findViewById(R.id.five_year);
+        supplierCount = (TextView)view3.findViewById(R.id.supplierCount);
+        supplier_money = (TextView)view3.findViewById(R.id.supplier_money);
+        supplier_price = (TextView)view3.findViewById(R.id.supplier_price);
+        checkin_head = (TextView)view3.findViewById(R.id.checkin_head);
+        count_checkin = (TextView)view3.findViewById(R.id.count_checkin);
+        checkin_percent = (TextView)view3.findViewById(R.id.checkin_percent);
+        supplier_all = (TextView)view3.findViewById(R.id.supplier_all);
+
+        buyer_count = (TextView)view3.findViewById(R.id.buyer_count);
+        buyer_money = (TextView)view3.findViewById(R.id.buyer_money);
+        buyer_price = (TextView)view3.findViewById(R.id.buyer_price);
+        checkout_head = (TextView)view3.findViewById(R.id.checkout_head);
+        count_checkout = (TextView)view3.findViewById(R.id.count_checkout);
+        checkout_percent = (TextView)view3.findViewById(R.id.checkout_percent);
+        buyer_all = (TextView)view3.findViewById(R.id.buyer_all);
+
+    }
 
     public void showView2() {
         updateTime.setText("更新时间： " + CurrentTimeUtil.getHMTime());
@@ -225,7 +279,181 @@ public class GoodsActivity extends BasicActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.select_ablum_btn:
                 GoodsAblumActivity.startGoodsAblumActivity(GoodsActivity.this);
+                break;
+            case R.id.week:
+                week.setTextColor(getResources().getColor(R.color.colorWhite));
+                week.setBackgroundColor(getResources().getColor(R.color.colorHome));
+                month.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                month.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                one_year.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                one_year.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                five_year.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                five_year.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                break;
+            case R.id.month:
+                week.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                week.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                month.setTextColor(getResources().getColor(R.color.colorWhite));
+                month.setBackgroundColor(getResources().getColor(R.color.colorHome));
+                one_year.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                one_year.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                five_year.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                five_year.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                break;
+            case R.id.one_year:
+                week.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                week.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                month.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                month.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                one_year.setTextColor(getResources().getColor(R.color.colorWhite));
+                one_year.setBackgroundColor(getResources().getColor(R.color.colorHome));
+                five_year.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                five_year.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                break;
+            case R.id.five_year:
+                week.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                week.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                month.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                month.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                one_year.setTextColor(getResources().getColor(R.color.colorDarkGery));
+                one_year.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                five_year.setTextColor(getResources().getColor(R.color.colorWhite));
+                five_year.setBackgroundColor(getResources().getColor(R.color.colorHome));
+                break;
+            case R.id.supplierCount:
+                supplierCount.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                supplier_money.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                supplier_price.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                if (checkinList.size() == 0) {
+                    checkin_head.setHeight(60);
+                    count_checkin.setVisibility(View.GONE);
+                    checkin_percent.setVisibility(View.GONE);
+                    supplier_all.setVisibility(View.GONE);
+                } else {
+                    count_checkin.setVisibility(View.VISIBLE);
+                    checkin_percent.setVisibility(View.VISIBLE);
+                    supplier_all.setVisibility(View.VISIBLE);
+                   // showSupplier();
+                    for (Checkin checkin : checkinList) {
+                        checkin_head.setText("1供货商/入库总量"+ CheckinDao.sumAllCheckinAmountByGoodsId(goods.getId()));
+                        count_checkin.setText(CheckinDao.sumAllCheckinAmountByGoodsId(goods.getId())+"");
+                    }
+                }
+                break;
+            case R.id.supplier_money:
+                supplierCount.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                supplier_money.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                supplier_price.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                if (checkinList.size() == 0) {
+                    checkin_head.setHeight(60);
+                    checkin_head.setText("0供货商/入库总额0￥");
+                    count_checkin.setVisibility(View.GONE);
+                    checkin_percent.setVisibility(View.GONE);
+                    supplier_all.setVisibility(View.GONE);
+                } else {
+                    count_checkin.setVisibility(View.VISIBLE);
+                    checkin_percent.setVisibility(View.VISIBLE);
+                    supplier_all.setVisibility(View.VISIBLE);
+                    checkin_head.setText("1供货商/入库总额"+ CheckinDao.sumAllCheckinMoneyByGoodsId(goods.getId())+"￥");
+/*
+                    for (Checkin checkin : checkinList) {
+                        count_checkin.setText(checkin.getPrice());
+                    }*/
+
+                }
+                break;
+            case R.id.supplier_price:
+                supplierCount.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                supplier_money.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                supplier_price.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                if (checkinList.size() == 0) {
+                    checkin_head.setHeight(60);
+                    checkin_head.setText("0供货商");
+                    count_checkin.setVisibility(View.GONE);
+                    checkin_percent.setVisibility(View.GONE);
+                    supplier_all.setVisibility(View.GONE);
+                } else {
+                    count_checkin.setVisibility(View.VISIBLE);
+                    checkin_percent.setVisibility(View.VISIBLE);
+                    supplier_all.setVisibility(View.VISIBLE);
+                    for (SupplierData supplierData : supplierDataSet) {
+                        checkin_head.setText("1供货商");
+                        count_checkin.setText(supplierData.getPriceAvg()+"");
+                    }
+                }
+                break;
+            case R.id.buyer_count:
+                buyer_count.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                buyer_money.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                buyer_price.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                if (checkoutList.size() == 0) {
+                    checkout_head.setHeight(60);
+                    count_checkout.setVisibility(View.GONE);
+                    checkout_percent.setVisibility(View.GONE);
+                    buyer_all.setVisibility(View.GONE);
+                } else {
+                    count_checkout.setVisibility(View.VISIBLE);
+                    checkout_percent.setVisibility(View.VISIBLE);
+                    buyer_all.setVisibility(View.VISIBLE);
+                    checkout_head.setText("1买家/出库总量"+CheckoutDao.sumAllCheckoutAmountByGoodsId(goods.getId()));
+                    for (BuyerData buyerData : buyerDataSet) {
+                        count_checkout.setText(buyerData.getAmount()+"");
+                    }
+                }
+                break;
+            case R.id.buyer_money:
+                buyer_count.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                buyer_money.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                buyer_price.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                if (checkoutList.size() == 0) {
+                    checkout_head.setHeight(60);
+                    checkout_head.setText("0买家/出库总额0￥");
+                    count_checkout.setVisibility(View.GONE);
+                    checkout_percent.setVisibility(View.GONE);
+                    buyer_all.setVisibility(View.GONE);
+                } else {
+                    count_checkout.setVisibility(View.VISIBLE);
+                    checkout_percent.setVisibility(View.VISIBLE);
+                    buyer_all.setVisibility(View.VISIBLE);
+                    checkout_head.setText("1买家/出库总额"+CheckoutDao.sumAllCheckoutMoneyByGoodsId(goods.getId())+"￥");
+                    for (BuyerData buyerData : buyerDataSet) {
+                        count_checkout.setText(buyerData.getPriceSum()+"");
+                    }
+
+                }
+                break;
+            case R.id.buyer_price:
+                buyer_count.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                buyer_money.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                buyer_price.setBackgroundColor(getResources().getColor(R.color.colorLightGery));
+                if (checkoutList.size() == 0) {
+                    checkout_head.setHeight(60);
+                    checkout_head.setText("0供货商");
+                    count_checkout.setVisibility(View.GONE);
+                    checkout_percent.setVisibility(View.GONE);
+                    buyer_all.setVisibility(View.GONE);
+                } else {
+                    count_checkout.setVisibility(View.VISIBLE);
+                    checkout_percent.setVisibility(View.VISIBLE);
+                    buyer_all.setVisibility(View.VISIBLE);
+                    for (BuyerData buyerData : buyerDataSet) {
+                        checkout_head.setText("1买家");
+                        count_checkout.setText(buyerData.getPriceAvg()+"");
+                    }
+                }
+                break;
+            case R.id.supplier_all:
+                startActivity(new Intent(this, ChooseSupplierActivity.class));
+                break;
+            case R.id.buyer_all:
+                startActivity(new Intent(this, ChooseBuyerActivity.class));
+                break;
+            default:break;
         }
+    }
+
+    private void showSupplier() {
+
     }
 
     class MyPagerAdapter extends PagerAdapter {

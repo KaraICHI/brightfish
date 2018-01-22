@@ -35,6 +35,7 @@
             android:background="@drawable/ic_chevron_right_white_24dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
+            android:onClick="onClick"
             />
 
 
@@ -69,6 +70,7 @@
             android:backgroundTint="@color/colorDarkGery"
             android:background="@drawable/ic_list_white_24dp"
             android:layout_toLeftOf="@id/to_goods"
+            android:onClick="onClick"
             />
         <ImageButton
             android:id="@+id/to_goods"
@@ -78,6 +80,7 @@
             android:background="@drawable/ic_chevron_right_white_24dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
+            android:onClick="onClick"
             />
 
 
@@ -112,6 +115,7 @@
             android:backgroundTint="@color/colorDarkGery"
             android:background="@drawable/ic_list_white_24dp"
             android:layout_toLeftOf="@id/to_supplier"
+            android:onClick="onClick"
             />
         <ImageButton
             android:id="@+id/to_supplier"
@@ -121,6 +125,7 @@
             android:background="@drawable/ic_chevron_right_white_24dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
+            android:onClick="onClick"
             />
 
 
@@ -155,6 +160,7 @@
             android:backgroundTint="@color/colorDarkGery"
             android:background="@drawable/ic_list_white_24dp"
             android:layout_toLeftOf="@id/to_buyer"
+            android:onClick="onClick"
             />
         <ImageButton
             android:id="@+id/to_buyer"
@@ -164,6 +170,7 @@
             android:background="@drawable/ic_chevron_right_white_24dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
+            android:onClick="onClick"
             />
 
 

@@ -26,51 +26,58 @@
             android:id="@+id/reason_output"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/btn_radio"
+            android:drawableEnd="@drawable/radio_button"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
             android:text="@string/output"
-
-
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
             />
         <RadioButton
             android:id="@+id/reason_consumption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/btn_radio"
+            android:drawableEnd="@drawable/radio_button"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
             android:text="@string/consumption"
-
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
             />
         <RadioButton
             android:id="@+id/reason_wear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/btn_radio"
+            android:drawableEnd="@drawable/radio_button"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
             android:text="@string/wear"
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
 
             />
         <RadioButton
             android:id="@+id/reason_lost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/btn_radio"
+            android:drawableEnd="@drawable/radio_button"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
             android:text="@string/lost"
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
             />
         <RadioButton
             android:id="@+id/reason_reversion_mistake"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/btn_radio"
+            android:drawableEnd="@drawable/radio_button"
             android:button="@null"
             android:drawableTint="@color/colorOrange"
             android:text="@string/reversion"
             android:checked="true"
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
             />
 
     </RadioGroup>

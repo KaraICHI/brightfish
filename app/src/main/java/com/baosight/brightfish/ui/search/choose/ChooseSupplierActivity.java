@@ -30,10 +30,10 @@ public class ChooseSupplierActivity extends BasicActivity {
     boolean sortdesc;
     List<Supplier> chooseItemList=new ArrayList<>();
 
-    public static void startChooseSupplierActivity(Context context) {
+   /* public static void startChooseSupplierActivity(Context context) {
         Intent intent = new Intent(context, ChooseSupplierActivity.class);
         context.startActivity(intent);
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

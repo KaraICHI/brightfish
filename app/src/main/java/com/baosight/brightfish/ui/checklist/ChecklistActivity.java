@@ -33,7 +33,6 @@ public class ChecklistActivity extends BasicActivity {
     RelativeLayout currentSortMethod;
     boolean sortdesc;
     List<Goods> goodsList;
-    private static final String TAG = "ChecklistActivity";
 
     public static void startChecklistActivity(Context context) {
         Intent intent = new Intent(context, ChecklistActivity.class);

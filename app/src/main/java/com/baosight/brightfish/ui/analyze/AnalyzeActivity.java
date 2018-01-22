@@ -3,6 +3,7 @@ package com.baosight.brightfish.ui.analyze;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -14,7 +15,7 @@ import com.baosight.brightfish.ui.search.choose.ChooseSupplierNoteActivity;
 
 public class AnalyzeActivity extends BasicActivity implements View.OnClickListener{
     ImageButton toAll,toGoods,toSupplier,toBuyer,goodsMenu,supplierMenu,buyerMenu;
-
+    private static final String TAG = "AnalyzeActivity";
     public static void startAnalyzeActivity(Context context) {
         Intent intent = new Intent(context, AnalyzeActivity.class);
         context.startActivity(intent);
@@ -25,6 +26,7 @@ public class AnalyzeActivity extends BasicActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analyze);
         initControls();
+
     }
 
     private void initControls() {
@@ -36,14 +38,6 @@ public class AnalyzeActivity extends BasicActivity implements View.OnClickListen
         buyerMenu=(ImageButton) findViewById(R.id.analyze_menu_buyer);
         supplierMenu=(ImageButton) findViewById(R.id.analyze_menu_supplier);
         goodsMenu=(ImageButton) findViewById(R.id.analyze_menu_goods);
-        toAll.setOnClickListener(this);
-        toBuyer.setOnClickListener(this);
-        toSupplier.setOnClickListener(this);
-        toBuyer.setOnClickListener(this);
-        buyerMenu.setOnClickListener(this);
-        supplierMenu.setOnClickListener(this);
-        goodsMenu.setOnClickListener(this);
-
     }
 
     @Override
@@ -51,12 +45,14 @@ public class AnalyzeActivity extends BasicActivity implements View.OnClickListen
         switch (v.getId()){
             case R.id.to_all:
                 AnalyzeAllActivity.startAnalyzeAllActivity(this);
+                Log.d(TAG, "onClick:-------------------all ");
                 break;
             case R.id.to_buyer:
-
+                Log.d(TAG, "onClick: -------------buy------------");
                 break;
             case R.id.to_goods:
-
+                GoodsAnalzyActivity.startGoodsAnalzyActivity(this);
+                Log.d("qwqwqw", "onClick: ---------------g-==============");
                 break;
             case R.id.analyze_menu_buyer:
                 ChooseBuyerNoteActivity.startChooseBuyerActivity(this);
